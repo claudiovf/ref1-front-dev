@@ -6,9 +6,11 @@ const Header: React.FC = () => {
 
 
   return (
+      <React.Fragment>
         <HeaderStyled> 
             <LogoStyled>REF1</LogoStyled> 
         </HeaderStyled>
+      </React.Fragment>
   );
 };
 
