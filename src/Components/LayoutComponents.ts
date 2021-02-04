@@ -1,14 +1,15 @@
-import styled from "styled-components";
-import workSansBold from '../../Assets/WorkSans/static/WorkSans-Bold.ttf';
-import workSansReg from '../../Assets/WorkSans/static/WorkSans-Regular.ttf';
+import styled, { createGlobalStyle } from "styled-components";
+import workSansBold from '../Assets/WorkSans/static/WorkSans-Bold.ttf';
+import workSansReg from '../Assets/WorkSans/static/WorkSans-Regular.ttf';
 
-export const Spacer = styled.div`
-    min-height: 3rem;
-    background-color: tomato;
-`;
+// #24282E Raisin Black
+// #D1DADC Light Gray
+// #FFFFFF White 
+// #388659 Sea Green
+// #EF233C Imperial Red
+// #6279B8 Glaucous
 
-export const Section = styled.div`
-
+export const Fonts = createGlobalStyle`
     @font-face {
         font-family: "Work Sans Bold";
         src: url(${workSansBold}) format('truetype');
@@ -17,7 +18,14 @@ export const Section = styled.div`
         font-family: "Work Sans Reg";
         src: url(${workSansReg}) format('truetype');
     }
+`;
 
+
+export const Spacer = styled.div`
+    min-height: 3rem;
+`;
+
+export const Section = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

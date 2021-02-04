@@ -22,7 +22,8 @@
         "error", { "argsIgnorePattern": "^_" }
       ],
       "@typescript-eslint/no-explicit-any": 1,
-      "@typescript-eslint/semi": ["error"]
+      "@typescript-eslint/semi": ["error"],
+      "react/prop-types": 0
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

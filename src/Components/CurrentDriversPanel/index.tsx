@@ -1,20 +1,46 @@
 import React from 'react';
-import { Section, Title, Spacer, Scroll } from './style';
+import { Section, Title, Spacer, Scroll } from '../LayoutComponents';
 import CurrentDriverCards from './CurrentDriverCards';
+import { useQuery } from '@apollo/client';
+import { Driver } from '../../types';
+import { CURRENT_DRIVERS_HOME } from '../../queries';
+
 
 
 const CurrentDriversPanel: React.FC = () => {
+    const { loading, data } = useQuery<{ allDrivers: Driver[] }>(CURRENT_DRIVERS_HOME);
 
-    const drivers: Array<string> = ['HAM', 'VER', 'RIC', 'GAS', 'PER', 'LEC', 'BOT', 'ALO'];
+    
+    const displayOrder = [
+        'hamilton', 'bottas', 'max_verstappen', 'albon', 
+        'leclerc', 'vettel', 'perez', 'stroll', 
+        'ricciardo', 'ocon', 'sainz', 'norris', 
+        'gasly', 'kvyat', 'raikonnen', 'giovinazzi', 
+        'russell', 'latifi', 
+        'hulkenberg', 'aitken', 'pietro_fittipaldi'];
+        
+
     return (
         <React.Fragment>
             <Spacer />
-            <Section>
+            <Section>  
                 <Title>2020 Drivers</Title>
+                    { loading ? <p>Loading ... </p> : null}
                 <Scroll>
-                    { drivers.map(d => (
-                        <CurrentDriverCards driver={d} key={d} />
-                    ))}
+                    { data ?  (
+                        displayOrder.map(driver => {
+                            const driverToDisplay = data.allDrivers.find(d => d.driverId === driver);
+
+                            if(!driverToDisplay) return null;
+
+                            return (
+                                <CurrentDriverCards 
+                                    driver={driverToDisplay} 
+                                    key={driverToDisplay.driverId} />
+                            );
+                        })
+                        ) : null
+                    }
                 </Scroll>
             </Section>
         </React.Fragment>
