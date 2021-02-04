@@ -3,23 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Driver } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
-import { Fonts } from '../LayoutComponents';
+import { Cards, Fonts } from '../LayoutComponents';
 
-
-
-
-const Cards = styled.div<{ bg: string}>`
-    
-    background-color: ${props => props.bg};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: auto;
-    min-width: 8rem;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-`;
 
 const CodeNumber = styled.div<{ color: string;}>`
     color: ${props => props.color};

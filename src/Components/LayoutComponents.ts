@@ -55,6 +55,19 @@ export const Scroll = styled.div`
     overflow: auto;
 `;
 
+export const Cards = styled.div<{ bg: string}>`
+    
+    background-color: ${props => props.bg};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    min-width: 8rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+`;
+
 
 
 
