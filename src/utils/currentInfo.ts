@@ -16,7 +16,7 @@ export const getDriverStyle = (id: string): CurrTeamStyles => {
         case id === 'max_verstappen' || id === 'albon' || id === 'red_bull':
             return {
                 team: 'Red Bull Racing',
-                primary: '#0000CE',
+                primary: '#0000AE',
                 secondary: '#F94774'
             };
         case id === 'leclerc' || id === 'vettel' || id === 'ferrari':

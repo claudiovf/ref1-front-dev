@@ -10,9 +10,10 @@ const CodeNumber = styled.div<{ color: string;}>`
     color: ${props => props.color};
     font-family: "Work Sans Bold";
     display: flex;
-    flex-direction: row;
+    flex-direction: row nowrap;
     padding: 0.5rem;
     font-size: 1.75rem;
+    min-width: 7rem;
 `;
 
 const DriverName = styled.div`

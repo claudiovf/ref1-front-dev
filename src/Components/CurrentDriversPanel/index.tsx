@@ -15,7 +15,7 @@ const CurrentDriversPanel: React.FC = () => {
         'hamilton', 'bottas', 'max_verstappen', 'albon', 
         'leclerc', 'vettel', 'perez', 'stroll', 
         'ricciardo', 'ocon', 'sainz', 'norris', 
-        'gasly', 'kvyat', 'raikonnen', 'giovinazzi', 
+        'gasly', 'kvyat', 'raikkonen', 'giovinazzi', 
         'russell', 'latifi', 
         'hulkenberg', 'aitken', 'pietro_fittipaldi'];
         
@@ -27,6 +27,7 @@ const CurrentDriversPanel: React.FC = () => {
                 <Title>2020 Drivers</Title>
                     { loading ? <p>Loading ... </p> : null}
                 <Scroll>
+                    { data ? console.log(data.allDrivers) : null}
                     { data ?  (
                         displayOrder.map(driver => {
                             const driverToDisplay = data.allDrivers.find(d => d.driverId === driver);

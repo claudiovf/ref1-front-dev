@@ -51,7 +51,7 @@ export const Scroll = styled.div`
     display: flex;
     flex-flow: row nowrap;
     font-size: 1rem;
-    padding: 0.5rem;
+    padding-left: 0.5rem;
     overflow: auto;
 `;
 
@@ -62,7 +62,6 @@ export const Cards = styled.div<{ bg: string}>`
     flex-direction: column;
     justify-content: space-between;
     height: auto;
-    min-width: 8rem;
     margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 0.5rem;

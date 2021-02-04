@@ -17,6 +17,17 @@ export const CURRENT_DRIVERS_HOME = gql`
   }
 `;
 
+export const CURRENT_TEAMS_HOME = gql`
+    query {
+        allTeams(
+            period: "2020"
+        ) {
+            name
+            constructorId
+        }
+  }
+`;
+
 // {
 //     givenName
 //     familyName
