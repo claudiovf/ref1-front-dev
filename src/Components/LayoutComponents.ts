@@ -1,5 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import workSansBold from '../Assets/WorkSans/static/WorkSans-Bold.ttf';
+import workSansSemiBold from '../Assets/WorkSans/static/WorkSans-SemiBold.ttf';
+import workSansExtraBold from '../Assets/WorkSans/static/WorkSans-ExtraBold.ttf';
 import workSansReg from '../Assets/WorkSans/static/WorkSans-Regular.ttf';
 
 // #24282E Raisin Black
@@ -11,8 +13,16 @@ import workSansReg from '../Assets/WorkSans/static/WorkSans-Regular.ttf';
 
 export const Fonts = createGlobalStyle`
     @font-face {
+        font-family: "Work Sans Extra Bold";
+        src: url(${workSansExtraBold}) format('truetype');
+    }
+    @font-face {
         font-family: "Work Sans Bold";
         src: url(${workSansBold}) format('truetype');
+    }
+    @font-face {
+        font-family: "Work Sans Semi Bold";
+        src: url(${workSansSemiBold}) format('truetype');
     }
     @font-face {
         font-family: "Work Sans Reg";

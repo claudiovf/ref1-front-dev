@@ -8,7 +8,7 @@ import { Cards, Fonts } from '../LayoutComponents';
 
 const TeamName = styled.div<{ color: string;}>`
     color: ${props => props.color};
-    font-family: "Work Sans Bold";
+    font-family: "Work Sans Semi Bold";
     display: flex;
     flex-direction: row nowrap;
     padding: 0.5rem;
