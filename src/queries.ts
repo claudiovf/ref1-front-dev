@@ -28,6 +28,62 @@ export const CURRENT_TEAMS_HOME = gql`
   }
 `;
 
+export const DRIVER_PROFILE = gql`
+    query getDriver(
+        $driverId: String!
+    ) {
+        findDriver(
+            driverId: $driverId
+        ) {
+            givenName
+            familyName
+            driverId
+            code
+            nationality
+            dateOfBirth
+            permanentNumber
+            seasonsIn
+            championships
+            entries {
+                period
+                entries
+                firstEntry {
+                    date
+                    race
+                }
+                lastEntry {
+                    date
+                    race
+                }
+                points
+                avgPoints
+                bestResult
+                worstResult
+                avgPosition
+                championshipRank
+                vsTeammates {
+                    driverAhead
+                    teammatesAhead
+                    pctAhead
+                }
+                stats {
+                    stat
+                    total
+                    pct
+                    first {
+                        date
+                        race
+                    }
+                    last {
+                        date
+                        race
+                    }
+                }
+            }
+        }
+    }
+`;
+
 // {
 //     givenName
 //     familyName
@@ -71,4 +127,4 @@ export const CURRENT_TEAMS_HOME = gql`
 //             }
 //         }
 //     }
-//     }
+// }

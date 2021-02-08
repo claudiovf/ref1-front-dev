@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Driver } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
-import { Cards, Fonts } from '../LayoutComponents';
+import { Cards, Fonts, StyledLink } from '../LayoutComponents';
 
 
 const CodeNumber = styled.div<{ color: string;}>`
@@ -56,21 +56,23 @@ const CurrentDriverCards: React.FC<{ driver: Driver }> = ({driver}: {driver: Dri
     return (
         <>
             <Fonts />
-            <Cards onClick={() => console.log(driver.driverId)} bg={driverStyle.primary}>
-                <CodeNumber color={driverStyle.secondary}>
-                    {driver.code} {driver.permanentNumber}</CodeNumber>
+            <StyledLink to={"/profile/driver/" + driver.driverId}>
+                <Cards  bg={driverStyle.primary}>
+                    <CodeNumber color={driverStyle.secondary}>
+                        {driver.code} {driver.permanentNumber}</CodeNumber>
 
-                <DriverName>
-                    <First color={driverStyle.secondary}>
-                        {driver.givenName}</First>
+                    <DriverName>
+                        <First color={driverStyle.secondary}>
+                            {driver.givenName}</First>
 
-                    <Last color={driverStyle.secondary}>
-                        {driver.familyName.toUpperCase()}</Last>
+                        <Last color={driverStyle.secondary}>
+                            {driver.familyName.toUpperCase()}</Last>
 
-                </DriverName>
-                <Team>
-                    {driverStyle.team}</Team>
-            </Cards>
+                    </DriverName>
+                    <Team>
+                        {driverStyle.team}</Team>
+                </Cards>
+            </StyledLink>    
         </>
     );
 };

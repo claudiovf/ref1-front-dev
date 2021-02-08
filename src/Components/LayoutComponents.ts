@@ -3,6 +3,7 @@ import workSansBold from '../Assets/WorkSans/static/WorkSans-Bold.ttf';
 import workSansSemiBold from '../Assets/WorkSans/static/WorkSans-SemiBold.ttf';
 import workSansExtraBold from '../Assets/WorkSans/static/WorkSans-ExtraBold.ttf';
 import workSansReg from '../Assets/WorkSans/static/WorkSans-Regular.ttf';
+import { Link } from "react-router-dom";
 
 // #24282E Raisin Black
 // #D1DADC Light Gray
@@ -77,8 +78,33 @@ export const Cards = styled.div<{ bg: string}>`
     border-radius: 0.5rem;
 `;
 
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
 
 
+export const BackHome = styled.div`
+    font-family: "Work Sans Semi Bold";
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    color: #2E2E2E;
+    background-color: #FFFFFF;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 0px 1px 2px #FFFFFF;
+    position: fixed;
+`;
+
+export const Period = styled.div`
+    color: #888888;
+`;
 
 // #24282E Raisin Black
 // #D1DADC Light Gray

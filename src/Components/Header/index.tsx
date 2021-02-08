@@ -12,7 +12,8 @@ export const HeaderStyled = styled.div`
     width: 100%;
     position: fixed;
     box-shadow: 0px 0.5px 2px #D1DADC;
-    backdrop-filter: blur(3px);
+    background-color: #FFFFFF;
+    // backdrop-filter: blur(3px);
 `;
 
 
