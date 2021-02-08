@@ -97,7 +97,7 @@ export const BackHome = styled.div`
     color: #2E2E2E;
     background-color: #FFFFFF;
     font-size: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     box-shadow: 0px 1px 2px #FFFFFF;
     position: fixed;
 `;

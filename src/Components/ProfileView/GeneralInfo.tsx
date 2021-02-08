@@ -12,7 +12,7 @@ const GenContainer = styled.div<{ bg: string }>`
     justify-content: left;
     align-items: flex-start;
     min-height: auto;
-    width: 100%;
+    padding: 0.5rem;
 `;
 
 
