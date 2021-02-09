@@ -62,8 +62,9 @@ export const Scroll = styled.div`
     display: flex;
     flex-flow: row nowrap;
     font-size: 1rem;
-    padding-left: 0.5rem;
+    padding: 0 0 0.25rem 0.5rem;
     overflow: auto;
+    scroll-snap-type: x mandatory;
 `;
 
 export const Cards = styled.div<{ bg: string}>`
@@ -86,6 +87,14 @@ export const StyledLink = styled(Link)`
     }
 `;
 
+export const StyledButton = styled.button`
+    outline: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        outline: none;
+    }
+`;
+
 
 export const BackHome = styled.div`
     font-family: "Work Sans Semi Bold";
@@ -98,7 +107,7 @@ export const BackHome = styled.div`
     background-color: #FFFFFF;
     font-size: 1rem;
     padding: 1rem 1rem;
-    box-shadow: 0px 1px 2px #FFFFFF;
+    box-shadow: 0px 1px 1px #DDDDDD;
     position: fixed;
 `;
 

@@ -27,7 +27,6 @@ const CurrentDriversPanel: React.FC = () => {
                 <Title>2020 Drivers</Title>
                     { loading ? <p>Loading ... </p> : null}
                 <Scroll>
-                    { data ? console.log(data.allDrivers) : null}
                     { data ?  (
                         displayOrder.map(driver => {
                             const driverToDisplay = data.allDrivers.find(d => d.driverId === driver);

@@ -70,7 +70,10 @@ const CurrentDriverCards: React.FC<{ driver: Driver }> = ({driver}: {driver: Dri
 
                     </DriverName>
                     <Team>
-                        {driverStyle.team}</Team>
+                        {driverStyle.team !== 'NA'
+                            ? driverStyle.team
+                            : null
+                        }</Team>
                 </Cards>
             </StyledLink>    
         </>

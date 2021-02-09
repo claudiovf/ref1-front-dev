@@ -152,3 +152,8 @@ export interface Season {
     season  : string;
 }
 
+export interface CurrTeamStyles {
+    team        : string;
+    primary     : string;
+    secondary   : string;
+}

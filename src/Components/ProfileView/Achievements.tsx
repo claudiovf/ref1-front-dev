@@ -36,6 +36,8 @@ const AchIcon = styled.span`
     padding: 0.5rem;
 `;
 
+
+
 const Achievements: React.FC<{driver: Driver}> = ({ driver }: { driver: Driver }) => {
     const career = driver.entries.find(p => p.period === "Career");
 
@@ -44,26 +46,60 @@ const Achievements: React.FC<{driver: Driver}> = ({ driver }: { driver: Driver }
     const wins = career.stats.find(s => s.stat === "wins");
     const podiums = career.stats.find(s => s.stat === "podiums");
     const pointsFinish = career.stats.find(s => s.stat === "pointsFinish");
+    const entries = {stat: "entries", total: career.entries};
 
     if (!wins || !podiums || !pointsFinish) return null;
+
+
+    const resultsAchievements = [wins, podiums, pointsFinish, entries].map(a => {
+        switch(true) {
+            case a.stat === 'wins':
+                if (a.total >= 25) return '25+ Race Wins';
+                else if (a.total >= 10) return '10+ Race Wins';
+                else if (a.total >= 5) return '5+ Race Wins';
+                else if (a.total > 0) return 'Race Winner';
+                else return null;
+
+            case a.stat === 'podiums':
+                if (a.total >= 25) return '25+ Podium Finishes';
+                else if (a.total >= 10) return '10+ Podium Finishes';
+                else if (a.total >= 5) return '5+ Podium Finishes';
+                else if (a.total > 0) return 'Podium Finish';
+                else return null;
+
+            case a.stat === 'pointsFinish':
+                if (a.total >= 25) return '25+ Points Finishes';
+                else if (a.total >= 10) return '10+ Points Finishes';
+                else if (a.total >= 5) return '5+ Points Finishes';
+                else if (a.total > 0) return 'Points Finish';
+                else return null;
+
+            case a.stat === 'entries':
+                if (a.total >= 300) return '300+ Race Entries';
+                else if (a.total >= 200) return '200+ Race Entries';
+                else if (a.total >= 100) return '100+ Race Entries';
+                else if (a.total >= 50) return '50+ Race Entries';
+                else if (a.total >= 25) return '25+ Race Entries';
+                else return null;
+        }
+    });
+
+    if (resultsAchievements.filter(a => a !== null).length === 0) return null;
 
     return (
         <React.Fragment>
             <AchieveContainer>
                 <AchieveCard>
                 <Title>Achievements</Title>
-                {driver.championships.length > 0
-                ? <div><AchIcon>&#10003;</AchIcon> World Champion</div>
-                : null}
-                {wins.total > 0
-                ? <div><AchIcon>&#10003;</AchIcon> Race Winner</div>
-                : null}
-                {podiums.total > 0
-                ? <div><AchIcon>&#10003;</AchIcon> Podium Finish</div>
-                : null}
-                {pointsFinish.total > 0
-                ? <div><AchIcon>&#10003;</AchIcon> Point Finish</div>
-                : null}
+                { driver.championships.length > 0 
+                    ? <div><AchIcon>&#10003;</AchIcon> World Champion</div>
+                    : null
+                }
+                { resultsAchievements.map(a => a !== null 
+                    ? <div key={a}><AchIcon>&#10003;</AchIcon> {a}</div>
+                    : null
+                )}
+        
                 </AchieveCard>
             </AchieveContainer>
         </React.Fragment>

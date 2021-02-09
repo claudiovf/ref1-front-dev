@@ -1,8 +1,5 @@
-interface CurrTeamStyles {
-    team        : string;
-    primary     : string;
-    secondary   : string;
-}
+import { CurrTeamStyles } from "../types";
+
 
 export const getDriverStyle = (id: string): CurrTeamStyles => {
     switch(true) {
