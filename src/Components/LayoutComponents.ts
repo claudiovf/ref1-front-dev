@@ -115,6 +115,39 @@ export const Period = styled.div`
     color: #888888;
 `;
 
+export const InfoRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    
+`;
+
+export const InfoBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    padding: 1rem;
+`;
+
+export const Label = styled.div`
+    font-family: "Work Sans Semi Bold";
+    color: rgb(255,255,255,0.75);
+    font-size: 0.75rem;
+`;
+
+export const Value = styled.div`
+    font-family: "Work Sans Bold";
+    color: #FFFFFF;
+    font-size: 1rem;
+`;
+
+export const AchIcon = styled.span`
+    font-size: 1.5rem;
+    padding: 0.5rem;
+`;
+
 // #24282E Raisin Black
 // #D1DADC Light Gray
 // #FFFFFF White 

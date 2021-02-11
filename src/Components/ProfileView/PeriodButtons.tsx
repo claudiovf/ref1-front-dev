@@ -49,7 +49,7 @@ const PeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style, per
     );
 
     const displayPeriods: string[] = [];
-    [teamPeriods,["Career"], seasonPeriods].map(arr => {
+    [teamPeriods.reverse(),["Career"], seasonPeriods].map(arr => {
         return arr.map(period => period !== null ? displayPeriods.push(period): null);
     });
 

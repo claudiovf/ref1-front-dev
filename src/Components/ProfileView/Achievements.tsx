@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Driver } from '../../types';
+import { AchIcon } from '../LayoutComponents';
 
 const AchieveContainer = styled.div`
     display: flex;
@@ -12,7 +13,7 @@ const AchieveContainer = styled.div`
 
 const Title = styled.div`
     width: 100%;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
     font-size: 1rem;
 `;
 
@@ -31,10 +32,6 @@ const AchieveCard = styled.div`
     line-height: 1.5rem;
 `;
 
-const AchIcon = styled.span`
-    font-size: 1.5rem;
-    padding: 0.5rem;
-`;
 
 
 

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Driver } from '../../types';
 import { BackHome, Period, StyledLink } from '../LayoutComponents';
 
-import StatInfo from './StatInfo';
+import StatSection from './StatSection';
 import GeneralInfo from './GeneralInfo';
 
 import { DRIVER_PROFILE } from '../../queries';
@@ -44,7 +44,7 @@ const ProfileView: React.FC = () => {
                 </BackHome>
             </StyledLink>
             <GeneralInfo driver={driver} />
-            <StatInfo 
+            <StatSection 
                 driver={driver} 
                 period={period} 
                 changeProfilePeriod={changeProfilePeriod} />

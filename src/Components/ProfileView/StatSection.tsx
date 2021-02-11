@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Driver } from '../../types';
+import { Driver, DriverPeriod } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
 import { formattedPeriod } from '../../utils/formatting';
 import PeriodButtons from './PeriodButtons';
+import PeriodStats from './PeriodStats';
 
 
 interface Props {
@@ -13,10 +14,14 @@ interface Props {
 
 const StatInfo: React.FC<Props> = ({ driver, period, changeProfilePeriod }: Props) => {
     const [ periodSelected, setPeriodSelected] = useState<string>(period);
+    const [ displayPeriod, setDisplayPeriod ] = useState<DriverPeriod | null>(null);
     const driverStyle = getDriverStyle(driver.driverId);
     
     useEffect(() => {
-        console.log(periodSelected);
+        const periodToDisplay = driver.entries.find(p => p.period === periodSelected);
+        if ( periodToDisplay ) {
+            setDisplayPeriod(periodToDisplay);
+        }
     }, [periodSelected]);
     
     if ( !driver ) return null;
@@ -38,6 +43,13 @@ const StatInfo: React.FC<Props> = ({ driver, period, changeProfilePeriod }: Prop
                 style={driverStyle}
                 periodSelected={periodSelected}
             />
+            
+            {displayPeriod
+            ? <PeriodStats 
+                displayPeriod={displayPeriod} 
+                driverStyle={driverStyle}
+            />
+            : null}
         </React.Fragment>
     );
 };
