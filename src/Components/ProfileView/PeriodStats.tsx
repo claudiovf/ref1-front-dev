@@ -32,7 +32,7 @@ const DarkValue = styled(Value)`
 
 const DarkLabel = styled(Label)`
     color: #6F6F6F;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
 `;
 
 const RaceValue = styled(Value)`
