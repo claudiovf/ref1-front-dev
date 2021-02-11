@@ -26,10 +26,14 @@ const TopStats = styled.div`
 `;
 
 const DarkValue = styled(Value)`
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #2F2F2F;
 `;
 
+const DarkLabel = styled(Label)`
+    color: #6F6F6F;
+    font-size: 0.5rem;
+`;
 
 const RaceValue = styled(Value)`
     font-size: 1rem;
@@ -40,10 +44,6 @@ const DateValue = styled(Value)`
     color: #2F2F2F;
 `;
 
-const DarkLabel = styled(Label)`
-    color: #6F6F6F;
-    font-size: 0.75rem;
-`;
 
 
 const CenterInfoBox = styled(InfoBox)`
