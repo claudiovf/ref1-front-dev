@@ -31,7 +31,7 @@ const DarkValue = styled(Value)`
 `;
 
 const DarkLabel = styled(Label)`
-    color: #6F6F6F;
+    color: #AFAFAF;
     font-size: 0.75rem;
 `;
 
