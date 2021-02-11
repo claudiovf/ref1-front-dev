@@ -3,6 +3,7 @@ import { Driver, DriverPeriod } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
 import { formattedPeriod } from '../../utils/formatting';
 import PeriodButtons from './PeriodButtons';
+// import PeriodRaceStats from './PeriodRaceStats';
 import PeriodStats from './PeriodStats';
 
 
@@ -50,6 +51,13 @@ const StatInfo: React.FC<Props> = ({ driver, period, changeProfilePeriod }: Prop
                 driverStyle={driverStyle}
             />
             : null}
+
+            {/* {displayPeriod
+            ? <PeriodRaceStats
+                displayPeriod={displayPeriod}
+                driverStyle={driverStyle}
+            />
+            : null} */}
         </React.Fragment>
     );
 };
