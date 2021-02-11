@@ -26,7 +26,7 @@ const TopStats = styled.div`
 `;
 
 const DarkValue = styled(Value)`
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: #2F2F2F;
 `;
 
@@ -42,7 +42,7 @@ const DateValue = styled(Value)`
 
 const DarkLabel = styled(Label)`
     color: #6F6F6F;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
 `;
 
 
