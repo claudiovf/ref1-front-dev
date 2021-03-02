@@ -12,6 +12,8 @@ const StatsContainer = styled.div<{ bg: string }>`
     // align-items: center;
     widht: 100%;
 
+    padding-top: 1rem;
+
 `;
 
 const TopStats = styled.div`
@@ -26,7 +28,7 @@ const TopStats = styled.div`
 `;
 
 const DarkValue = styled(Value)`
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: #2F2F2F;
 `;
 
@@ -80,33 +82,33 @@ const PeriodStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props) => 
                         <InfoRowWithBorder>
                             <CenterInfoBox>
                                 <DarkValue>{displayPeriod.entries}</DarkValue>
-                                <DarkLabel>ENTRIES</DarkLabel>
+                                <DarkLabel>Entries</DarkLabel>
                             </CenterInfoBox>
                             { displayPeriod.championshipRank > 0 
                             ? <CenterInfoBox>
                                 <DarkValue>{displayPeriod.championshipRank}</DarkValue>
-                                <DarkLabel>CHAMPIONSHIP RANK</DarkLabel>
+                                <DarkLabel>Championship Rank</DarkLabel>
                             </CenterInfoBox>
                             : null}
                         </InfoRowWithBorder>
                         <InfoRowWithBorder>
                             <CenterInfoBox>
                                 <DarkValue>{displayPeriod.points}</DarkValue>
-                                <DarkLabel>POINTS</DarkLabel>
+                                <DarkLabel>Points</DarkLabel>
                             </CenterInfoBox>
                             <CenterInfoBox>
                                 <DarkValue>{displayPeriod.avgPoints}</DarkValue>
-                                <DarkLabel>AVERAGE POINTS</DarkLabel>
+                                <DarkLabel>Average Points</DarkLabel>
                             </CenterInfoBox>
                         </InfoRowWithBorder>
                         <InfoRowWithBorder>
                             <CenterInfoBox>
                                 <DarkValue>{displayPeriod.bestResult}</DarkValue>
-                                <DarkLabel>BEST RESULT</DarkLabel>
+                                <DarkLabel>Best Result</DarkLabel>
                             </CenterInfoBox>
                             <CenterInfoBox>
                                 <DarkValue>{displayPeriod.avgPosition}</DarkValue>
-                                <DarkLabel>AVERAGE RESULT</DarkLabel>
+                                <DarkLabel>Average Result</DarkLabel>
                             </CenterInfoBox>
                         </InfoRowWithBorder>
                         <InfoRow>
@@ -114,7 +116,7 @@ const PeriodStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props) => 
                             <CenterInfoBox>
                                 <RaceValue>{displayPeriod.firstEntry.race}</RaceValue>
                                 <DateValue>{displayPeriod.firstEntry.date}</DateValue>
-                                <DarkLabel>FIRST ENTRY</DarkLabel>
+                                <DarkLabel>First Entry</DarkLabel>
                             </CenterInfoBox>
                         </InfoRow>
                         <InfoRow>
@@ -122,7 +124,7 @@ const PeriodStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props) => 
                             <CenterInfoBox>
                                 <RaceValue>{displayPeriod.lastEntry.race}</RaceValue>
                                 <DateValue>{displayPeriod.lastEntry.date}</DateValue>
-                                <DarkLabel>LAST ENTRY</DarkLabel>
+                                <DarkLabel>Last Entry</DarkLabel>
                             </CenterInfoBox>
                         </InfoRow>
                    

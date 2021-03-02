@@ -3,8 +3,9 @@ import { Driver, DriverPeriod } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
 import { formattedPeriod } from '../../utils/formatting';
 import PeriodButtons from './PeriodButtons';
-// import PeriodRaceStats from './PeriodRaceStats';
+import PeriodRaceStats from './PeriodRaceStats';
 import PeriodStats from './PeriodStats';
+
 
 
 interface Props {
@@ -38,26 +39,26 @@ const StatInfo: React.FC<Props> = ({ driver, period, changeProfilePeriod }: Prop
 
     return (
         <React.Fragment>
-            <PeriodButtons 
-                periods={driver.entries}
-                handlePeriodChange={handlePeriodChange}
-                style={driverStyle}
-                periodSelected={periodSelected}
-            />
-            
-            {displayPeriod
-            ? <PeriodStats 
-                displayPeriod={displayPeriod} 
-                driverStyle={driverStyle}
-            />
-            : null}
+                <PeriodButtons 
+                    periods={driver.entries}
+                    handlePeriodChange={handlePeriodChange}
+                    style={driverStyle}
+                    periodSelected={periodSelected}
+                />
+                
+                {displayPeriod
+                ? <PeriodStats 
+                    displayPeriod={displayPeriod} 
+                    driverStyle={driverStyle}
+                />
+                : null}
 
-            {/* {displayPeriod
-            ? <PeriodRaceStats
-                displayPeriod={displayPeriod}
-                driverStyle={driverStyle}
-            />
-            : null} */}
+                {displayPeriod
+                ? <PeriodRaceStats
+                    displayPeriod={displayPeriod}
+                    driverStyle={driverStyle}
+                />
+                : null}
         </React.Fragment>
     );
 };

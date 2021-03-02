@@ -134,13 +134,13 @@ export const InfoBox = styled.div`
 export const Label = styled.div`
     font-family: "Work Sans Semi Bold";
     color: rgb(255,255,255,0.75);
-    font-size: 0.75rem;
+    font-size: 0.5rem;
 `;
 
 export const Value = styled.div`
     font-family: "Work Sans Bold";
     color: #FFFFFF;
-    font-size: 1rem;
+    font-size: 0.75rem;
 `;
 
 export const AchIcon = styled.span`

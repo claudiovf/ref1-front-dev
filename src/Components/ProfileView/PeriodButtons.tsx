@@ -9,6 +9,9 @@ const ScrollWrapper = styled.div<{ bg: string}>`
     height: auto;
     width: 100%;
     padding: 0.5rem 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 6rem;
 `;
 
 const SelectionButton = styled(StyledButton)<{ bg: string; color: string; selected: boolean;}>`
@@ -23,6 +26,7 @@ const SelectionButton = styled(StyledButton)<{ bg: string; color: string; select
     scroll-snap-align: center;
 `;
 
+
 interface Props {
     periods: DriverPeriod[];
     handlePeriodChange: (selected: string) => void;
@@ -32,12 +36,14 @@ interface Props {
 
 const PeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style, periodSelected}: Props) => {
     if(!periods) return null;
+
     const selRef = useRef<HTMLButtonElement | null>(null);
 
     useEffect(() => {
         if(selRef && selRef.current) {
             selRef.current.scrollIntoView({ behavior: "smooth", inline: "center" });
         }
+
     }, [selRef]);
     
     const seasonPeriods = periods.map(p => 
@@ -52,7 +58,6 @@ const PeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style, per
     [teamPeriods.reverse(),["Career"], seasonPeriods].map(arr => {
         return arr.map(period => period !== null ? displayPeriods.push(period): null);
     });
-
 
     return (
         <React.Fragment>

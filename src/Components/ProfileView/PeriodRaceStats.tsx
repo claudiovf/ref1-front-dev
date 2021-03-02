@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CurrTeamStyles, DriverPeriod } from '../../types';
-// import { InfoRow, InfoBox, Value, Label } from '../LayoutComponents';
+import { CurrTeamStyles, DriverPeriod, Stat } from '../../types';
+import StatCard from './StatCard';
 
 
 const StatsContainer = styled.div<{ bg: string }>`
@@ -11,6 +11,7 @@ const StatsContainer = styled.div<{ bg: string }>`
     justify-content: flex-start;
     // align-items: center;
     widht: 100%;
+    
 
 `;
 
@@ -24,35 +25,6 @@ const RaceStats = styled.div`
     border-radius: 0.5rem;
 `;
 
-// const DarkValue = styled(Value)`
-//     font-size: 1.25rem;
-//     color: #2F2F2F;
-// `;
-
-// const DarkLabel = styled(Label)`
-//     color: #AFAFAF;
-//     font-size: 0.75rem;
-// `;
-
-// const RaceValue = styled(Value)`
-//     font-size: 1rem;
-//     color: #2F2F2F;
-// `;
-// const DateValue = styled(Value)`
-//     font-size: 0.75rem;
-//     color: #2F2F2F;
-// `;
-
-
-
-// const CenterInfoBox = styled(InfoBox)`
-//     min-width: 5rem;
-// `;
-
-// const InfoRowWithBorder = styled(InfoRow)`
-//     border-bottom: 1px solid #DDDDDD;
-// `;
-
 
 export const Icon = styled.div`
     display: flex;
@@ -61,14 +33,6 @@ export const Icon = styled.div`
     align-items: center;
     font-size: 2rem;
     padding: 0.5rem;
-`;
-
-const StatCard = styled.div<{ dark: boolean}>`
-    background-color: ${props => props.dark ? '#2F2F2F' : '#FFFFFF'};
-    color: ${props => props.dark ? '#FFFFFF' : '#2F2F2F'};
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 `;
 
 
@@ -84,9 +48,26 @@ const PeriodRaceStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props)
         <React.Fragment>
             <StatsContainer bg={driverStyle.primary}>
                 <RaceStats>
-                        {displayPeriod.stats.map(s => 
-                            <StatCard dark={true} key={s.stat}>{s.stat}</StatCard>
-                        )}
+                        {displayPeriod.stats.map((s: Stat) => {
+                            if (s.stat === 'fastestLaps') {
+                                return null;
+                            }
+                            else if (displayPeriod.stats.indexOf(s) === 0) {
+                                return (
+                                    <StatCard key={s.stat} s={s} rad={"0.5rem 0.5rem 0 0"} />
+                                );
+                            }
+                            else if (displayPeriod.stats.indexOf(s) === displayPeriod.stats.length - 1) {
+                                return (
+                                    <StatCard s={s} rad={"0 0 0.5rem 0.5rem"} key={s.stat} />
+                                );
+                            }
+                            else {
+                                return (
+                                    <StatCard s={s} rad={"none"} key={s.stat} />
+                                );
+                            }
+                        })}
                 </RaceStats>
             </StatsContainer>
         </React.Fragment>
