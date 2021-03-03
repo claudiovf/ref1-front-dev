@@ -84,6 +84,55 @@ export const DRIVER_PROFILE = gql`
     }
 `;
 
+export const TEAM_PROFILE = gql`
+    query getTeam(
+        $constructorId: String!
+    ) {
+        findTeam(
+            constructorId: $constructorId
+        ) {
+            name
+            constructorId
+            url
+            nationality
+            seasonsIn
+            championships
+            entries {
+                period
+                entries
+                firstEntry {
+                    date
+                    race
+                }
+                lastEntry {
+                    date
+                    race
+                }
+                points
+                avgPoints
+                bestResult
+                worstResult
+                avgPosition
+                championshipRank
+                drivers
+                stats {
+                    stat
+                    total
+                    pct
+                    first {
+                        date
+                        race
+                    }
+                    last {
+                        date
+                        race
+                    }
+                }
+            }
+        }
+    }
+`;
+
 // {
 //     givenName
 //     familyName

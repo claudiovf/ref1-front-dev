@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Team } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
-import { Cards, Fonts } from '../LayoutComponents';
+import { Cards, Fonts, StyledLink } from '../LayoutComponents';
 
 
 const TeamName = styled.div<{ color: string;}>`
@@ -11,7 +11,7 @@ const TeamName = styled.div<{ color: string;}>`
     font-family: "Work Sans Semi Bold";
     display: flex;
     flex-direction: row nowrap;
-    padding: 0.5rem;
+    padding: 1rem;
     font-size: 1rem;
     width: auto;
     height: auto;
@@ -26,10 +26,12 @@ const CurrentTeamCards: React.FC<{ team: Team }> = ({team}: {team: Team}) => {
     return (
         <>
             <Fonts />
-            <Cards onClick={() => console.log(team)} bg={teamStyle.primary}>
-                <TeamName color={teamStyle.secondary}>
-                    {team.name} </TeamName>
-            </Cards>
+            <StyledLink to={"/profile/team/" + team.constructorId}>
+                <Cards bg={teamStyle.primary}>
+                    <TeamName color={teamStyle.secondary}>
+                        {team.name} </TeamName>
+                </Cards>
+            </StyledLink>
         </>
     );
 };

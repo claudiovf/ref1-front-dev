@@ -27,7 +27,7 @@ const StatTitle = styled.div<{ colorTitle: boolean }>`
     color: ${props => props.colorTitle ? "#2F2F2F" : "#FFFFFF" };
     font-family: "Work Sans Bold";
     font-size: 1rem;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0.5rem;
 `;
 
 const StatInfoRow = styled(InfoRow)`

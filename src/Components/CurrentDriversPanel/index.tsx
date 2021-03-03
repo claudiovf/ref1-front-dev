@@ -16,7 +16,7 @@ const CurrentDriversPanel: React.FC = () => {
         'leclerc', 'vettel', 'perez', 'stroll', 
         'ricciardo', 'ocon', 'sainz', 'norris', 
         'gasly', 'kvyat', 'raikkonen', 'giovinazzi', 
-        'russell', 'latifi', 
+        'kevin_magnussen', 'grosjean', 'russell', 'latifi', 
         'hulkenberg', 'aitken', 'pietro_fittipaldi'];
         
 

@@ -11,12 +11,11 @@ const CurrentTeamsPanel: React.FC = () => {
     const { loading, data } = useQuery<{ allTeams: Team[] }>(CURRENT_TEAMS_HOME);
 
     
-    const topRowOrder = [
-        'mercedes', 'ferrari','racing_point', 
-        'renault', 'alfa' ,];
-    const bottomRowOrder = [
-        'red_bull', 'mclaren', 
-        'alphatauri', 'haas', 'williams',];
+    const TeamOrder = [
+        'mercedes', 'red_bull', 'ferrari','racing_point', 
+        'renault', 'mclaren', 'alphatauri', 'alfa', 
+        'haas', 'williams'];
+ 
         
 
     return (
@@ -26,23 +25,7 @@ const CurrentTeamsPanel: React.FC = () => {
                     { loading ? <p>Loading ... </p> : null}
                 <Scroll>
                     { data ?  (
-                        topRowOrder.map(team => {
-                            const teamToDisplay = data.allTeams.find(t => t.constructorId === team);
-
-                            if(!teamToDisplay) return null;
-
-                            return (
-                                <CurrentTeamCards 
-                                    team={teamToDisplay} 
-                                    key={teamToDisplay.constructorId} />
-                            );
-                        })
-                        ) : null
-                    }
-                </Scroll>
-                <Scroll>
-                    { data ?  (
-                        bottomRowOrder.map(team => {
+                        TeamOrder.map(team => {
                             const teamToDisplay = data.allTeams.find(t => t.constructorId === team);
 
                             if(!teamToDisplay) return null;

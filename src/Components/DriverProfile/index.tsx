@@ -11,7 +11,7 @@ import { DRIVER_PROFILE } from '../../queries';
 
 
 
-const ProfileView: React.FC = () => {
+const DriverProfile: React.FC = () => {
     const [ driver, setDriver ] = useState<Driver | null>(null);
     const [ period, setPeriod ] = useState<string>("Career");
     
@@ -52,4 +52,4 @@ const ProfileView: React.FC = () => {
     );
 };
 
-export default ProfileView;
+export default DriverProfile;
