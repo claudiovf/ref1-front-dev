@@ -14,7 +14,7 @@ import { TEAM_PROFILE } from '../../queries';
 
 const TeamProfile: React.FC = () => {
     const [ team, setTeam ] = useState<Team | null>(null);
-    const [ period, setPeriod ] = useState<string>("All Time");
+    const [ period, setPeriod ] = useState<string>("Career");
     
 
     const { constructorId } = useParams<{ constructorId: string }>();
