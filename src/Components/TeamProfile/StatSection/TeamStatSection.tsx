@@ -20,7 +20,9 @@ const TeamStatInfo: React.FC<Props> = ({ team, period, changeProfilePeriod }: Pr
     const teamStyle = getDriverStyle(team.constructorId);
     
     useEffect(() => {
-        const periodToDisplay = team.entries.find(p => p.period === periodSelected);
+        const correctedPeriod = (period: string): string => period === 'All Time' ? 'Career' : period;
+
+        const periodToDisplay = team.entries.find(p => p.period === correctedPeriod(period));
         if ( periodToDisplay ) {
             setDisplayPeriod(periodToDisplay);
         }

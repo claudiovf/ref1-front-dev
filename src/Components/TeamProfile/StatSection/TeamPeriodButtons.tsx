@@ -52,7 +52,7 @@ const TeamPeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style,
 
 
     const displayPeriods: string[] = [];
-    [["Career"], seasonPeriods].map(arr => {
+    [["All Time"], seasonPeriods].map(arr => {
         return arr.map(period => period !== null ? displayPeriods.push(period): null);
     });
 

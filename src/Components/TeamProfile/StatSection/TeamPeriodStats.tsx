@@ -106,7 +106,8 @@ interface Props {
 const TeamPeriodStats: React.FC<Props> = ({ displayPeriod, teamStyle }: Props) => {
     const [ expandedDrivers, setExpandedDrivers ] = useState<boolean>(false);
 
-   
+   const correctedPeriod = (period: string): string => period === 'Career' ? 'All Time' : period;
+
     return (
         <React.Fragment>
             <StatsContainer bg={teamStyle.primary}>
@@ -160,7 +161,7 @@ const TeamPeriodStats: React.FC<Props> = ({ displayPeriod, teamStyle }: Props) =
                             </CenterInfoBox>
                         </InfoRowWithBorder>
                         <InfoRowDrivers>
-                                <DriversLabel>Drivers in {displayPeriod.period}</DriversLabel>
+                                <DriversLabel>{correctedPeriod(displayPeriod.period)} Drivers</DriversLabel>
                                 { displayPeriod.drivers.length <= 5
                                     ? <RaceValue>{displayPeriod.drivers.map(d => <div key={d}>{formattedPeriod(d)}</div>)}</RaceValue>
                                     : expandedDrivers 

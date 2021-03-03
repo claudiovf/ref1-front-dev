@@ -36,6 +36,16 @@ export const Spacer = styled.div`
     min-height: 3rem;
 `;
 
+export const Spinner = styled.div`
+    font-family: "Work Sans Bold";
+    min-height: 6rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const Section = styled.div`
     display: flex;
     flex-direction: column;

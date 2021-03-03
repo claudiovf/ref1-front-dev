@@ -1,5 +1,5 @@
 import React from 'react';
-import { Section, Title, Scroll } from '../LayoutComponents';
+import { Section, Title, Scroll, Spinner } from '../LayoutComponents';
 import CurrentTeamCards from './CurrentTeamCards';
 import { useQuery } from '@apollo/client';
 import { Team } from '../../types';
@@ -22,7 +22,7 @@ const CurrentTeamsPanel: React.FC = () => {
         <React.Fragment>
             <Section>  
                 <Title>2020 Teams</Title>
-                    { loading ? <p>Loading ... </p> : null}
+                    { loading ? <Spinner>Loading ... </Spinner> : null}
                 <Scroll>
                     { data ?  (
                         TeamOrder.map(team => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Team } from '../../types';
-import { BackHome, Period, StyledLink } from '../LayoutComponents';
+import { BackHome, Period, StyledLink, Spinner } from '../LayoutComponents';
 
 import TeamStatSection from './StatSection/TeamStatSection';
 import TeamInfo from './TeamInfo/TeamInfo';
@@ -14,7 +14,7 @@ import { TEAM_PROFILE } from '../../queries';
 
 const TeamProfile: React.FC = () => {
     const [ team, setTeam ] = useState<Team | null>(null);
-    const [ period, setPeriod ] = useState<string>("Career");
+    const [ period, setPeriod ] = useState<string>("All Time");
     
 
     const { constructorId } = useParams<{ constructorId: string }>();
@@ -32,7 +32,7 @@ const TeamProfile: React.FC = () => {
     };
     
     
-    if ( loading ) return <div>Loading ...</div>;
+    if ( loading ) return <Spinner>Loading ...</Spinner>;
 
     if ( !team ) return null;
 
