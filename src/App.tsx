@@ -7,6 +7,8 @@ import DriverProfile from './Components/DriverProfile';
 import { Switch, Route } from 'react-router-dom';
 import { Spacer } from './Components/LayoutComponents';
 import TeamProfile from './Components/TeamProfile';
+import LegendsPanel from './Components/LegendsPanel';
+import SkySportsPanel from './Components/SkySportsPanel';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +18,8 @@ const App: React.FC = () => {
         <Route exact path="/">
           <CurrentDriversPanel />
           <CurrentTeamsPanel />
+          <LegendsPanel />
+          <SkySportsPanel />
         </Route>
         <Route exact path="/profile/driver/:driverId">
           <Spacer />

@@ -12,8 +12,8 @@ const CurrentTeamsPanel: React.FC = () => {
 
     
     const TeamOrder = [
-        'mercedes', 'red_bull', 'ferrari','racing_point', 
-        'renault', 'mclaren', 'alphatauri', 'alfa', 
+        'mercedes', 'red_bull', 'racing_point', 'renault', 
+        'mclaren', 'ferrari', 'alphatauri', 'alfa', 
         'haas', 'williams'];
  
         

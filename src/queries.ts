@@ -133,6 +133,18 @@ export const TEAM_PROFILE = gql`
     }
 `;
 
+export const GET_THIS_DRIVERS = gql`
+    query getThisDrivers($driversList: [String!]!){
+        findManyDrivers (
+        driversList: $driversList
+        ) {
+            givenName
+            familyName
+            driverId
+        }
+    }
+`;
+
 // {
 //     givenName
 //     familyName
