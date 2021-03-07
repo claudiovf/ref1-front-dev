@@ -129,6 +129,7 @@ export const InfoRow = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     
 `;
@@ -138,7 +139,7 @@ export const InfoBox = styled.div`
     flex-direction: column;
     justify-content: left;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
 `;
 
 export const Label = styled.div`
@@ -154,9 +155,11 @@ export const Value = styled.div`
 `;
 
 export const AchIcon = styled.span`
+    color: #5f48f7;
     font-size: 1.5rem;
     padding: 0.5rem;
 `;
+
 
 // #24282E Raisin Black
 // #D1DADC Light Gray
@@ -164,3 +167,4 @@ export const AchIcon = styled.span`
 // #388659 Sea Green
 // #EF233C Imperial Red
 // #6279B8 Glaucous
+//#667dff purple

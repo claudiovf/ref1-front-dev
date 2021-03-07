@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Team } from '../../../types';
-import { getDriverStyle } from '../../../utils/currentInfo';
-import { InfoBox, InfoRow, Label, Spacer, Value } from '../../LayoutComponents';
-import TeamAchievements from './TeamAchievements';
+import { Team } from '../../types';
+import { getDriverStyle } from '../../utils/currentInfo';
+import { InfoBox, InfoRow, Label, Spacer, Value } from '../LayoutComponents';
 
 const GenContainer = styled.div<{ bg: string }>`
     background-color: ${props => props.bg};
@@ -50,9 +49,6 @@ const TeamInfo: React.FC<{ team: Team; }> = ( {team}: { team: Team } ) => {
                         <Label>Championships</Label>
                     </InfoBox>
                 </InfoRow>
-                
-                <TeamAchievements team={team} />
-            
             </GenContainer>
         </React.Fragment>
     );

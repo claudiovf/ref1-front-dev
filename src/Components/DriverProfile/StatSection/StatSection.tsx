@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Driver, DriverPeriod } from '../../types';
-import { getDriverStyle } from '../../utils/currentInfo';
-import { formattedPeriod } from '../../utils/formatting';
+import { Driver, DriverPeriod } from '../../../types';
+import { getDriverStyle } from '../../../utils/currentInfo';
+import { formattedPeriod } from '../../../utils/formatting';
 import PeriodButtons from './PeriodButtons';
 import PeriodRaceStats from './PeriodRaceStats';
 import PeriodStats from './PeriodStats';

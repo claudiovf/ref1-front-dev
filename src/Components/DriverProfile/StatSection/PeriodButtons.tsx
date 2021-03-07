@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { CurrTeamStyles, DriverPeriod } from '../../types';
-import { formattedPeriod } from '../../utils/formatting';
-import { StyledButton, Scroll } from '../LayoutComponents';
+import { CurrTeamStyles, DriverPeriod } from '../../../types';
+import { formattedPeriod } from '../../../utils/formatting';
+import { StyledButton, Scroll } from '../../LayoutComponents';
 
 const ScrollWrapper = styled.div<{ bg: string}>`
     background-color: ${props => props.bg };
@@ -14,10 +14,10 @@ const ScrollWrapper = styled.div<{ bg: string}>`
     top: 6rem;
 `;
 
-const SelectionButton = styled(StyledButton)<{ bg: string; color: string; selected: boolean;}>`
+const SelectionButton = styled(StyledButton)<{ bg: string; color: string; selected: boolean; border: string}>`
     background-color: ${props => props.bg};
     color: ${props => props.color};
-    border: 2px solid #FFFFFF;
+    border: 2px solid ${props => props.border};
     padding: 0.5rem 1rem;
     font-family: ${props => props.selected ? "Work Sans Bold" : "Work Sans Semi Bold" };
     margin: 0.25rem;
@@ -68,8 +68,9 @@ const PeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style, per
                             ? <SelectionButton 
                                 ref={selRef}
                                 selected={true}
-                                bg={"#FFFFFF"}
-                                color={"2F2F2F"}
+                                bg={style.secondary}
+                                color={"#FFFFFF"}
+                                border={style.secondary}
                                 key={period}
                                 onClick={() => handlePeriodChange(period)}>
                                     {formattedPeriod(period)}
@@ -77,7 +78,8 @@ const PeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style, per
                             : <SelectionButton 
                                 selected={false}
                                 bg={style.primary}
-                                color={"#FFFFFF"}
+                                color={style.secondary}
+                                border={style.secondary}
                                 key={period}
                                 onClick={() => handlePeriodChange(period)}>
                                     {formattedPeriod(period)}

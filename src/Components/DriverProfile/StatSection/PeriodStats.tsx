@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CurrTeamStyles, DriverPeriod } from '../../types';
-import { InfoRow, InfoBox, Value, Label } from '../LayoutComponents';
+import { CurrTeamStyles, DriverPeriod } from '../../../types';
+import { InfoRow, InfoBox, Value, Label } from '../../LayoutComponents';
 
 
 const StatsContainer = styled.div<{ bg: string }>`
@@ -58,6 +58,7 @@ const InfoRowWithBorder = styled(InfoRow)`
 
 
 export const Icon = styled.div`
+    color: #5f48f7;
     display: flex;
     flex-direction: column;
     justify-content: center;

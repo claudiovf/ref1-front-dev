@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom';
 import { Driver } from '../../types';
 import { BackHome, Period, StyledLink, Spinner } from '../LayoutComponents';
 
-import StatSection from './StatSection';
+import StatSection from './StatSection/StatSection';
 import GeneralInfo from './GeneralInfo';
 
 import { DRIVER_PROFILE } from '../../queries';
+import Achievements from './Achievements';
 
 
 
@@ -39,11 +40,12 @@ const DriverProfile: React.FC = () => {
         <React.Fragment>
             <StyledLink to="/">
                 <BackHome>
-                    &larr;&nbsp;&nbsp;{driver.givenName} {driver.familyName}
-                    <Period>/{period}</Period>
+                    &larr; {driver.givenName} {driver.familyName} <Period>/{period}</Period>
                 </BackHome>
             </StyledLink>
+
             <GeneralInfo driver={driver} />
+            <Achievements driver={driver} />
             <StatSection 
                 driver={driver} 
                 period={period} 

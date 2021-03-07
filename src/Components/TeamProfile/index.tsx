@@ -5,10 +5,11 @@ import { Team } from '../../types';
 import { BackHome, Period, StyledLink, Spinner } from '../LayoutComponents';
 
 import TeamStatSection from './StatSection/TeamStatSection';
-import TeamInfo from './TeamInfo/TeamInfo';
+import TeamInfo from './TeamInfo';
 
 
 import { TEAM_PROFILE } from '../../queries';
+import TeamAchievements from './TeamAchievements';
 
 
 
@@ -45,6 +46,7 @@ const TeamProfile: React.FC = () => {
                 </BackHome>
             </StyledLink>
             <TeamInfo team={team} />
+            <TeamAchievements team={team} />
             <TeamStatSection 
                 team={team} 
                 period={period} 

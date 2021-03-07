@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CurrTeamStyles, DriverPeriod, Stat } from '../../types';
-import StatCard from './StatCard';
+import { CurrTeamStyles, DriverPeriod, Stat } from '../../../types';
+import StatCard from '../StatCard';
 
 
 const StatsContainer = styled.div<{ bg: string }>`
@@ -27,6 +27,7 @@ const RaceStats = styled.div`
 
 
 export const Icon = styled.div`
+    color: #5f48f7;
     display: flex;
     flex-direction: column;
     justify-content: center;

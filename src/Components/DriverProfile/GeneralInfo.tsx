@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Driver } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
 import { InfoBox, InfoRow, Label, Spacer, Value } from '../LayoutComponents';
-import Achievements from './Achievements';
 
 const GenContainer = styled.div<{ bg: string }>`
     background-color: ${props => props.bg};
@@ -62,10 +61,6 @@ const GeneralInfo: React.FC<{ driver: Driver; }> = ( {driver}: { driver: Driver 
                     </InfoBox>
                 </InfoRow>
                 : null }
-
-
-                <Achievements driver={driver} />
-            
             </GenContainer>
         </React.Fragment>
     );

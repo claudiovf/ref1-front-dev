@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Stat } from '../../types';
 import { InfoRow, InfoBox } from '../LayoutComponents';
-import { Icon } from './PeriodRaceStats';
+import { Icon } from './StatSection/PeriodRaceStats';
 import { formattedPeriod } from '../../utils/formatting';
 
 
@@ -28,10 +28,6 @@ const StatTitle = styled.div<{ colorTitle: boolean }>`
     font-family: "Work Sans Bold";
     font-size: 1rem;
     padding: 0.5rem 0.5rem;
-`;
-
-const StatInfoRow = styled(InfoRow)`
-    align-items: flex-start;
 `;
 
 const StatValue = styled.div<{ colorDark: boolean }>`
@@ -63,13 +59,13 @@ const StatCard: React.FC<Props> = ({s, rad}: Props) => {
             <StatCardStyle dark={isDark(s.stat)} rad={rad}>
                 <InfoBox>
                     <StatTitle colorTitle={!isDark(s.stat)}>{formattedPeriod(s.stat)}</StatTitle>
-                    <StatInfoRow>
+                    <InfoRow>
                         <Icon>&#10066;</Icon>
                         <InfoBox>
                             <StatValue colorDark={!isDark(s.stat)}>{s.total}</StatValue>
                             <StatLabel>{formattedPeriod(s.stat)}</StatLabel>
                         </InfoBox>
-                    </StatInfoRow>
+                    </InfoRow>
             
                 </InfoBox>
             </StatCardStyle>
@@ -79,36 +75,36 @@ const StatCard: React.FC<Props> = ({s, rad}: Props) => {
         <StatCardStyle dark={isDark(s.stat)} rad={rad}>
             <InfoBox>
                 <StatTitle colorTitle={!isDark(s.stat)}>{formattedPeriod(s.stat)}</StatTitle>
-                <StatInfoRow>
+                <InfoRow>
                     <Icon>&#10066;</Icon>
                     <InfoBox>
                         <StatValue colorDark={!isDark(s.stat)}>{s.total}</StatValue>
                         <StatLabel>{formattedPeriod(s.stat)}</StatLabel>
                     </InfoBox>
-                </StatInfoRow>
-                <StatInfoRow>
+                </InfoRow>
+                <InfoRow>
                     <Icon>&#10066;</Icon>
                     <InfoBox>
                         <StatValue colorDark={!isDark(s.stat)}>{s.pct}</StatValue>
                         <StatLabel>{`${formattedPeriod(s.stat)}/Entries`}</StatLabel>
                     </InfoBox>
-                </StatInfoRow>
-                <StatInfoRow>
+                </InfoRow>
+                <InfoRow>
                     <Icon>&#10066;</Icon>
                     <InfoBox>
                         <StatValue colorDark={!isDark(s.stat)}>{s.first.race}</StatValue>
                         <StatValue colorDark={!isDark(s.stat)}>{s.first.date}</StatValue>
                         <StatLabel>First</StatLabel>
                     </InfoBox>
-                </StatInfoRow>
-                <StatInfoRow>
+                </InfoRow>
+                <InfoRow>
                     <Icon>&#10066;</Icon>
                     <InfoBox>
                         <StatValue colorDark={!isDark(s.stat)}>{s.last.race}</StatValue>
                         <StatValue colorDark={!isDark(s.stat)}>{s.last.date}</StatValue>
                         <StatLabel>Last</StatLabel>
                     </InfoBox>
-                </StatInfoRow>
+                </InfoRow>
             </InfoBox>
         </StatCardStyle>
     );

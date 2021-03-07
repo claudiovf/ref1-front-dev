@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Team } from '../../../types';
-import { AchIcon } from '../../LayoutComponents';
+import { Team } from '../../types';
+import { getDriverStyle } from '../../utils/currentInfo';
+import { AchIcon } from '../LayoutComponents';
 
-const AchieveContainer = styled.div`
+const AchieveContainer = styled.div<{ bg: string }>`
+    background-color: ${props => props.bg};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,6 +38,7 @@ const AchieveCard = styled.div`
 
 
 const TeamAchievements: React.FC<{team: Team}> = ({ team }: { team: Team }) => {
+    const teamStyle = getDriverStyle(team.constructorId);
     const career = team.entries.find(p => p.period === "Career");
 
     if (!career ) return null;
@@ -92,7 +95,7 @@ const TeamAchievements: React.FC<{team: Team}> = ({ team }: { team: Team }) => {
 
     return (
         <React.Fragment>
-            <AchieveContainer>
+            <AchieveContainer bg={teamStyle.primary}>
                 <AchieveCard>
                 <Title>Achievements</Title>
                 { team.championships.length > 0 
