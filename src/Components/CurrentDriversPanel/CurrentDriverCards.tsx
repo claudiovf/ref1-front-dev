@@ -53,6 +53,7 @@ const Team = styled.div`
 const CurrentDriverCards: React.FC<{ driver: Driver }> = ({driver}: {driver: Driver}) => {
     const driverStyle = getDriverStyle(driver.driverId);
 
+
     return (
         <>
             <Fonts />
