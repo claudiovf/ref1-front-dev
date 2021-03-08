@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, TeamPeriod } from '../../../types';
 import { formattedPeriod } from '../../../utils/formatting';
-import { InfoRow, InfoBox, Value, Label } from '../../LayoutComponents';
+import { InfoRow, InfoBox, Value, Label, Icon } from '../../LayoutComponents';
 
 
 const StatsContainer = styled.div<{ bg: string }>`
@@ -87,15 +87,6 @@ const ExpandButton = styled.div`
     border-radius: 1rem;
 `;
 
-
-export const Icon = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    padding: 0.5rem;
-`;
 
 
 

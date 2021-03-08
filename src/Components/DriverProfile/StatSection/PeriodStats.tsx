@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, DriverPeriod } from '../../../types';
-import { InfoRow, InfoBox, Value, Label } from '../../LayoutComponents';
+import { formattedDate } from '../../../utils/formatting';
+import { InfoRow, InfoBox, Value, Label, Icon } from '../../LayoutComponents';
 
 
 const StatsContainer = styled.div<{ bg: string }>`
@@ -28,7 +29,7 @@ const TopStats = styled.div`
 `;
 
 const DarkValue = styled(Value)`
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: #2F2F2F;
 `;
 
@@ -56,16 +57,6 @@ const InfoRowWithBorder = styled(InfoRow)`
     border-bottom: 1px solid #DDDDDD;
 `;
 
-
-export const Icon = styled.div`
-    color: #5f48f7;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    padding: 0.5rem;
-`;
 
 
 
@@ -116,16 +107,16 @@ const PeriodStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props) => 
                             <Icon>&#10066;</Icon>
                             <CenterInfoBox>
                                 <RaceValue>{displayPeriod.firstEntry.race}</RaceValue>
-                                <DateValue>{displayPeriod.firstEntry.date}</DateValue>
-                                <DarkLabel>First Entry</DarkLabel>
+                                <DateValue>{formattedDate(displayPeriod.firstEntry.date)}</DateValue>
+                                <DarkLabel>First</DarkLabel>
                             </CenterInfoBox>
                         </InfoRow>
                         <InfoRow>
                             <Icon>&#10066;</Icon>
                             <CenterInfoBox>
                                 <RaceValue>{displayPeriod.lastEntry.race}</RaceValue>
-                                <DateValue>{displayPeriod.lastEntry.date}</DateValue>
-                                <DarkLabel>Last Entry</DarkLabel>
+                                <DateValue>{formattedDate(displayPeriod.lastEntry.date)}</DateValue>
+                                <DarkLabel>Last</DarkLabel>
                             </CenterInfoBox>
                         </InfoRow>
                    

@@ -36,7 +36,7 @@ const TeamInfo: React.FC<{ team: Team; }> = ( {team}: { team: Team } ) => {
             <GenContainer bg={teamStyle.primary}>
                 <Spacer />
                 <ProfileName color={teamStyle.secondary}>
-                    {team.name.toUpperCase()}</ProfileName>
+                    {teamStyle.team.toUpperCase()}</ProfileName>
                 <InfoRow>
                     <InfoBox>
                         <Value>{team.nationality}</Value>

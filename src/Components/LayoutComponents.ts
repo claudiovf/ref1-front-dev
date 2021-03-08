@@ -60,11 +60,11 @@ export const Section = styled.div`
 export const Title = styled.div`
     // background-color: #EF435C;
     text-align: left;
-    color: #000000;
+    color: #2F2F2F;
     font-family: "Work Sans Bold";
-    font-size: 1rem;
-    padding: 1rem;
-    padding-bottom: 0;
+    font-size: 1.5rem;
+    padding: 1.25rem;
+    padding-bottom: 0.25rem;
 `;
 
 export const Scroll = styled.div`
@@ -78,7 +78,7 @@ export const Scroll = styled.div`
 `;
 
 export const Cards = styled.div<{ bg: string}>`
-    
+    background-image: linear-gradient(rgba(255,255,255,0.25), ${props => props.bg});
     background-color: ${props => props.bg};
     display: flex;
     flex-direction: column;
@@ -131,7 +131,7 @@ export const InfoRow = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
-    
+    padding: 0.25rem;
 `;
 
 export const InfoBox = styled.div`
@@ -139,7 +139,7 @@ export const InfoBox = styled.div`
     flex-direction: column;
     justify-content: left;
     align-items: flex-start;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
 `;
 
 export const Label = styled.div`
@@ -155,8 +155,18 @@ export const Value = styled.div`
 `;
 
 export const AchIcon = styled.span`
-    color: #5f48f7;
+    color: rgb(255,255,255, 0.5);
     font-size: 1.5rem;
+    padding: 0.5rem;
+`;
+
+export const Icon = styled.div`
+    color: #FF8700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
     padding: 0.5rem;
 `;
 

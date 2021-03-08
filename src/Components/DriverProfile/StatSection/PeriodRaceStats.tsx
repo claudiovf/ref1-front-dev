@@ -26,15 +26,6 @@ const RaceStats = styled.div`
 `;
 
 
-export const Icon = styled.div`
-    color: #5f48f7;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-    padding: 0.5rem;
-`;
 
 
 
