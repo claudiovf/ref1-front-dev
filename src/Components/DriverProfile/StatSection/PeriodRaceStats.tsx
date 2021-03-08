@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, DriverPeriod, Stat } from '../../../types';
+import { SectionTitle } from '../../LayoutComponents';
 import StatCard from '../StatCard';
 
 
@@ -11,8 +12,6 @@ const StatsContainer = styled.div<{ bg: string }>`
     justify-content: flex-start;
     // align-items: center;
     widht: 100%;
-    
-
 `;
 
 const RaceStats = styled.div`
@@ -39,6 +38,7 @@ const PeriodRaceStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props)
     return (
         <React.Fragment>
             <StatsContainer bg={driverStyle.primary}>
+                <SectionTitle color={driverStyle.secondary} >Race Stats</SectionTitle>
                 <RaceStats>
                         {displayPeriod.stats.map((s: Stat) => {
                             if (s.stat === 'fastestLaps') {

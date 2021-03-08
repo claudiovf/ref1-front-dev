@@ -5,6 +5,7 @@ import { formattedPeriod } from '../../../utils/formatting';
 import PeriodButtons from './PeriodButtons';
 import PeriodRaceStats from './PeriodRaceStats';
 import PeriodStats from './PeriodStats';
+import VsTeammates from './VsTeammates';
 
 
 
@@ -45,20 +46,24 @@ const StatInfo: React.FC<Props> = ({ driver, period, changeProfilePeriod }: Prop
                     style={driverStyle}
                     periodSelected={periodSelected}
                 />
-                
-                {displayPeriod
-                ? <PeriodStats 
-                    displayPeriod={displayPeriod} 
-                    driverStyle={driverStyle}
-                />
-                : null}
 
                 {displayPeriod
-                ? <PeriodRaceStats
-                    displayPeriod={displayPeriod}
-                    driverStyle={driverStyle}
-                />
+                ? <>
+                    <PeriodStats 
+                        displayPeriod={displayPeriod} 
+                        driverStyle={driverStyle}
+                    />
+                    <VsTeammates 
+                        displayPeriod={displayPeriod}
+                        driverStyle={driverStyle}
+                    />
+                    <PeriodRaceStats
+                        displayPeriod={displayPeriod}
+                        driverStyle={driverStyle}
+                    />
+                </>
                 : null}
+             
         </React.Fragment>
     );
 };

@@ -8,7 +8,6 @@ import { formattedDate, formattedPeriod } from '../../utils/formatting';
 const isDark = (stat: string): boolean => {
     if ( stat === "wins" || stat === "pointsFinish") return false;
     else return true;
-    return true;
 };
 
 const StatCardStyle = styled.div<{ dark: boolean, rad: string }>`
@@ -17,7 +16,7 @@ const StatCardStyle = styled.div<{ dark: boolean, rad: string }>`
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0.5rem 0 0.5rem 0;
+    padding: 1.5rem 0;
     border-radius: ${props => props.rad};
 `;
 
@@ -35,7 +34,7 @@ const StatValue = styled.div<{ colorDark: boolean }>`
     display-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: ${props => props.colorDark ? "#2F2F2F" : "#FFFFFF" };
 `;
 const StatValueRace = styled.div<{ colorDark: boolean }>`

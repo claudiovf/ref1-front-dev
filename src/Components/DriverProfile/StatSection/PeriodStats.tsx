@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, DriverPeriod } from '../../../types';
 import { formattedDate } from '../../../utils/formatting';
-import { InfoRow, InfoBox, Value, Label, Icon } from '../../LayoutComponents';
+import { InfoRow, InfoBox, Value, Label, Icon, SectionTitle } from '../../LayoutComponents';
 
 
 const StatsContainer = styled.div<{ bg: string }>`
@@ -70,6 +70,7 @@ const PeriodStats: React.FC<Props> = ({ displayPeriod, driverStyle }: Props) => 
     return (
         <React.Fragment>
             <StatsContainer bg={driverStyle.primary}>
+                <SectionTitle color={driverStyle.secondary}>Summary</SectionTitle>
                 <TopStats>
                         <InfoRowWithBorder>
                             <CenterInfoBox>

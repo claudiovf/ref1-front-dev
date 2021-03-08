@@ -67,6 +67,15 @@ export const Title = styled.div`
     padding-bottom: 0.25rem;
 `;
 
+export const SectionTitle = styled.div<{ color: string; }>`
+    text-align: left;
+    font-family: "Work Sans Bold";
+    color: ${props => props.color};
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem 1rem 1.5rem;
+`;
+
+
 export const Scroll = styled.div`
     // background-color: tomato;
     display: flex;
@@ -131,7 +140,7 @@ export const InfoRow = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
-    padding: 0.25rem;
+    padding: 0.25rem 0;
 `;
 
 export const InfoBox = styled.div`
