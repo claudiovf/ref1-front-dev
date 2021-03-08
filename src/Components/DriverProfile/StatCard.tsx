@@ -46,6 +46,15 @@ const StatValueRace = styled.div<{ colorDark: boolean }>`
     font-size: 1rem;
     color: ${props => props.colorDark ? "#2F2F2F" : "#FFFFFF" };
 `;
+const StatValueDate = styled.div<{ colorDark: boolean }>`
+    font-family: "Work Sans Semi Bold";
+    display: flex;
+    display-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0.75rem;
+    color: ${props => props.colorDark ? "#2F2F2F" : "#FFFFFF" };
+`;
 
 const StatLabel = styled.div`
     font-family: "Work Sans Semi Bold";
@@ -81,7 +90,12 @@ const StatCard: React.FC<Props> = ({s, rad}: Props) => {
     return (
         <StatCardStyle dark={isDark(s.stat)} rad={rad}>
             <InfoBox>
-                <StatTitle colorTitle={!isDark(s.stat)}>{formattedPeriod(s.stat)}</StatTitle>
+                <StatTitle colorTitle={!isDark(s.stat)}>{s.stat === "pointsFinish" 
+                    ? "Point Finishes" 
+                    : s.stat === "dnfs" 
+                        ? "DNFs"
+                        : formattedPeriod(s.stat)}
+                </StatTitle>
                 <InfoRow>
                     <Icon>&#10066;</Icon>
                     <InfoBox>
@@ -100,7 +114,7 @@ const StatCard: React.FC<Props> = ({s, rad}: Props) => {
                     <Icon>&#10066;</Icon>
                     <InfoBox>
                         <StatValueRace colorDark={!isDark(s.stat)}>{s.first.race}</StatValueRace>
-                        <StatValueRace colorDark={!isDark(s.stat)}>{formattedDate(s.first.date)}</StatValueRace>
+                        <StatValueDate colorDark={!isDark(s.stat)}>{formattedDate(s.first.date)}</StatValueDate>
                         <StatLabel>First</StatLabel>
                     </InfoBox>
                 </InfoRow>
@@ -108,7 +122,7 @@ const StatCard: React.FC<Props> = ({s, rad}: Props) => {
                     <Icon>&#10066;</Icon>
                     <InfoBox>
                         <StatValueRace colorDark={!isDark(s.stat)}>{s.last.race}</StatValueRace>
-                        <StatValueRace colorDark={!isDark(s.stat)}>{formattedDate(s.last.date)}</StatValueRace>
+                        <StatValueDate colorDark={!isDark(s.stat)}>{formattedDate(s.last.date)}</StatValueDate>
                         <StatLabel>Last</StatLabel>
                     </InfoBox>
                 </InfoRow>

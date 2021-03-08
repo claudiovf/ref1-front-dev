@@ -19,7 +19,7 @@ const SkySportsPanel: React.FC = () => {
     return (
         <React.Fragment>
             <Section>  
-                <Title>Crofty`s Friends</Title>
+                <Title>Sky Sports Team</Title>
                     { loading ? <Spinner>Loading ... </Spinner> : null}
                 <Scroll>
                     { data ?  (

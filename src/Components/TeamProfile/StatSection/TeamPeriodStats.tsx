@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, TeamPeriod } from '../../../types';
-import { formattedPeriod } from '../../../utils/formatting';
+import { formattedPeriod, formattedDate } from '../../../utils/formatting';
 import { InfoRow, InfoBox, Value, Label, Icon } from '../../LayoutComponents';
 
 
@@ -139,7 +139,7 @@ const TeamPeriodStats: React.FC<Props> = ({ displayPeriod, teamStyle }: Props) =
                             <Icon>&#10066;</Icon>
                             <CenterInfoBox>
                                 <RaceValue>{displayPeriod.firstEntry.race}</RaceValue>
-                                <DateValue>{displayPeriod.firstEntry.date}</DateValue>
+                                <DateValue>{formattedDate(displayPeriod.firstEntry.date)}</DateValue>
                                 <DarkLabel>First Entry</DarkLabel>
                             </CenterInfoBox>
                         </InfoRow>
@@ -147,7 +147,7 @@ const TeamPeriodStats: React.FC<Props> = ({ displayPeriod, teamStyle }: Props) =
                             <Icon>&#10066;</Icon>
                             <CenterInfoBox>
                                 <RaceValue>{displayPeriod.lastEntry.race}</RaceValue>
-                                <DateValue>{displayPeriod.lastEntry.date}</DateValue>
+                                <DateValue>{formattedDate(displayPeriod.lastEntry.date)}</DateValue>
                                 <DarkLabel>Last Entry</DarkLabel>
                             </CenterInfoBox>
                         </InfoRowWithBorder>
