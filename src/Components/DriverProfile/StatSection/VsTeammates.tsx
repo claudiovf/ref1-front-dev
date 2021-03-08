@@ -44,7 +44,7 @@ const CenterInfoBox = styled(InfoBox)`
 const PctBarIncrement = styled.div<{ bginc: boolean }>`
     background-color: ${props => props.bginc ? "#2F2F2F" : "#DFDFDF"};
     min-width: 0.175rem;
-    min-height: 0.175rem;
+    min-height: 0.2rem;
     display: block;
 `;
 

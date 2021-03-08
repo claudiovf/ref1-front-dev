@@ -69,7 +69,7 @@ const PeriodButtons: React.FC<Props> = ({periods, handlePeriodChange, style, per
                                 ref={selRef}
                                 selected={true}
                                 bg={style.secondary}
-                                color={"#FFFFFF"}
+                                color={style.secondary === "#FFFFFF" || style.secondary === '#FFF500' ? "#2F2F2F" : "#FFFFFF"}
                                 border={style.secondary}
                                 key={period}
                                 onClick={() => handlePeriodChange(period)}>
