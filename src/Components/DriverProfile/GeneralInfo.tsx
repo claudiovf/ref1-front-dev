@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Driver } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
+import { formattedDate } from '../../utils/formatting';
 import { InfoBox, InfoRow, Label, Spacer, Value } from '../LayoutComponents';
 
 const GenContainer = styled.div<{ bg: string }>`
@@ -24,6 +25,10 @@ const ProfileName = styled.div<{ color: string}>`
     width: 100%;
 `;
 
+const ChampValue = styled(Value)`
+    font-size: 2rem;
+`;
+
 
 
 
@@ -43,13 +48,13 @@ const GeneralInfo: React.FC<{ driver: Driver; }> = ( {driver}: { driver: Driver 
                         <Label>Nationality</Label>
                     </InfoBox>
                     <InfoBox>
-                        <Value>{driver.dateOfBirth}</Value>
+                        <Value>{formattedDate(driver.dateOfBirth)}</Value>
                         <Label>Born</Label>
                     </InfoBox>
                 </InfoRow>
                 <InfoRow>
                     <InfoBox>
-                        <Value>{driver.championships.length}</Value>
+                        <ChampValue>{driver.championships.length}</ChampValue>
                         <Label>Championships</Label>
                     </InfoBox>
                 </InfoRow>

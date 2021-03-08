@@ -29,7 +29,7 @@ const CurrentTeamCards: React.FC<{ team: Team }> = ({team}: {team: Team}) => {
             <StyledLink to={"/profile/team/" + team.constructorId}>
                 <Cards bg={teamStyle.primary}>
                     <TeamName color={teamStyle.secondary}>
-                        {team.name} </TeamName>
+                        {team.name.toUpperCase()} </TeamName>
                 </Cards>
             </StyledLink>
         </>

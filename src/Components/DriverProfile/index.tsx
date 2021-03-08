@@ -36,6 +36,8 @@ const DriverProfile: React.FC = () => {
 
     if ( !driver ) return null;
 
+    console.log(driver);
+    
     return (
         <React.Fragment>
             <StyledLink to="/">

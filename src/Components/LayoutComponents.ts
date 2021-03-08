@@ -167,7 +167,7 @@ export const Icon = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
 `;
 
 
