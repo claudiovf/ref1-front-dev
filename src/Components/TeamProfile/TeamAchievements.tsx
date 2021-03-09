@@ -26,7 +26,7 @@ const AchieveCard = styled.div`
     justify-content: left;
     align-items: flex-start;
     padding: 1rem;
-    margin: 1rem;
+    margin: 1.5rem;
     font-size: 0.75rem;
     font-family: "Work Sans Semi Bold";
     color: #FFFFFF;

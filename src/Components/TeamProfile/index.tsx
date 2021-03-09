@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Team } from '../../types';
-import { BackHome, Period, StyledLink, ProfileContainer } from '../LayoutComponents';
+import { BackHome, Period, StyledLink, ProfileContainer, Spacer } from '../LayoutComponents';
 import Spinner from '../Common/Spinner';
 
 import TeamStatSection from './StatSection/TeamStatSection';
@@ -34,7 +34,7 @@ const TeamProfile: React.FC = () => {
     };
     
     
-    if ( loading ) return <Spinner />;
+    if ( loading ) return <> <Spacer /><Spinner /> </>;
 
     if ( !team ) return null;
 

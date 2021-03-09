@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Driver } from '../../types';
-import { BackHome, Period, ProfileContainer, StyledLink } from '../LayoutComponents';
+import { BackHome, Period, ProfileContainer, Spacer, StyledLink } from '../LayoutComponents';
 import Spinner from '../Common/Spinner';
 
 import StatSection from './StatSection/StatSection';
@@ -32,7 +32,7 @@ const DriverProfile: React.FC = () => {
     };
     
     
-    if ( loading ) return <Spinner />;
+    if ( loading ) return <> <Spacer /><Spinner /> </>;
 
     if ( !driver ) return null;
 
