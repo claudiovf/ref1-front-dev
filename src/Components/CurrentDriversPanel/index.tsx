@@ -1,5 +1,6 @@
 import React from 'react';
-import { Section, Title, Spacer, Scroll, Spinner } from '../LayoutComponents';
+import { Section, Title, Spacer, Scroll } from '../LayoutComponents';
+import Spinner from '../Common/Spinner';
 import CurrentDriverCards from './CurrentDriverCards';
 import { useQuery } from '@apollo/client';
 import { Driver } from '../../types';
@@ -24,7 +25,7 @@ const CurrentDriversPanel: React.FC = () => {
             <Spacer />
             <Section>  
                 <Title>2020 Drivers</Title>
-                    { loading ? <Spinner>Loading ... </Spinner> : null}
+                    { loading ? <Spinner /> : null}
                 <Scroll>
                     { data ?  (
                         displayOrder.map(driver => {

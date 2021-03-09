@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import workSansBold from '../Assets/WorkSans/static/WorkSans-Bold.ttf';
 import workSansSemiBold from '../Assets/WorkSans/static/WorkSans-SemiBold.ttf';
 import workSansExtraBold from '../Assets/WorkSans/static/WorkSans-ExtraBold.ttf';
@@ -36,15 +36,6 @@ export const Spacer = styled.div`
     min-height: 3rem;
 `;
 
-export const Spinner = styled.div`
-    font-family: "Work Sans Bold";
-    min-height: 6rem;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`;
 
 export const Section = styled.div`
     display: flex;
@@ -81,9 +72,16 @@ export const Scroll = styled.div`
     display: flex;
     flex-flow: row nowrap;
     font-size: 1rem;
-    padding: 0 0 0.25rem 0.5rem;
+    padding: 0 0 0.25rem 1rem;
     overflow: auto;
     scroll-snap-type: x mandatory;
+`;
+
+export const popOutAnimation = keyframes`
+    0% { opacity: 0}
+    65% { opacity: 0; margin-left: 5rem;}
+    75% { margin-left: 5rem;}
+    100% { opacity: 1}
 `;
 
 export const Cards = styled.div<{ bg: string}>`
@@ -93,9 +91,16 @@ export const Cards = styled.div<{ bg: string}>`
     flex-direction: column;
     justify-content: space-between;
     height: auto;
-    margin: 0.5rem;
+    margin: 0.25rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    animation-name: ${popOutAnimation};
+    animation-duration: 1s;
+`;
+
+export const ProfileContainer = styled.div`
+    animation-name: ${popOutAnimation};
+    animation-duration: 1s;
 `;
 
 export const StyledLink = styled(Link)`

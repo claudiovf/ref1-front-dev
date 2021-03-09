@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, DriverPeriod, Stat } from '../../../types';
 import { SectionTitle } from '../../LayoutComponents';
-import StatCard from '../StatCard';
+import StatCard from '../../Common/StatCard';
 
 
 const StatsContainer = styled.div<{ bg: string }>`

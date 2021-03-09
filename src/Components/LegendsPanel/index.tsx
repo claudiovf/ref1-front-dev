@@ -1,5 +1,6 @@
 import React from 'react';
-import { Section, Title, Scroll, Spinner } from '../LayoutComponents';
+import { Section, Title, Scroll } from '../LayoutComponents';
+import Spinner from '../Common/Spinner';
 import CurrentDriverCards from '../CurrentDriversPanel/CurrentDriverCards';
 import { useQuery } from '@apollo/client';
 import { Driver } from '../../types';
@@ -23,7 +24,7 @@ const LegendsPanel: React.FC = () => {
         <React.Fragment>
             <Section>  
                 <Title>F1 Legends</Title>
-                    { loading ? <Spinner>Loading ... </Spinner> : null}
+                    { loading ? <Spinner /> : null}
                 <Scroll>
                     { data ?  (
                         driversList.map(driver => {

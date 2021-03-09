@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CurrTeamStyles, TeamPeriod, Stat } from '../../../types';
-import StatCard from '../../DriverProfile/StatCard';
+import StatCard from '../../Common/StatCard';
 
 
 const StatsContainer = styled.div<{ bg: string }>`

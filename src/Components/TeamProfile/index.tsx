@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Team } from '../../types';
-import { BackHome, Period, StyledLink, Spinner } from '../LayoutComponents';
+import { BackHome, Period, StyledLink, ProfileContainer } from '../LayoutComponents';
+import Spinner from '../Common/Spinner';
 
 import TeamStatSection from './StatSection/TeamStatSection';
 import TeamInfo from './TeamInfo';
@@ -33,24 +34,26 @@ const TeamProfile: React.FC = () => {
     };
     
     
-    if ( loading ) return <Spinner>Loading ...</Spinner>;
+    if ( loading ) return <Spinner />;
 
     if ( !team ) return null;
 
     return (
         <React.Fragment>
-            <StyledLink to="/">
-                <BackHome>
-                    &larr;&nbsp;&nbsp;{team.name}
-                    <Period>/{period}</Period>
-                </BackHome>
-            </StyledLink>
-            <TeamInfo team={team} />
-            <TeamAchievements team={team} />
-            <TeamStatSection 
-                team={team} 
-                period={period} 
-                changeProfilePeriod={changeProfilePeriod} />
+            <ProfileContainer>
+                <StyledLink to="/">
+                    <BackHome>
+                        &larr;&nbsp;&nbsp;{team.name}
+                        <Period>/{period}</Period>
+                    </BackHome>
+                </StyledLink>
+                <TeamInfo team={team} />
+                <TeamAchievements team={team} />
+                <TeamStatSection 
+                    team={team} 
+                    period={period} 
+                    changeProfilePeriod={changeProfilePeriod} />
+            </ProfileContainer>
         </React.Fragment>
     );
 };

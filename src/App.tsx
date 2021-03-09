@@ -11,6 +11,8 @@ import LegendsPanel from './Components/LegendsPanel';
 import SkySportsPanel from './Components/SkySportsPanel';
 
 const App: React.FC = () => {
+
+
   return (
     <div className="App">
       <Header />

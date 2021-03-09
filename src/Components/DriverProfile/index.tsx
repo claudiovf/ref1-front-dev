@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Driver } from '../../types';
-import { BackHome, Period, StyledLink, Spinner } from '../LayoutComponents';
+import { BackHome, Period, ProfileContainer, StyledLink } from '../LayoutComponents';
+import Spinner from '../Common/Spinner';
 
 import StatSection from './StatSection/StatSection';
 import GeneralInfo from './GeneralInfo';
 
 import { DRIVER_PROFILE } from '../../queries';
 import Achievements from './Achievements';
-
 
 
 const DriverProfile: React.FC = () => {
@@ -32,25 +32,27 @@ const DriverProfile: React.FC = () => {
     };
     
     
-    if ( loading ) return <Spinner>Loading ...</Spinner>;
+    if ( loading ) return <Spinner />;
 
     if ( !driver ) return null;
 
     
     return (
         <React.Fragment>
-            <StyledLink to="/">
-                <BackHome>
-                    &larr; {driver.givenName} {driver.familyName} <Period>/{period}</Period>
-                </BackHome>
-            </StyledLink>
+            <ProfileContainer>
+                <StyledLink to="/">
+                    <BackHome>
+                        &larr; {driver.givenName} {driver.familyName} <Period>/{period}</Period>
+                    </BackHome>
+                </StyledLink>
 
-            <GeneralInfo driver={driver} />
-            <Achievements driver={driver} />
-            <StatSection 
-                driver={driver} 
-                period={period} 
-                changeProfilePeriod={changeProfilePeriod} />
+                <GeneralInfo driver={driver} />
+                <Achievements driver={driver} />
+                <StatSection 
+                    driver={driver} 
+                    period={period} 
+                    changeProfilePeriod={changeProfilePeriod} />
+            </ProfileContainer>
         </React.Fragment>
     );
 };
