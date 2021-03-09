@@ -79,8 +79,8 @@ export const Scroll = styled.div`
 
 export const popOutAnimation = keyframes`
     0% { opacity: 0}
-    65% { opacity: 0; transform: translateX(5rem);}
-    75% { transform: translateX(5rem);}
+    65% { opacity: 0; transform: translateX(30px);}
+    75% { transform: translateX(30px);}
     100% { opacity: 1}
 `;
 
@@ -101,6 +101,8 @@ export const Cards = styled.div<{ bg: string}>`
 export const ProfileContainer = styled.div`
     animation-name: ${popOutAnimation};
     animation-duration: 1s;
+    width: auto;
+    overflow: hidden;
 `;
 
 export const StyledLink = styled(Link)`

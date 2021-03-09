@@ -8,7 +8,7 @@ export const HeaderStyled = styled.div`
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    height: 3rem;
+    min-height: 3rem;
     width: 100%;
     position: fixed;
     box-shadow: 0px 0.5px 2px #D1DADC;
