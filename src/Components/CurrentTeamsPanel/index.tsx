@@ -4,18 +4,21 @@ import Spinner from '../Common/Spinner';
 import CurrentTeamCards from './CurrentTeamCards';
 import { useQuery } from '@apollo/client';
 import { Team } from '../../types';
-import { CURRENT_TEAMS_HOME } from '../../queries';
+import { GET_SEASON_TEAMS } from '../../queries';
 
 
 
 const CurrentTeamsPanel: React.FC = () => {
-    const { loading, data } = useQuery<{ allTeams: Team[] }>(CURRENT_TEAMS_HOME);
-
-    
-    const TeamOrder = [
+    const teamsList = [
         'mercedes', 'red_bull', 'racing_point', 'renault', 
         'mclaren', 'ferrari', 'alphatauri', 'alfa', 
-        'haas', 'williams'];
+        'haas', 'williams'
+    ];
+    
+    const { loading, data } = useQuery<{ findManyTeams: Team[] }>(GET_SEASON_TEAMS,
+        { variables: { teamsList } });
+
+    
  
         
 
@@ -26,8 +29,8 @@ const CurrentTeamsPanel: React.FC = () => {
                     { loading ? <Spinner /> : null}
                 <Scroll>
                     { data ?  (
-                        TeamOrder.map(team => {
-                            const teamToDisplay = data.allTeams.find(t => t.constructorId === team);
+                        teamsList.map(team => {
+                            const teamToDisplay = data.findManyTeams.find(t => t.constructorId === team);
 
                             if(!teamToDisplay) return null;
 

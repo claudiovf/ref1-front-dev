@@ -145,6 +145,32 @@ export const GET_THIS_DRIVERS = gql`
     }
 `;
 
+export const GET_SEASON_DRIVERS = gql`
+    query getThisDrivers($driversList: [String!]!){
+        findManyDrivers (
+        driversList: $driversList
+        ) {
+            givenName
+            familyName
+            driverId
+            code
+            permanentNumber
+        }
+    }
+`;
+
+export const GET_SEASON_TEAMS = gql`
+    query getTeams($teamsList: [String!]!){
+        findManyTeams(
+        teamsList: $teamsList
+        ) {
+            name
+            constructorId
+    
+        }
+    }
+`;
+
 // {
 //     givenName
 //     familyName
