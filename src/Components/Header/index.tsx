@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fonts, StyledLink } from '../LayoutComponents';
+import {  StyledLink } from '../LayoutComponents';
 import styled from "styled-components";
 
 export const HeaderStyled = styled.div`
@@ -56,7 +56,6 @@ const Header: React.FC<Props> = ({handleOpenSearch}: Props) => {
   return (
       <React.Fragment>
         <HeaderStyled> 
-          <Fonts />
           <StyledLink to={"/"}>
             <LogoStyled>REF1</LogoStyled> 
           </StyledLink>

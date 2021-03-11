@@ -83,6 +83,13 @@ export const popOutAnimation = keyframes`
     100% { opacity: 1}
 `;
 
+export const slideUpAnimation = keyframes`
+    0% { opacity: 0;}
+    45% { opacity: 0; margin-top: 4rem;}
+    85% { margin-top: -0.5rem;}
+    100% { opacity: 1}
+`;
+
 export const Cards = styled.div<{ bg: string}>`
     background-image: linear-gradient(rgba(255,255,255,0.15), ${props => props.bg}, ${props => props.bg});
     background-color: ${props => props.bg};
@@ -121,6 +128,17 @@ export const StyledButton = styled.button`
     }
 `;
 
+export const SelectionButton = styled(StyledButton)<{ bg: string; color: string; selected: boolean; border: string}>`
+    background-color: ${props => props.bg};
+    color: ${props => props.color};
+    border: 2px solid ${props => props.border};
+    padding: 0.5rem 1rem;
+    font-family: ${props => props.selected ? "Work Sans Bold" : "Work Sans Semi Bold" };
+    margin: 0.25rem;
+    white-space: nowrap;
+    border-radius: 2rem;
+    scroll-snap-align: center;
+`;
 
 export const BackHome = styled.div`
     font-family: "Work Sans Semi Bold";
@@ -177,7 +195,7 @@ export const AchIcon = styled.span`
 `;
 
 export const Icon = styled.div`
-    color: #FF8700;
+    color: #bfc8c9;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,7 +204,7 @@ export const Icon = styled.div`
     padding: 0.25rem 0.5rem;
 `;
 
-
+// #bfc8c9; ICON
 // #24282E Raisin Black
 // #D1DADC Light Gray
 // #FFFFFF White 

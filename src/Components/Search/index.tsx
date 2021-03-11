@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Title } from '../LayoutComponents';
+import SelectionSection from './SelectionSection';
 
 const overlayAnimation = keyframes`
     0% { opacity: 0;}
@@ -9,7 +10,7 @@ const overlayAnimation = keyframes`
 
 const slideUpAnimation = keyframes`
     0% { opacity: 0;}
-    65% { opacity: 0; top: 80%; }
+    50% { opacity: 0; top: 90%; }
     100% { opacity: 1}
 `;
 
@@ -71,14 +72,67 @@ interface Props {
     handleClose: () => void;
 }
 const SearchModal: React.FC<Props> = ({ isOpen, handleClose}: Props) => {
+    const [resultSelection, setResultSelection ] = useState<string | null>(null);
+    const [sortSelection, setSortSelection ] = useState<string | null>(null);
+    const [filterSelection, setFilterSelection ] = useState<string | null>(null);
+
+    const handleResultSelection = (selection: string | null) => {
+        setResultSelection(selection);
+        if(!selection) {
+            setSortSelection(null);
+            setFilterSelection(null);
+        }
+    };
+
+    const handleSortSelection = (selection: string | null) => {
+        setSortSelection(selection);
+    };
+    const handleFilterSelection = (selection: string | null) => {
+        setFilterSelection(selection);
+    };
+
+    const filterOptionsFor = (resultSel: string): string[] => {
+        if ( resultSel === "drivers" ) return ["All Time", "Season", "Team"];
+        else return ["All Time", "Season"];
+    };
+    
     if (isOpen) {
         return (
                 <Overlay>
                     <ModalContainer>
                         <SearchHeader>
                             <SearchTitle>Search</SearchTitle>
-                            <CloseX onClick={handleClose}>&#x2715;</CloseX>
+                            <CloseX onClick={() => {
+                                handleClose();
+                                handleResultSelection(null);
+                            }}>&#x2715;</CloseX>
                         </SearchHeader>
+                        <SelectionSection 
+                        title={"Show results for"}
+                        optionsArr={["drivers", "teams"]}
+                        selected={resultSelection}
+                        handleResultSelection={handleResultSelection}
+                        />
+                        {resultSelection
+                            ? <>
+                                <SelectionSection 
+                                    title={"Sort by"}
+                                    optionsArr={["wins", "podiums", "points"]}
+                                    selected={sortSelection}
+                                    handleResultSelection={handleSortSelection}
+                                />
+                                {sortSelection || filterSelection
+                                    ? <SelectionSection 
+                                        title={"Filter by"}
+                                        optionsArr={filterOptionsFor(resultSelection)}
+                                        selected={filterSelection}
+                                        handleResultSelection={handleFilterSelection}
+                                    />
+                                    : null
+                                }
+                            </>
+                            : null
+                        }
                     </ModalContainer>
                 </Overlay>
             

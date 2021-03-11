@@ -5,11 +5,13 @@ import CurrentDriversPanel from './Components/CurrentDriversPanel';
 import CurrentTeamsPanel from './Components/CurrentTeamsPanel';
 import DriverProfile from './Components/DriverProfile';
 import { Switch, Route } from 'react-router-dom';
-import { Spacer } from './Components/LayoutComponents';
+import { Spacer, Fonts } from './Components/LayoutComponents';
 import TeamProfile from './Components/TeamProfile';
 import LegendsPanel from './Components/LegendsPanel';
 import SkySportsPanel from './Components/SkySportsPanel';
 import SearchModal from './Components/Search';
+
+
 
 const App: React.FC = () => {
   const [ isOpen, toggle ] = useState<boolean>(false);
@@ -21,6 +23,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <Fonts />
       <Header handleOpenSearch={() => handleOpenSearch(true)}/>
       <Switch>
         <Route exact path="/">
