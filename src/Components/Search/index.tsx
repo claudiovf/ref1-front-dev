@@ -73,7 +73,6 @@ interface Props {
 const SearchModal: React.FC<Props> = ({ isOpen, handleClose}: Props) => {
     if (isOpen) {
         return (
-            
                 <Overlay>
                     <ModalContainer>
                         <SearchHeader>
