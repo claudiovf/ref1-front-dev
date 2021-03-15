@@ -48,7 +48,7 @@ const ModalContainer = styled.div`
 const OptionsContainer = styled.div`
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     width: auto;
     height: auto;
@@ -62,9 +62,9 @@ const FilterTitle = styled(Title)`
 `;
 
 const OptionsButton = styled(SelectionButton)`
-    font-size: 0.75rem;
+    font-size: 1rem;
     padding: 0.25rem 0.75rem;
-    min-width: 3.6rem;
+    min-width: 4.25rem;
 `;
 
 
