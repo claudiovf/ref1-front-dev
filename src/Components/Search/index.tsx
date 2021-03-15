@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { Title } from '../LayoutComponents';
 import SelectionSection from './SelectionSection';
+import { RootState } from '../../store';
+import { SearchState } from '../../store/searchTypes';
+import { setSearch, toggleOpen } from '../../store/actions';
 
 const overlayAnimation = keyframes`
     0% { opacity: 0;}
     100% { opacity: 1}
+`;
+const overlayClosingAnimation = keyframes`
+    0% { opacity: 1;}
+    50% { opacity: 1}
+    100% { opacity: 0}
 `;
 
 const slideUpAnimation = keyframes`
@@ -14,18 +23,26 @@ const slideUpAnimation = keyframes`
     100% { opacity: 1}
 `;
 
-const Overlay = styled.div`
+const slideDownAnimation = keyframes`
+    0% { opacity: 1;}
+    50% { opacity: 1; top: 56%;  }
+    100% { opacity: 0; top: 100%;  }
+`;
+
+
+
+const Overlay = styled.div<{ overlayClosing: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.3);
-    animation-name: ${overlayAnimation};
-    animation-duration: 0.8s;
+    background: rgba(0,0,0,0.7);
+    animation-name: ${props => props.overlayClosing ? overlayClosingAnimation: overlayAnimation};
+    animation-duration: 0.6s;
 `;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<{ closing: boolean }>`
     width: 100.5%;
     height: 90vh;
     background-color: white;
@@ -34,7 +51,7 @@ const ModalContainer = styled.div`
     left: 50%;                        
     transform:translate(-50%,-50%);  
     border-radius:1rem 1rem 0 0;
-    animation-name: ${slideUpAnimation};
+    animation-name: ${props => props.closing ? slideDownAnimation : slideUpAnimation};
     animation-duration: 0.5s;
 `;
 
@@ -62,33 +79,46 @@ const CloseX = styled.div`
     line-height: 2rem;
     height: 2rem;
     width: 2rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 1rem;
     border-radius: 50%;
 `;
 
-interface Props {
-    isOpen: boolean;
-    handleClose: () => void;
-}
-const SearchModal: React.FC<Props> = ({ isOpen, handleClose}: Props) => {
-    const [resultSelection, setResultSelection ] = useState<string | null>(null);
-    const [sortSelection, setSortSelection ] = useState<string | null>(null);
-    const [filterSelection, setFilterSelection ] = useState<string | null>(null);
+
+const SearchModal: React.FC = () => {
+    const [closing, setClosing] = useState<boolean>(false);
+
+    const search: SearchState = useSelector((state: RootState) => state.search);
+    const dispatch = useDispatch();
+
 
     const handleResultSelection = (selection: string | null) => {
-        setResultSelection(selection);
         if(!selection) {
-            setSortSelection(null);
-            setFilterSelection(null);
+            dispatch( setSearch({}) );
+        } else {
+            dispatch( setSearch({ resultsFor: selection }) );
         }
     };
 
     const handleSortSelection = (selection: string | null) => {
-        setSortSelection(selection);
+        if(!selection) {
+            const updatedSelection = search.selections;
+            delete updatedSelection.sortBy; 
+            dispatch( setSearch(updatedSelection) );
+
+        } else {
+            dispatch( setSearch({ ...search.selections, sortBy: selection }) );
+        }
     };
     const handleFilterSelection = (selection: string | null) => {
-        setFilterSelection(selection);
+        if(!selection) {
+            const updatedSelection = search.selections;
+            delete updatedSelection.filterBy;
+            dispatch( setSearch(updatedSelection) );
+
+        } else {
+            dispatch( setSearch({ ...search.selections, filterBy: selection }) );
+        }
     };
 
     const filterOptionsFor = (resultSel: string): string[] => {
@@ -96,37 +126,42 @@ const SearchModal: React.FC<Props> = ({ isOpen, handleClose}: Props) => {
         else return ["All Time", "Season"];
     };
     
-    if (isOpen) {
+    if (search.isOpen) {
         return (
-                <Overlay>
-                    <ModalContainer>
+                <Overlay overlayClosing={closing}>
+                    <ModalContainer closing={closing}>
                         <SearchHeader>
                             <SearchTitle>Search</SearchTitle>
                             <CloseX onClick={() => {
-                                handleClose();
-                                handleResultSelection(null);
+                                setClosing(true);
+                                setTimeout(() => {
+                                    dispatch( setSearch({}) );
+                                    dispatch( toggleOpen() );
+                                    setClosing(false);
+                                }, 500);
                             }}>&#x2715;</CloseX>
                         </SearchHeader>
+
                         <SelectionSection 
                         title={"Show results for"}
                         optionsArr={["drivers", "teams"]}
-                        selected={resultSelection}
-                        handleResultSelection={handleResultSelection}
+                        selected={search.selections.resultsFor ? search.selections.resultsFor : null}
+                        handleSelection={handleResultSelection}
                         />
-                        {resultSelection
+                        {search.selections.resultsFor
                             ? <>
                                 <SelectionSection 
                                     title={"Sort by"}
                                     optionsArr={["wins", "podiums", "points"]}
-                                    selected={sortSelection}
-                                    handleResultSelection={handleSortSelection}
+                                    selected={search.selections.sortBy ? search.selections.sortBy : null}
+                                    handleSelection={handleSortSelection}
                                 />
-                                {sortSelection || filterSelection
+                                {search.selections.sortBy || search.selections.filterBy 
                                     ? <SelectionSection 
                                         title={"Filter by"}
-                                        optionsArr={filterOptionsFor(resultSelection)}
-                                        selected={filterSelection}
-                                        handleResultSelection={handleFilterSelection}
+                                        optionsArr={filterOptionsFor(search.selections.resultsFor)}
+                                        selected={search.selections.filterBy ? search.selections.filterBy : null}
+                                        handleSelection={handleFilterSelection}
                                     />
                                     : null
                                 }

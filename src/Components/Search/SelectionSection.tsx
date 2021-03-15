@@ -23,10 +23,10 @@ interface Props {
     selected: string | null;
     optionsArr: string[];
     title: string;
-    handleResultSelection: (selection: string | null ) => void;
+    handleSelection: (selection: string | null ) => void;
 }
 
-const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handleResultSelection }: Props) => {
+const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handleSelection }: Props) => {
     
     if (!selected) {
         return(
@@ -42,7 +42,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                                     color={"#2F2F2F"}
                                     border={"#bfc8c9"}
                                     key={item}
-                                    onClick={() => handleResultSelection(item)}
+                                    onClick={() => handleSelection(item)}
                                     >
                                         {formattedPeriod(item)}
                                 </SelectionButton> )
@@ -65,7 +65,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                             border={"#2F2F2F"}
                             >
                                 {formattedPeriod(selected)} 
-                                <Unselect onClick={() => handleResultSelection(null)}>
+                                <Unselect onClick={() => handleSelection(null)}>
                                     &#x2715;</Unselect>
                         </SelectionButton> 
           

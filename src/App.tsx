@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Header from './Components/Header';
 import CurrentDriversPanel from './Components/CurrentDriversPanel';
@@ -14,17 +14,11 @@ import SearchModal from './Components/Search';
 
 
 const App: React.FC = () => {
-  const [ isOpen, toggle ] = useState<boolean>(false);
-
-  const handleOpenSearch = (open: boolean) => {
-    toggle(open);
-  };
-
 
   return (
     <div className="App">
       <Fonts />
-      <Header handleOpenSearch={() => handleOpenSearch(true)}/>
+      <Header />
       <Switch>
         <Route exact path="/">
           <CurrentDriversPanel />
@@ -42,7 +36,7 @@ const App: React.FC = () => {
         </Route>
       </Switch>
 
-      <SearchModal isOpen={isOpen}  handleClose={() => handleOpenSearch(false)} />
+      <SearchModal />
       
 
     </div>
