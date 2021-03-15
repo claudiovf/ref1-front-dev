@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { Title } from '../LayoutComponents';
 import SelectionSection from './SelectionSection';
+import FilterModal from './FilterModal';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
 import { setSearch, toggleOpen } from '../../store/actions';
@@ -114,6 +115,7 @@ const SearchModal: React.FC = () => {
         if(!selection) {
             const updatedSelection = search.selections;
             delete updatedSelection.filterBy;
+            delete updatedSelection.period;
             dispatch( setSearch(updatedSelection) );
 
         } else {
@@ -138,7 +140,7 @@ const SearchModal: React.FC = () => {
                                     dispatch( setSearch({}) );
                                     dispatch( toggleOpen() );
                                     setClosing(false);
-                                }, 500);
+                                }, 600);
                             }}>&#x2715;</CloseX>
                         </SearchHeader>
 
@@ -157,17 +159,21 @@ const SearchModal: React.FC = () => {
                                     handleSelection={handleSortSelection}
                                 />
                                 {search.selections.sortBy || search.selections.filterBy 
-                                    ? <SelectionSection 
-                                        title={"Filter by"}
-                                        optionsArr={filterOptionsFor(search.selections.resultsFor)}
-                                        selected={search.selections.filterBy ? search.selections.filterBy : null}
-                                        handleSelection={handleFilterSelection}
-                                    />
+                                    ? <>
+                                        <SelectionSection 
+                                            title={"Filter by"}
+                                            optionsArr={filterOptionsFor(search.selections.resultsFor)}
+                                            selected={search.selections.filterBy ? search.selections.filterBy : null}
+                                            handleSelection={handleFilterSelection}
+                                        />
+                                        <FilterModal />
+                                    </>
                                     : null
                                 }
                             </>
                             : null
                         }
+                        
                     </ModalContainer>
                 </Overlay>
             

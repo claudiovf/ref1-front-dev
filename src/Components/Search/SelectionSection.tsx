@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Section, Title, Scroll, SelectionButton, slideUpAnimation } from '../LayoutComponents';
 import { formattedPeriod } from '../../utils/formatting';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { SearchState } from '../../store/searchTypes';
 
 
 const SearchSection = styled(Section)`
@@ -27,6 +30,7 @@ interface Props {
 }
 
 const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handleSelection }: Props) => {
+    const search: SearchState = useSelector((state: RootState) => state.search);
     
     if (!selected) {
         return(
@@ -44,7 +48,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                                     key={item}
                                     onClick={() => handleSelection(item)}
                                     >
-                                        {formattedPeriod(item)}
+                                        {formattedPeriod(item)} 
                                 </SelectionButton> )
                         }
                     </Scroll>
@@ -65,6 +69,9 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                             border={"#2F2F2F"}
                             >
                                 {formattedPeriod(selected)} 
+                                {search.selections.period && ( selected === "Season" || selected === "Team" )
+                                    ? ` - ${formattedPeriod(search.selections.period)}` 
+                                    : null}
                                 <Unselect onClick={() => handleSelection(null)}>
                                     &#x2715;</Unselect>
                         </SelectionButton> 
