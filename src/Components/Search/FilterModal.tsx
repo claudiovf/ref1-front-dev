@@ -62,8 +62,6 @@ const FilterTitle = styled(Title)`
 `;
 
 const OptionsButton = styled(SelectionButton)`
-    font-size: 1rem;
-    padding: 0.25rem 0.75rem;
     min-width: 4.25rem;
 `;
 
