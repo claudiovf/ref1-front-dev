@@ -11,6 +11,7 @@ import ResutsFor from './ResultsFor';
 import { useQuery } from '@apollo/client';
 import { GET_TEAM_NAMES } from '../../queries';
 import { Team } from '../../types';
+import DriverResults from './DriverResults';
 
 const overlayAnimation = keyframes`
     0% { opacity: 0;}
@@ -48,17 +49,33 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
 `;
 
 const ModalContainer = styled.div<{ closing: boolean }>`
-    width: 100.5%;
-    height: 90vh;
+    width: 100%;
+    height: 91vh;
     background-color: white;
     position:absolute;                        
-    top: 56%;                        
+    top: 55%;                        
     left: 50%;                        
     transform:translate(-50%,-50%);  
     border-radius:1rem 1rem 0 0;
     animation-name: ${props => props.closing ? slideDownAnimation : slideUpAnimation};
     animation-duration: 0.5s;
 `;
+
+const ModalOverflow = styled.div`
+    width: 100%;
+    height: 91vh;
+    background-color: white;
+    position:absolute;                        
+    top: 55%;                        
+    left: 50%;                        
+    transform:translate(-50%,-50%);  
+    border-radius:1rem 1rem 0 0;
+    overflow-y:  auto;
+`;
+
+
+
+
 
 const SearchHeader = styled.div`
     display: flex;
@@ -119,14 +136,18 @@ const SearchModal: React.FC = () => {
         return (
                 <Overlay overlayClosing={closing}>
                     <ModalContainer closing={closing}>
-                        <SearchHeader>
-                            <SearchTitle>Search</SearchTitle>
-                            <CloseX onClick={() => handleSearchClose()}>&#x2715;</CloseX>
-                        </SearchHeader>
+                        <ModalOverflow>
+                            <SearchHeader>
+                                <SearchTitle>Search</SearchTitle>
+                                <CloseX onClick={() => handleSearchClose()}>&#x2715;</CloseX>
+                            </SearchHeader>
 
-                        <ResutsFor />
-                        <SortBy />
-                        <FilterBy />
+                            <ResutsFor />
+                            <SortBy />
+                            <FilterBy />
+
+                            <DriverResults />
+                        </ModalOverflow>
                         
                     </ModalContainer>
                 </Overlay>

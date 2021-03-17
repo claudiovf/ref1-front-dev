@@ -23,7 +23,11 @@ const FilterBy: React.FC = () => {
             dispatch( setSearch(updatedSelection) );
 
         } else {
-            dispatch( setSearch({ ...search.selections, filterBy: selection }) );
+            if(selection === "All Time") {
+                dispatch( setSearch({ ...search.selections, period: selection, filterBy: selection}) );
+            } else {
+                dispatch( setSearch({ ...search.selections, filterBy: selection }) );
+            }
         }
     };
 

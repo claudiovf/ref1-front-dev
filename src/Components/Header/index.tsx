@@ -60,7 +60,7 @@ const Header: React.FC = () => {
             <LogoStyled>REF1</LogoStyled> 
           </StyledLink>
             <MagBox onClick={ () => {
-              // await dispatch( setSearch({resultsFor: "drivers", sortBy: "wins", filterBy: "all time"}) );
+              // await dispatch( setSearch({resultsFor: "drivers", sortBy: "wins", filterBy: "Team", period: "red_bull"}) );
               dispatch( toggleOpen() );
 
             }} ><Mag>&#9906;</Mag></MagBox> 
