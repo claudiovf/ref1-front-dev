@@ -26,7 +26,7 @@ const Overlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.97);
     animation-name: ${overlayAnimation};
     animation-duration: 0.6s;
     display: flex;
@@ -39,7 +39,7 @@ const Overlay = styled.div`
 
 const ModalContainer = styled.div<{ teams: boolean }>`
     width: 100%;
-    height: ${props => props.teams ? "75vh" : "62vh"};
+    height: ${props => props.teams ? "72vh" : "62vh"};
     padding-top: ${props => props.teams ? "0" : "5rem"};
     display: flex;
     flex-direction: column;
@@ -47,7 +47,8 @@ const ModalContainer = styled.div<{ teams: boolean }>`
     justify-content: flex-start;
     animation-name: ${slideUpAnimation};
     animation-duration: 0.5s;
-
+    overflow: scroll;
+    margin-bottom: 2rem;
 `;
 
 const OptionsContainer = styled.div`
@@ -71,7 +72,19 @@ const FilterTitle = styled(Title)`
 const TeamTitle = styled(Title)`
     font-family: "Work Sans Bold";
     font-size: 0.75rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 `;
+
+const CloseContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
 
 const OptionsButton = styled(SelectionButton)`
     min-width: 4.25rem;
@@ -83,6 +96,14 @@ const FilterModal: React.FC = () => {
 
     const search: SearchState = useSelector((state: RootState) => state.search);
     const dispatch = useDispatch();
+
+    const handleClose = () => {
+        const updatedSelection = search.selections;
+        delete updatedSelection.filterBy;
+        dispatch( setSearch(updatedSelection) );
+
+    };
+
     
     if (search.selections.filterBy && search.selections.filterBy !== "All Time" && !search.selections.period) {
 
@@ -104,9 +125,9 @@ const FilterModal: React.FC = () => {
                                 {options.reverse().map(option => <OptionsButton 
                                     key={option}
                                     selected={false}
-                                    bg={"#bfc8c9"}
+                                    bg={"#e4eced"}
                                     color={"#2F2F2F"}
-                                    border={"#bfc8c9"}
+                                    border={"#e4eced"}
                                     onClick={() => dispatch(setSearch({...search.selections, period: option}))}
                                     >
                                         {formattedPeriod(option)}
@@ -114,8 +135,8 @@ const FilterModal: React.FC = () => {
                             </OptionsContainer>
 
                             : <>
-                                <TeamTitle>Current Teams</TeamTitle>
                                 <OptionsContainer>
+                                <TeamTitle>Current Teams</TeamTitle>
                                 { 
                                     search.teamNames.length === 0
                                         ? <Spinner />
@@ -135,9 +156,7 @@ const FilterModal: React.FC = () => {
                                             );
                                         })
                                 }
-                                </OptionsContainer>
                                 <TeamTitle>All Teams</TeamTitle>
-                                <OptionsContainer>
                                 { 
                                     search.teamNames.length === 0
                                         ? <Spinner />
@@ -145,9 +164,9 @@ const FilterModal: React.FC = () => {
                                             <OptionsButton 
                                                 key={option.constructorId}
                                                 selected={false}
-                                                bg={"#bfc8c9"}
+                                                bg={"#e4eced"}
                                                 color={"#2F2F2F"}
-                                                border={"#bfc8c9"}
+                                                border={"#e4eced"}
                                                 onClick={() => dispatch(setSearch({...search.selections, period: option}))}
                                                 >
                                                     {formattedPeriod(option.name)}
@@ -157,8 +176,18 @@ const FilterModal: React.FC = () => {
                                 </OptionsContainer>
                             </>
                         }
-                        
                     </ModalContainer>
+                        <CloseContainer>
+                            <OptionsButton
+                                selected={false}
+                                bg={"#FFF"}
+                                color={"#2F2F2F"}
+                                border={"#FFF"}
+                                onClick={() => handleClose()}                       
+                            >
+                                Close &#x2715;
+                            </OptionsButton>
+                        </CloseContainer>
                 </Overlay>
             
         );

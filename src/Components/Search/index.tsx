@@ -49,7 +49,7 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
 
 const ModalContainer = styled.div<{ closing: boolean }>`
     width: 100.5%;
-    height: 100vh;
+    height: 90vh;
     background-color: white;
     position:absolute;                        
     top: 56%;                        
@@ -75,7 +75,7 @@ const SearchTitle = styled(Title)`
 `;
 
 const CloseX = styled.div`
-    background-color: #D1DADC;
+    background-color: #e4eced;
     display: flex;
     flex-direction: column;
     justify-contents: center;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Section, Title, Scroll, SelectionButton, slideUpAnimation } from '../LayoutComponents';
-import { formattedPeriod } from '../../utils/formatting';
+import { formattedPeriod, formattedStat } from '../../utils/formatting';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
@@ -42,13 +42,13 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                             optionsArr.map(item => 
                                 <SelectionButton 
                                     selected={false}
-                                    bg={"#bfc8c9"}
+                                    bg={"#e4eced"}
                                     color={"#2F2F2F"}
-                                    border={"#bfc8c9"}
+                                    border={"#e4eced"}
                                     key={item}
                                     onClick={() => handleSelection(item)}
                                     >
-                                        {formattedPeriod(item)} 
+                                        {formattedPeriod(formattedStat(item))} 
                                 </SelectionButton> )
                         }
                     </Scroll>
@@ -68,7 +68,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                             color={"#FFFFFF"}
                             border={"#2F2F2F"}
                             >
-                                {formattedPeriod(selected)} 
+                                {formattedPeriod(formattedStat(selected))} 
                                 {search.selections.period && ( selected === "Season" || selected === "Team" )
                                     ? ` - ${typeof search.selections.period === 'string' 
                                         ? formattedPeriod(search.selections.period) 
