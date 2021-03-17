@@ -66,7 +66,7 @@ const ModalOverflow = styled.div`
     height: 91vh;
     background-color: white;
     position:absolute;                        
-    top: 55%;                        
+    top: 45%;                        
     left: 50%;                        
     transform:translate(-50%,-50%);  
     border-radius:1rem 1rem 0 0;
@@ -74,21 +74,18 @@ const ModalOverflow = styled.div`
 `;
 
 
-
-
-
 const SearchHeader = styled.div`
+    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 3rem;
     width: 100%;
 `;
 
 const SearchTitle = styled(Title)`
-    margin: 1rem;
-    padding: 0;
+    margin: 0 0.75rem;
+    padding: 0 0.5rem;
 `;
 
 const CloseX = styled.div`

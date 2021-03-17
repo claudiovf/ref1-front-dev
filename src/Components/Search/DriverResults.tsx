@@ -167,8 +167,6 @@ const DriverResults: React.FC = () => {
     ];
 
     const search: SearchState = useSelector((state: RootState) => state.search);
-    
-    console.log(search.selections);
 
     return (
         <React.Fragment>
