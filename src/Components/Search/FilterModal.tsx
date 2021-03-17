@@ -33,13 +33,13 @@ const Overlay = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 1rem 1rem 0 0;
     padding-top: 3rem;
 `;
 
 const ModalContainer = styled.div<{ teams: boolean }>`
     width: 100%;
-    height: ${props => props.teams ? "72vh" : "62vh"};
+    height: ${props => props.teams ? "68vh" : "62vh"};
     padding-top: ${props => props.teams ? "0" : "5rem"};
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@ const ModalContainer = styled.div<{ teams: boolean }>`
     animation-name: ${slideUpAnimation};
     animation-duration: 0.5s;
     overflow: scroll;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 `;
 
 const OptionsContainer = styled.div`
@@ -66,16 +66,17 @@ const OptionsContainer = styled.div`
 
 const FilterTitle = styled(Title)`
     font-family: "Work Sans Bold";
-    font-size: 1rem;
+    font-size: 1.25rem;
 `;
 
 const TeamTitle = styled(Title)`
     font-family: "Work Sans Bold";
-    font-size: 0.75rem;
+    font-size: 1rem;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding: 1.5rem 0 0.75rem 0;
 `;
 
 const CloseContainer = styled.div`
