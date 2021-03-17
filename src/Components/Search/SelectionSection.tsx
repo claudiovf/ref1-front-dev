@@ -70,7 +70,9 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                             >
                                 {formattedPeriod(selected)} 
                                 {search.selections.period && ( selected === "Season" || selected === "Team" )
-                                    ? ` - ${formattedPeriod(search.selections.period)}` 
+                                    ? ` - ${typeof search.selections.period === 'string' 
+                                        ? formattedPeriod(search.selections.period) 
+                                        : search.selections.period.name}` 
                                     : null}
                                 <Unselect onClick={() => handleSelection(null)}>
                                     &#x2715;</Unselect>

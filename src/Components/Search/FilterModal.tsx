@@ -4,7 +4,9 @@ import styled, { keyframes } from 'styled-components';
 import { RootState } from '../../store';
 import { setSearch } from '../../store/actions';
 import { SearchState } from '../../store/searchTypes';
+import { getDriverStyle } from '../../utils/currentInfo';
 import { formattedPeriod } from '../../utils/formatting';
+import Spinner from '../Common/Spinner';
 import { SelectionButton, Title } from '../LayoutComponents';
 
 const overlayAnimation = keyframes`
@@ -29,13 +31,16 @@ const Overlay = styled.div`
     animation-duration: 0.6s;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding-top: 3rem;
 `;
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<{ teams: boolean }>`
     width: 100%;
-    height: 58vh;
+    height: ${props => props.teams ? "75vh" : "62vh"};
+    padding-top: ${props => props.teams ? "0" : "5rem"};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,13 +57,20 @@ const OptionsContainer = styled.div`
     align-items: flex-start;
     width: auto;
     height: auto;
+    min-height: 12rem;
     margin: 0.5rem 1.5rem;
     overflow: scroll;
 `;
 
+
 const FilterTitle = styled(Title)`
     font-family: "Work Sans Bold";
     font-size: 1rem;
+`;
+
+const TeamTitle = styled(Title)`
+    font-family: "Work Sans Bold";
+    font-size: 0.75rem;
 `;
 
 const OptionsButton = styled(SelectionButton)`
@@ -74,35 +86,78 @@ const FilterModal: React.FC = () => {
     
     if (search.selections.filterBy && search.selections.filterBy !== "All Time" && !search.selections.period) {
 
-        const getPeriodOptions = (filter: string): string[] => {
-            if ( filter === "Season" ) {
-                const options = [];
-                for (let i = 1950; i < 2021; i++) {
-                    options.push(i.toString());
-                }
-                return options.reverse();
-            } else {
-                return ['mercedes', 'red_bull', 'mclaren', 'ferrari', 'alfa', 'williams'];
-            }
-        };
+    const options = [];
+    for (let i = 1950; i < 2021; i++) {
+        options.push(i.toString());
+    }
 
-        const periodOptions = getPeriodOptions(search.selections.filterBy);
+    const currentTeams = search.teamNames.filter(team => getDriverStyle(team.constructorId).team !== "NA");
+    const sortedTeams = search.teamNames.slice().sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1 );
+
         return (
                 <Overlay>
-                    <ModalContainer>
+                    <ModalContainer teams={ search.selections.filterBy !== "Season" }>
                         <FilterTitle>Select a {formattedPeriod(search.selections.filterBy)}</FilterTitle>
-                        <OptionsContainer>
-                            {periodOptions.map(option => <OptionsButton 
-                                key={option}
-                                selected={false}
-                                bg={"#bfc8c9"}
-                                color={"#2F2F2F"}
-                                border={"#bfc8c9"}
-                                onClick={() => dispatch(setSearch({...search.selections, period: option}))}
-                                >
-                                    {formattedPeriod(option)}
-                            </OptionsButton>)}
-                        </OptionsContainer>
+                        {
+                            search.selections.filterBy === "Season"
+                            ? <OptionsContainer>
+                                {options.reverse().map(option => <OptionsButton 
+                                    key={option}
+                                    selected={false}
+                                    bg={"#bfc8c9"}
+                                    color={"#2F2F2F"}
+                                    border={"#bfc8c9"}
+                                    onClick={() => dispatch(setSearch({...search.selections, period: option}))}
+                                    >
+                                        {formattedPeriod(option)}
+                                </OptionsButton>)}
+                            </OptionsContainer>
+
+                            : <>
+                                <TeamTitle>Current Teams</TeamTitle>
+                                <OptionsContainer>
+                                { 
+                                    search.teamNames.length === 0
+                                        ? <Spinner />
+                                        : currentTeams.map(option => {
+                                            const optionTeam = getDriverStyle(option.constructorId);
+                                            return (
+                                                <OptionsButton 
+                                                    key={option.constructorId}
+                                                    selected={false}
+                                                    bg={optionTeam.primary}
+                                                    color={optionTeam.secondary}
+                                                    border={optionTeam.primary}
+                                                    onClick={() => dispatch(setSearch({...search.selections, period: option}))}
+                                                    >
+                                                        {formattedPeriod(option.name)}
+                                                </OptionsButton>
+                                            );
+                                        })
+                                }
+                                </OptionsContainer>
+                                <TeamTitle>All Teams</TeamTitle>
+                                <OptionsContainer>
+                                { 
+                                    search.teamNames.length === 0
+                                        ? <Spinner />
+                                        : sortedTeams.map(option => 
+                                            <OptionsButton 
+                                                key={option.constructorId}
+                                                selected={false}
+                                                bg={"#bfc8c9"}
+                                                color={"#2F2F2F"}
+                                                border={"#bfc8c9"}
+                                                onClick={() => dispatch(setSearch({...search.selections, period: option}))}
+                                                >
+                                                    {formattedPeriod(option.name)}
+                                            </OptionsButton>
+                                        )
+                                    }
+                                </OptionsContainer>
+                            </>
+                        }
+                        
                     </ModalContainer>
                 </Overlay>
             

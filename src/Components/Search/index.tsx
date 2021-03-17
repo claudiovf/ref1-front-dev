@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { Title } from '../LayoutComponents';
-import SelectionSection from './SelectionSection';
-import FilterModal from './FilterModal';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
-import { setSearch, toggleOpen } from '../../store/actions';
+import { setSearch, toggleOpen, setTeamNames } from '../../store/actions';
+import FilterBy from './FilterBy';
+import SortBy from './SortBy';
+import ResutsFor from './ResultsFor';
+import { useQuery } from '@apollo/client';
+import { GET_TEAM_NAMES } from '../../queries';
+import { Team } from '../../types';
 
 const overlayAnimation = keyframes`
     0% { opacity: 0;}
@@ -45,7 +49,7 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
 
 const ModalContainer = styled.div<{ closing: boolean }>`
     width: 100.5%;
-    height: 90vh;
+    height: 100vh;
     background-color: white;
     position:absolute;                        
     top: 56%;                        
@@ -92,41 +96,24 @@ const SearchModal: React.FC = () => {
     const search: SearchState = useSelector((state: RootState) => state.search);
     const dispatch = useDispatch();
 
+    const teamNames = useQuery<{ findManyTeams: Team[] }>(GET_TEAM_NAMES);
 
-    const handleResultSelection = (selection: string | null) => {
-        if(!selection) {
+    useEffect(() => {
+        if ( teamNames.data ) {
+            dispatch(setTeamNames(teamNames.data.findManyTeams));
+        }
+    }, [teamNames.data]);
+
+
+    const handleSearchClose = () => {
+        setClosing(true);
+        setTimeout(() => {
             dispatch( setSearch({}) );
-        } else {
-            dispatch( setSearch({ resultsFor: selection }) );
-        }
+            dispatch( toggleOpen() );
+            setClosing(false);
+        }, 600);
     };
 
-    const handleSortSelection = (selection: string | null) => {
-        if(!selection) {
-            const updatedSelection = search.selections;
-            delete updatedSelection.sortBy; 
-            dispatch( setSearch(updatedSelection) );
-
-        } else {
-            dispatch( setSearch({ ...search.selections, sortBy: selection }) );
-        }
-    };
-    const handleFilterSelection = (selection: string | null) => {
-        if(!selection) {
-            const updatedSelection = search.selections;
-            delete updatedSelection.filterBy;
-            delete updatedSelection.period;
-            dispatch( setSearch(updatedSelection) );
-
-        } else {
-            dispatch( setSearch({ ...search.selections, filterBy: selection }) );
-        }
-    };
-
-    const filterOptionsFor = (resultSel: string): string[] => {
-        if ( resultSel === "drivers" ) return ["All Time", "Season", "Team"];
-        else return ["All Time", "Season"];
-    };
     
     if (search.isOpen) {
         return (
@@ -134,45 +121,12 @@ const SearchModal: React.FC = () => {
                     <ModalContainer closing={closing}>
                         <SearchHeader>
                             <SearchTitle>Search</SearchTitle>
-                            <CloseX onClick={() => {
-                                setClosing(true);
-                                setTimeout(() => {
-                                    dispatch( setSearch({}) );
-                                    dispatch( toggleOpen() );
-                                    setClosing(false);
-                                }, 600);
-                            }}>&#x2715;</CloseX>
+                            <CloseX onClick={() => handleSearchClose()}>&#x2715;</CloseX>
                         </SearchHeader>
 
-                        <SelectionSection 
-                        title={"Show results for"}
-                        optionsArr={["drivers", "teams"]}
-                        selected={search.selections.resultsFor ? search.selections.resultsFor : null}
-                        handleSelection={handleResultSelection}
-                        />
-                        {search.selections.resultsFor
-                            ? <>
-                                <SelectionSection 
-                                    title={"Sort by"}
-                                    optionsArr={["wins", "podiums", "points"]}
-                                    selected={search.selections.sortBy ? search.selections.sortBy : null}
-                                    handleSelection={handleSortSelection}
-                                />
-                                {search.selections.sortBy || search.selections.filterBy 
-                                    ? <>
-                                        <SelectionSection 
-                                            title={"Filter by"}
-                                            optionsArr={filterOptionsFor(search.selections.resultsFor)}
-                                            selected={search.selections.filterBy ? search.selections.filterBy : null}
-                                            handleSelection={handleFilterSelection}
-                                        />
-                                        <FilterModal />
-                                    </>
-                                    : null
-                                }
-                            </>
-                            : null
-                        }
+                        <ResutsFor />
+                        <SortBy />
+                        <FilterBy />
                         
                     </ModalContainer>
                 </Overlay>
