@@ -39,7 +39,7 @@ const Overlay = styled.div`
 
 const ModalContainer = styled.div<{ teams: boolean }>`
     width: 100%;
-    height: ${props => props.teams ? "68vh" : "62vh"};
+    height: ${props => props.teams ? "82%" : "62vh"};
     padding-top: ${props => props.teams ? "0" : "5rem"};
     display: flex;
     flex-direction: column;
@@ -178,17 +178,17 @@ const FilterModal: React.FC = () => {
                             </>
                         }
                     </ModalContainer>
-                        <CloseContainer>
-                            <OptionsButton
-                                selected={false}
-                                bg={"#FFF"}
-                                color={"#2F2F2F"}
-                                border={"#FFF"}
-                                onClick={() => handleClose()}                       
-                            >
-                                Close &#x2715;
-                            </OptionsButton>
-                        </CloseContainer>
+                    <CloseContainer>
+                        <OptionsButton
+                            selected={false}
+                            bg={"#FFF"}
+                            color={"#2F2F2F"}
+                            border={"#FFF"}
+                            onClick={() => handleClose()}                       
+                        >
+                            Close &#x2715;
+                        </OptionsButton>
+                    </CloseContainer>
                 </Overlay>
             
         );
