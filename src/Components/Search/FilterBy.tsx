@@ -4,7 +4,7 @@ import SelectionSection from './SelectionSection';
 import FilterModal from './FilterModal';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
-import { setSearch } from '../../store/actions';
+import { setCurrResults, setPrevResults, setSearch } from '../../store/actions';
 
 
 
@@ -21,6 +21,8 @@ const FilterBy: React.FC = () => {
             delete updatedSelection.filterBy;
             delete updatedSelection.period;
             dispatch( setSearch(updatedSelection) );
+            dispatch( setCurrResults([]) );
+            dispatch( setPrevResults([]) );
 
         } else {
             if(selection === "All Time") {

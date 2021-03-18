@@ -1,13 +1,13 @@
 
 import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { GET_DRIVER_RESULTS } from '../../queries';
 import { RootState } from '../../store';
+import { setCurrResults, setPrevResults } from '../../store/actions';
 import { SearchState, TeamNameId} from '../../store/searchTypes';
 import { Driver } from '../../types';
-import { formattedPeriod } from '../../utils/formatting';
 import Spinner from '../Common/Spinner';
 import { SelectionButton, Spacer } from '../LayoutComponents';
 
@@ -15,7 +15,7 @@ const Table = styled.table`
     width: 100%;
     max-width: 100vw;
     height: auto;
-    margin: 2rem 0 5rem 0;
+    margin: 2rem 0 1rem 0;
     padding: 1rem;
 `;
 
@@ -77,6 +77,7 @@ const CloseContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 1rem;
 `;
 
 const OptionsButton = styled(SelectionButton)`
@@ -87,8 +88,8 @@ const OptionsButton = styled(SelectionButton)`
 
 
 const DriverResults: React.FC = () => {
-    const [results, setResults] = useState<Driver[]>([]);
     const search: SearchState = useSelector((state: RootState) => state.search);
+    const dispatch = useDispatch();
 
     const getPeriod = (statePeriod: TeamNameId | string): string => 
         typeof statePeriod === "string" 
@@ -108,21 +109,23 @@ const DriverResults: React.FC = () => {
         { variables: {
             "period": getPeriod(search.selections.period),
             "stat": splitStat(search.selections.sortBy).stat,
-            "skip": 0,
+            "skip": search.prevResults.length,
             "pct": splitStat(search.selections.sortBy).isPct            
           }});
         
   useEffect(() => {
       if ( data ) {
-          setResults(data.findDriverResults);
+          dispatch(setCurrResults(data.findDriverResults));
+
       }
   }, [data]);
 
-  if ( loading ) return <> <Spacer /><Spinner /> </>;
+  if ( loading && search.prevResults.length === 0 ) return <> <Spacer /><Spinner /> </>;
 
-  if ( results.length === 0 ) return null;
+  if ( search.currResults.length === 0 ) return null;
 
-
+console.log('curr', search.currResults);
+console.log('prev', search.prevResults);
 
     return (
         <React.Fragment>
@@ -131,36 +134,52 @@ const DriverResults: React.FC = () => {
                     <Tr>
                         <Th></Th>
                         <Th><TableCell>Name</TableCell></Th>
-                        <Th>{search.selections.sortBy ? formattedPeriod(search.selections.sortBy) : null}</Th>
+                        <Th>{splitStat(search.selections.sortBy).isPct ? "%" : "Total" }</Th>
                         <Th>Entries</Th>
                     </Tr>
-                    {results.map(driver => <Tr key={driver.familyName}>
-                        <Td><Rank>{results.indexOf(driver) + 1}</Rank></Td>
+                    {search.prevResults.map(driver => <Tr key={driver.driverId}>
+                        <Td><Rank>{search.prevResults.indexOf(driver) + 1}</Rank></Td>
                         <Td><TableCell><span>{driver.givenName} {driver.familyName}</span></TableCell></Td>
                         <Td>{
                             search.selections.sortBy 
                             ? splitStat(search.selections.sortBy).isPct 
-                                ? driver.entries[0].stats[0].pct 
+                                ? driver.entries[0].stats[0].pct.toFixed(2) 
                                 : driver.entries[0].stats[0].total
                             : null
                         }</Td>
                         <Td>{driver.entries[0].entries}</Td>
                     </Tr>)}
+                    
+                    {loading && search.prevResults.length !== 0
+                        ? null
+                        : search.currResults.map(driver => <Tr key={driver.driverId}>
+                            <Td><Rank>{search.currResults.indexOf(driver) + search.prevResults.length + 1}</Rank></Td>
+                            <Td><TableCell><span>{driver.givenName} {driver.familyName}</span></TableCell></Td>
+                            <Td>{
+                                search.selections.sortBy 
+                                ? splitStat(search.selections.sortBy).isPct 
+                                    ? driver.entries[0].stats[0].pct.toFixed(2) 
+                                    : driver.entries[0].stats[0].total
+                                : null
+                            }</Td>
+                            <Td>{driver.entries[0].entries}</Td>
+                        </Tr>)}
                 </Tbody>
             </Table>
 
             <CloseContainer>
-                <OptionsButton
-                    selected={false}
-                    bg={"#FFF"}
-                    color={"#2F2F2F"}
-                    border={"#FFF"}
-                    onClick={() => {
-                        console.log("this");
-                    }}  
-                >
-                    Load More
-                </OptionsButton>
+                {loading && search.prevResults.length !== 0 
+                    ? <> <Spinner /> </> 
+                    :<OptionsButton
+                        selected={false}
+                        bg={"#FFF"}
+                        color={"#2F2F2F"}
+                        border={"#FFF"}
+                        onClick={() => dispatch(setPrevResults(search.prevResults.concat(search.currResults)))}  
+                    >
+                        Load More
+                    </OptionsButton>
+                }
             </CloseContainer>
             
         </React.Fragment>

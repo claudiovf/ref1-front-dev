@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SelectionSection from './SelectionSection';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
-import { setSearch } from '../../store/actions';
+import { setCurrResults, setPrevResults, setSearch } from '../../store/actions';
 
 
 const ResutsFor: React.FC = () => {
@@ -15,6 +15,9 @@ const ResutsFor: React.FC = () => {
     const handleResultSelection = (selection: string | null) => {
         if(!selection) {
             dispatch( setSearch({}) );
+            dispatch( setCurrResults([]) );
+            dispatch( setPrevResults([]) );
+            
         } else {
             dispatch( setSearch({ resultsFor: selection }) );
         }

@@ -1,9 +1,15 @@
-import { SearchState, ActionTypes, SET_SEARCH, TOGGLE_OPEN, SET_TEAM_NAMES } from './searchTypes';
+import { SearchState, ActionTypes, 
+    SET_SEARCH, TOGGLE_OPEN, 
+    SET_TEAM_NAMES, SET_CURR_RESULTS,
+    SET_PREV_RESULTS 
+} from './searchTypes';
 
 const initialState: SearchState = {
     selections: {},
     isOpen: false,
-    teamNames: []
+    teamNames: [],
+    currResults: [],
+    prevResults: []
 };
 
 export const searchReducer = ( state = initialState, action: ActionTypes ): SearchState => {
@@ -22,6 +28,16 @@ export const searchReducer = ( state = initialState, action: ActionTypes ): Sear
             return { 
                 ...state,
                 teamNames: action.payload
+            };
+        case SET_CURR_RESULTS:
+            return { 
+                ...state,
+                currResults: action.payload
+            };
+        case SET_PREV_RESULTS:
+            return { 
+                ...state,
+                prevResults: action.payload
             };
         default:
             return state;

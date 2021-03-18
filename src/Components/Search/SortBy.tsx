@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SelectionSection from './SelectionSection';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
-import { setSearch } from '../../store/actions';
+import { setCurrResults, setPrevResults, setSearch } from '../../store/actions';
 
 
 
@@ -32,6 +32,8 @@ const SortBy: React.FC = () => {
             const updatedSelection = search.selections;
             delete updatedSelection.sortBy; 
             dispatch( setSearch(updatedSelection) );
+            dispatch( setCurrResults([]) );
+            dispatch( setPrevResults([]) );
 
         } else {
             dispatch( setSearch({ ...search.selections, sortBy: selection }) );

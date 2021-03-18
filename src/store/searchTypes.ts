@@ -1,3 +1,5 @@
+import { Driver } from "../types";
+
 export interface TeamNameId {
     name: string;
     constructorId: string;
@@ -15,12 +17,15 @@ export interface SearchState {
     selections: Search;
     isOpen: boolean;
     teamNames: TeamNameId[];
-
+    currResults: Driver[];
+    prevResults: Driver[];
 }
 
 export const SET_SEARCH = 'SET_SEARCH';
 export const TOGGLE_OPEN = 'TOGGLE_OPEN';
 export const SET_TEAM_NAMES = 'SET_TEAM_NAMES';
+export const SET_CURR_RESULTS = 'SET_CURR_RESULTS';
+export const SET_PREV_RESULTS = 'SET_PREV_RESULTS';
 
 export interface SetSearchAction {
     type: typeof SET_SEARCH
@@ -36,4 +41,13 @@ export interface SetTeamNamesAction {
     payload: TeamNameId[]
 }
 
-export type ActionTypes = SetSearchAction | ToggleOpenAction | SetTeamNamesAction;
+export interface SetCurrResults {
+    type: typeof SET_CURR_RESULTS
+    payload: Driver[]
+}
+export interface SetPrevResults {
+    type: typeof SET_PREV_RESULTS
+    payload: Driver[]
+}
+
+export type ActionTypes = SetSearchAction | ToggleOpenAction | SetTeamNamesAction | SetCurrResults | SetPrevResults;
