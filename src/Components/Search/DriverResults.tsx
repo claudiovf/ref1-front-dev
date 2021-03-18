@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { GET_DRIVER_RESULTS } from '../../queries';
 import { RootState } from '../../store';
-import { setCurrResults, setPrevResults } from '../../store/actions';
+import { setCurrResults, setPrevResults, setSearch, toggleOpen } from '../../store/actions';
 import { SearchState, TeamNameId} from '../../store/searchTypes';
 import { Driver } from '../../types';
 import Spinner from '../Common/Spinner';
-import { SelectionButton, Spacer } from '../LayoutComponents';
+import { SelectionButton, Spacer, StyledLink } from '../LayoutComponents';
 
 const Table = styled.table`
     width: 100%;
@@ -84,6 +84,10 @@ const OptionsButton = styled(SelectionButton)`
     min-width: 4.25rem;
 `;
 
+const ResultLink = styled(StyledLink)`
+    color: #2E2E2E;
+`;
+
 
 
 
@@ -100,6 +104,14 @@ const DriverResults: React.FC = () => {
         const split = stateStat.split("_");
         if (split.length === 1 ) return { stat: stateStat, isPct: false};
         else return { stat: split[0], isPct: true };
+    };
+
+    const closeSearch = () => {
+        dispatch( setSearch({}) );
+        dispatch( setCurrResults([]) );
+        dispatch( setPrevResults([]) );
+
+        dispatch( toggleOpen() );
     };
 
     
@@ -139,7 +151,15 @@ console.log('prev', search.prevResults);
                     </Tr>
                     {search.prevResults.map(driver => <Tr key={driver.driverId}>
                         <Td><Rank>{search.prevResults.indexOf(driver) + 1}</Rank></Td>
-                        <Td><TableCell><span>{driver.givenName} {driver.familyName}</span></TableCell></Td>
+                        <Td>
+                            <TableCell>
+                                <ResultLink 
+                                    to={"/profile/driver/" + driver.driverId} 
+                                    onClick={() => closeSearch()}>
+                                    {driver.givenName} {driver.familyName}
+                                </ResultLink>
+                            </TableCell>
+                        </Td>
                         <Td>{
                             search.selections.sortBy 
                             ? splitStat(search.selections.sortBy).isPct 
@@ -152,18 +172,27 @@ console.log('prev', search.prevResults);
                     
                     {loading && search.prevResults.length !== 0
                         ? null
-                        : search.currResults.map(driver => <Tr key={driver.driverId}>
-                            <Td><Rank>{search.currResults.indexOf(driver) + search.prevResults.length + 1}</Rank></Td>
-                            <Td><TableCell><span>{driver.givenName} {driver.familyName}</span></TableCell></Td>
-                            <Td>{
-                                search.selections.sortBy 
-                                ? splitStat(search.selections.sortBy).isPct 
-                                    ? driver.entries[0].stats[0].pct.toFixed(2) 
-                                    : driver.entries[0].stats[0].total
-                                : null
-                            }</Td>
-                            <Td>{driver.entries[0].entries}</Td>
-                        </Tr>)}
+                        : search.currResults.map(driver => 
+                            <Tr key={driver.driverId} >
+                                    <Td><Rank>{search.currResults.indexOf(driver) + search.prevResults.length + 1}</Rank></Td>
+                                    <Td>
+                                        <TableCell>
+                                            <ResultLink 
+                                                to={"/profile/driver/" + driver.driverId}
+                                                onClick={() => closeSearch()}>
+                                                {driver.givenName} {driver.familyName}
+                                            </ResultLink>
+                                        </TableCell>
+                                    </Td>
+                                    <Td>{
+                                        search.selections.sortBy 
+                                        ? splitStat(search.selections.sortBy).isPct 
+                                            ? driver.entries[0].stats[0].pct.toFixed(2) 
+                                            : driver.entries[0].stats[0].total
+                                        : null
+                                    }</Td>
+                                    <Td>{driver.entries[0].entries}</Td>
+                            </Tr>)}
                 </Tbody>
             </Table>
 
