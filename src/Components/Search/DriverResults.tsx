@@ -157,7 +157,7 @@ console.log('prev', search.prevResults);
                                     to={"/profile/driver/" + driver.driverId} 
                                     onClick={() => closeSearch()}>
                                     <OptionsButton 
-                                        selected={false}
+                                        selected={true}
                                         bg={getDriverStyle(driver.driverId).primary}
                                         color={getDriverStyle(driver.driverId).secondary}
                                         border={getDriverStyle(driver.driverId).primary}
@@ -188,7 +188,7 @@ console.log('prev', search.prevResults);
                                                 to={"/profile/driver/" + driver.driverId}
                                                 onClick={() => closeSearch()}>
                                                 <OptionsButton 
-                                                    selected={false}
+                                                    selected={true}
                                                     bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
                                                     color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
                                                     border={getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
