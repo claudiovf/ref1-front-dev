@@ -173,7 +173,7 @@ console.log('prev', search.prevResults);
                     {loading && search.prevResults.length !== 0
                         ? null
                         : search.currResults.map(driver => 
-                            <Tr key={driver.driverId} >
+                            <Tr key={driver.driverId + `1`} >
                                     <Td><Rank>{search.currResults.indexOf(driver) + search.prevResults.length + 1}</Rank></Td>
                                     <Td>
                                         <TableCell>
@@ -199,15 +199,17 @@ console.log('prev', search.prevResults);
             <CloseContainer>
                 {loading && search.prevResults.length !== 0 
                     ? <> <Spinner /> </> 
-                    :<OptionsButton
-                        selected={false}
-                        bg={"#FFF"}
-                        color={"#2F2F2F"}
-                        border={"#FFF"}
-                        onClick={() => dispatch(setPrevResults(search.prevResults.concat(search.currResults)))}  
-                    >
-                        Load More
-                    </OptionsButton>
+                    : search.currResults.length === 25 
+                        ?<OptionsButton
+                            selected={false}
+                            bg={"#FFF"}
+                            color={"#2F2F2F"}
+                            border={"#FFF"}
+                            onClick={() => dispatch(setPrevResults(search.prevResults.concat(search.currResults)))}  
+                        >
+                            Load More
+                        </OptionsButton>
+                        : null
                 }
             </CloseContainer>
             
