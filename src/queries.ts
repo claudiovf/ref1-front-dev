@@ -155,6 +155,29 @@ export const GET_TEAM_NAMES = gql`
     }
 `;
 
+export const GET_DRIVER_RESULTS = gql`
+    query getResults($period: String!, $stat: String!, $skip: Int!, $pct: Boolean!){
+        findDriverResults(
+            period: $period
+            stat: $stat
+            skip: $skip
+            pct: $pct
+        ) {
+            driverId
+            givenName
+            familyName
+            entries{
+                entries
+                stats {
+                    stat
+                    total
+                    pct
+                }
+            }
+        }
+    }
+`;
+
 // {
 //     givenName
 //     familyName

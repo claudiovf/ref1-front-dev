@@ -142,8 +142,14 @@ const SearchModal: React.FC = () => {
                             <ResutsFor />
                             <SortBy />
                             <FilterBy />
-
-                            <DriverResults />
+                            {
+                                search.selections.resultsFor 
+                                && search.selections.sortBy
+                                && search.selections.filterBy
+                                && search.selections.period
+                                    ? <DriverResults />
+                                    : null
+                            }
                         </ModalOverflow>
                         
                     </ModalContainer>

@@ -1,9 +1,15 @@
-import React from 'react';
+
+import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { GET_DRIVER_RESULTS } from '../../queries';
 import { RootState } from '../../store';
-import { SearchState } from '../../store/searchTypes';
+import { SearchState, TeamNameId} from '../../store/searchTypes';
+import { Driver } from '../../types';
 import { formattedPeriod } from '../../utils/formatting';
+import Spinner from '../Common/Spinner';
+import { SelectionButton, Spacer } from '../LayoutComponents';
 
 const Table = styled.table`
     width: 100%;
@@ -66,133 +72,100 @@ const TableCell = styled.div`
     }
 `;
 
+const CloseContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
 
+const OptionsButton = styled(SelectionButton)`
+    min-width: 4.25rem;
+`;
 
 
 
 
 const DriverResults: React.FC = () => {
-
-    const drivers = [
-        {
-            familyName: "hamilton",
-            givenName: "Lewis",
-            wins: 95,
-            entries: 250
-        },
-        {
-            familyName: "Michael",
-            givenName: "Schummacher",
-            wins: 91,
-            entries: 300
-        },
-        {
-            familyName: "Giovinazzi",
-            givenName: "Antonio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovinaasdzzi",
-            givenName: "Antongreqio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovinadfsagzzi",
-            givenName: "Antoqgeqrgnio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovineqgqazzi",
-            givenName: "Antonreegio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovgqerginazzi",
-            givenName: "Antogqerbnenio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovirefeqwfnazzi",
-            givenName: "Antonsdfasfio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovazzi",
-            givenName: "Anto",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Gioviazzi",
-            givenName: "Antono",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Gioazzi",
-            givenName: "Antoio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giazzi",
-            givenName: "Ano",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovinzzi",
-            givenName: "Aio",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovinaz",
-            givenName: "Anton",
-            wins: 0,
-            entries: 30
-        },
-        {
-            familyName: "Giovnazzi",
-            givenName: "An",
-            wins: 0,
-            entries: 30
-        },
-    ];
-
+    const [results, setResults] = useState<Driver[]>([]);
     const search: SearchState = useSelector((state: RootState) => state.search);
+
+    const getPeriod = (statePeriod: TeamNameId | string): string => 
+        typeof statePeriod === "string" 
+            ? statePeriod === "All Time" ? "Career" : statePeriod 
+            : statePeriod.constructorId;
+
+    const splitStat = (stateStat: string): { stat: string; isPct: boolean; } => {
+        const split = stateStat.split("_");
+        if (split.length === 1 ) return { stat: stateStat, isPct: false};
+        else return { stat: split[0], isPct: true };
+    };
+
+    
+    if (!search.selections.period || !search.selections.sortBy ) return null;
+
+    const { loading, data } = useQuery<{ findDriverResults: Driver[] }>(GET_DRIVER_RESULTS,
+        { variables: {
+            "period": getPeriod(search.selections.period),
+            "stat": splitStat(search.selections.sortBy).stat,
+            "skip": 0,
+            "pct": splitStat(search.selections.sortBy).isPct            
+          }});
+        
+  useEffect(() => {
+      if ( data ) {
+          setResults(data.findDriverResults);
+      }
+  }, [data]);
+
+  if ( loading ) return <> <Spacer /><Spinner /> </>;
+
+  if ( results.length === 0 ) return null;
+
+
 
     return (
         <React.Fragment>
-            {
-                search.selections.resultsFor 
-                && search.selections.sortBy
-                && search.selections.filterBy
-                && search.selections.period
-                    ? <Table>
-                        <Tbody>
-                            <Tr>
-                                <Th></Th>
-                                <Th><TableCell>Name</TableCell></Th>
-                                <Th>{formattedPeriod(search.selections.sortBy)}</Th>
-                            </Tr>
-                            {drivers.map(driver => <Tr key={driver.familyName}>
-                                <Td><Rank>{drivers.indexOf(driver) + 1}</Rank></Td>
-                                <Td><TableCell><span>{driver.givenName} {driver.familyName}</span></TableCell></Td>
-                                <Td>{driver.wins}</Td>
-                            </Tr>)}
-                        </Tbody>
-                    </Table>
-                    : <></>
-            }
+            <Table>
+                <Tbody>
+                    <Tr>
+                        <Th></Th>
+                        <Th><TableCell>Name</TableCell></Th>
+                        <Th>{search.selections.sortBy ? formattedPeriod(search.selections.sortBy) : null}</Th>
+                        <Th>Entries</Th>
+                    </Tr>
+                    {results.map(driver => <Tr key={driver.familyName}>
+                        <Td><Rank>{results.indexOf(driver) + 1}</Rank></Td>
+                        <Td><TableCell><span>{driver.givenName} {driver.familyName}</span></TableCell></Td>
+                        <Td>{
+                            search.selections.sortBy 
+                            ? splitStat(search.selections.sortBy).isPct 
+                                ? driver.entries[0].stats[0].pct 
+                                : driver.entries[0].stats[0].total
+                            : null
+                        }</Td>
+                        <Td>{driver.entries[0].entries}</Td>
+                    </Tr>)}
+                </Tbody>
+            </Table>
+
+            <CloseContainer>
+                <OptionsButton
+                    selected={false}
+                    bg={"#FFF"}
+                    color={"#2F2F2F"}
+                    border={"#FFF"}
+                    onClick={() => {
+                        console.log("this");
+                    }}  
+                >
+                    Load More
+                </OptionsButton>
+            </CloseContainer>
+            
         </React.Fragment>
     );
+    
 };
 
 export default DriverResults;
