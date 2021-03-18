@@ -158,9 +158,13 @@ console.log('prev', search.prevResults);
                                     onClick={() => closeSearch()}>
                                     <OptionsButton 
                                         selected={true}
-                                        bg={getDriverStyle(driver.driverId).primary}
+                                        bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
+                                            ? "#e4eced" 
+                                            : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
                                         color={getDriverStyle(driver.driverId).secondary}
-                                        border={getDriverStyle(driver.driverId).primary}
+                                        border={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
+                                        ? "#e4eced" 
+                                        : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
                                         >
                                             {driver.givenName} {driver.familyName}
                                     </OptionsButton>
@@ -189,9 +193,13 @@ console.log('prev', search.prevResults);
                                                 onClick={() => closeSearch()}>
                                                 <OptionsButton 
                                                     selected={true}
-                                                    bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                                    bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
+                                                    ? "#e4eced" 
+                                                    : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
                                                     color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
-                                                    border={getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                                    border={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
+                                                    ? "#e4eced" 
+                                                    : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
                                                     >
                                                         {driver.givenName} {driver.familyName}
                                                 </OptionsButton>
