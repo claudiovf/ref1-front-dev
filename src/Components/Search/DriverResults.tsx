@@ -8,6 +8,7 @@ import { RootState } from '../../store';
 import { setCurrResults, setPrevResults, setSearch, toggleOpen } from '../../store/actions';
 import { SearchState, TeamNameId} from '../../store/searchTypes';
 import { Driver } from '../../types';
+import { getDriverStyle, patchId } from '../../utils/currentInfo';
 import Spinner from '../Common/Spinner';
 import { SelectionButton, Spacer, StyledLink } from '../LayoutComponents';
 
@@ -55,7 +56,6 @@ const Rank = styled.div`
     justify-content: center;
     margin: 0 0.5rem;
     padding: 0.25rem 0.25rem;
-    background-color: #bfc8c9;
     border-radius: 0.25rem;
 `;
 
@@ -156,7 +156,14 @@ console.log('prev', search.prevResults);
                                 <ResultLink 
                                     to={"/profile/driver/" + driver.driverId} 
                                     onClick={() => closeSearch()}>
-                                    {driver.givenName} {driver.familyName}
+                                    <OptionsButton 
+                                        selected={false}
+                                        bg={getDriverStyle(driver.driverId).primary}
+                                        color={getDriverStyle(driver.driverId).secondary}
+                                        border={getDriverStyle(driver.driverId).primary}
+                                        >
+                                            {driver.givenName} {driver.familyName}
+                                    </OptionsButton>
                                 </ResultLink>
                             </TableCell>
                         </Td>
@@ -180,7 +187,14 @@ console.log('prev', search.prevResults);
                                             <ResultLink 
                                                 to={"/profile/driver/" + driver.driverId}
                                                 onClick={() => closeSearch()}>
-                                                {driver.givenName} {driver.familyName}
+                                                <OptionsButton 
+                                                    selected={false}
+                                                    bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                                    color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
+                                                    border={getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                                    >
+                                                        {driver.givenName} {driver.familyName}
+                                                </OptionsButton>
                                             </ResultLink>
                                         </TableCell>
                                     </Td>

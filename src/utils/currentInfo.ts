@@ -1,6 +1,11 @@
 import { CurrTeamStyles } from "../types";
 
-
+export const patchId = (id: string, firstName: string): string => {
+    if(id === "mclaren" && firstName ) return "";
+    else if(id === "ferrari" && firstName ) return "";
+    else return id;
+};
+ 
 export const getDriverStyle = (id: string): CurrTeamStyles => {
     switch(true) {
         case id === 'hamilton' || id === 'bottas' || id === 'mercedes':
