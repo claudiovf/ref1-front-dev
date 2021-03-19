@@ -49,7 +49,7 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
 `;
 
 const ModalContainer = styled.div<{ closing: boolean }>`
-    width: 100%;
+    width: 100vw;
     height: 91vh;
     background-color: white;
     position:absolute;                        
@@ -59,10 +59,11 @@ const ModalContainer = styled.div<{ closing: boolean }>`
     border-radius:1rem 1rem 0 0;
     animation-name: ${props => props.closing ? slideDownAnimation : slideUpAnimation};
     animation-duration: 0.5s;
+    
 `;
 
 const ModalOverflow = styled.div`
-    width: 100%;
+    width: 100vw;
     height: 91vh;
     background-color: white;
     position:absolute;                        

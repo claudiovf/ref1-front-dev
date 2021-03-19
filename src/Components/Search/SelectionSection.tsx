@@ -7,10 +7,7 @@ import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
 
 
-const SearchSection = styled(Section)`
-    animation-name: ${slideUpAnimation};
-    animation-duration: 0.3s
-`;
+
 
 const FilterTitle = styled(Title)`
     font-family: "Work Sans Bold";
@@ -20,6 +17,15 @@ const FilterTitle = styled(Title)`
 const Unselect = styled.span`
     font-family: "Work Sans Bold";
     margin-left: 0.5rem;
+`;
+
+const ScrollCover = styled.div`
+    min-width: 100%;
+    max-height: 5.175rem;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    animation-name: ${slideUpAnimation};
+    animation-duration: 0.3s
 `;
 
 interface Props {
@@ -35,7 +41,8 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
     if (!selected) {
         return(
             <React.Fragment>
-                <SearchSection>
+                <ScrollCover>
+                <Section>
                     <FilterTitle>{title}</FilterTitle>
                     <Scroll>
                         {
@@ -52,7 +59,8 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                                 </SelectionButton> )
                         }
                     </Scroll>
-                </SearchSection>
+                </Section>
+                </ScrollCover>
             </React.Fragment>
         );
     }

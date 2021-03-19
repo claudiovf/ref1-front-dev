@@ -54,8 +54,6 @@ const Rank = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 0 0.5rem;
-    padding: 0.25rem 0.25rem;
     border-radius: 0.25rem;
 `;
 
@@ -135,9 +133,6 @@ const DriverResults: React.FC = () => {
   if ( loading && search.prevResults.length === 0 ) return <> <Spacer /><Spinner /> </>;
 
   if ( search.currResults.length === 0 ) return null;
-
-console.log('curr', search.currResults);
-console.log('prev', search.prevResults);
 
     return (
         <React.Fragment>
