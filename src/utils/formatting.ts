@@ -43,7 +43,7 @@ export const formattedStat = (stat: string): string => {
             return "% Point Finishes";
 
         case stat === "dnfs":
-            return "DNFs";
+            return "Most DNFs";
 
         case stat === "dnfs_pct":
             return "% DNFs";
