@@ -24,8 +24,9 @@ const DriverProfile: React.FC = () => {
     useEffect(() => {
         if ( data ) {
             setDriver(data.findDriver);
+            setPeriod("Career");
         }
-    }, [data]);
+    }, [data, period]);
 
     const changeProfilePeriod = ( period: string ) => {
         setPeriod(period);

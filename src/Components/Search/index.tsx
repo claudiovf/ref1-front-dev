@@ -47,6 +47,7 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
     background: rgba(0,0,0,0.7);
     animation-name: ${props => props.overlayClosing ? overlayClosingAnimation: overlayAnimation};
     animation-duration: 0.6s;
+    z-index: 2000;
 `;
 
 const ModalContainer = styled.div<{ closing: boolean }>`

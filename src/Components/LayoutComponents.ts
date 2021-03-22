@@ -152,6 +152,7 @@ export const BackHome = styled.div`
     padding: 1rem 1rem;
     box-shadow: 0px 1px 1px #DDDDDD;
     position: fixed;
+    z-index: 1000;
 `;
 
 export const Period = styled.div`

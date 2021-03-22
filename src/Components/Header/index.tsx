@@ -17,6 +17,7 @@ export const HeaderStyled = styled.div`
     box-shadow: 0px 0.5px 2px #D1DADC;
     background-color: #FFFFFF;
     overflow: hidden;
+    z-index: 1000;
 `;
 
 

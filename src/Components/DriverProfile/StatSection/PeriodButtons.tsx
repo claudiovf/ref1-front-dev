@@ -12,6 +12,7 @@ const ScrollWrapper = styled.div<{ bg: string}>`
     position: -webkit-sticky;
     position: sticky;
     top: 6rem;
+    z-index: 1000;
 `;
 
 

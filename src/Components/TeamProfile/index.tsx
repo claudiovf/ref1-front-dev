@@ -26,8 +26,9 @@ const TeamProfile: React.FC = () => {
     useEffect(() => {
         if ( data ) {
             setTeam(data.findTeam);
+            setPeriod("All Time");
         }
-    }, [data]);
+    }, [data, period]);
 
     const changeProfilePeriod = ( period: string ) => {
         setPeriod(period);
