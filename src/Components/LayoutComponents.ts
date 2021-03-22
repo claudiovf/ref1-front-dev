@@ -91,7 +91,6 @@ export const slideUpAnimation = keyframes`
 `;
 
 export const Cards = styled.div<{ bg: string}>`
-    background-image: linear-gradient(rgba(255,255,255,0.15), ${props => props.bg}, ${props => props.bg});
     background-color: ${props => props.bg};
     display: flex;
     flex-direction: column;

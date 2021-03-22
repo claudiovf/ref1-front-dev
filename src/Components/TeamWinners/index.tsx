@@ -8,8 +8,7 @@ import { Section, Title, Scroll, popOutAnimation } from '../LayoutComponents';
 
 const SearchCard = styled.div`
     font-family: "Work Sans Bold";
-    background-image: linear-gradient(rgba(255,255,255,0.15), #2B2D42 , #2B2D42 );
-    background-color: #2B2D42;
+    background-color: #262a4d;
     display: flex;
     flex-direction: column;
     justify-content: left;

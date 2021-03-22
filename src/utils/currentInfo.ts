@@ -73,8 +73,8 @@ export const getDriverStyle = (id: string): CurrTeamStyles => {
         default:
             return {
                 team: 'NA',
-                primary: '#EF435C',
-                secondary: '#2E2E2E'
+                primary: '#ff425c',
+                secondary: '#2D2D2D'
             };
     }
 };
