@@ -1,8 +1,10 @@
 import { CurrTeamStyles } from "../types";
 
-export const patchId = (id: string, firstName: string): string => {
+export const patchId = (id: string, firstName: string | null): string => {
     if(id === "mclaren" && firstName ) return "";
     else if(id === "ferrari" && firstName ) return "";
+    else if(id === "williams" && firstName ) return "";
+    else if(id === "stewart" && firstName ) return "";
     else return id;
 };
  

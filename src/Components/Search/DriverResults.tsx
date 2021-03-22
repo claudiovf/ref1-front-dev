@@ -1,14 +1,15 @@
 
 import { useQuery } from '@apollo/client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { GET_DRIVER_RESULTS } from '../../queries';
 import { RootState } from '../../store';
 import { setCurrResults, setPrevResults, setSearch, toggleOpen } from '../../store/actions';
-import { SearchState, TeamNameId} from '../../store/searchTypes';
+import { SearchState } from '../../store/searchTypes';
 import { Driver } from '../../types';
 import { getDriverStyle, patchId } from '../../utils/currentInfo';
+import { getPeriod, resultItemStyle, splitStat } from '../../utils/formatting';
 import Spinner from '../Common/Spinner';
 import { SelectionButton, Spacer, StyledLink } from '../LayoutComponents';
 
@@ -26,7 +27,7 @@ const Tbody = styled.tbody`
 
 const Th = styled.th`
     font-family: "Work Sans Semi Bold";
-    color: #bfc8c9;
+    color: #2F2f2f;
     padding: 0.25rem 0;
     font-size: 0.75rem;
 `;
@@ -46,6 +47,12 @@ const Tr = styled.tr`
     }
      ${Th}:nth-child(1) {
          color: #FFFFFF;
+    }
+     ${Th}:nth-child(4) {
+         color: #BEBEBE;
+    }
+     ${Td}:nth-child(4) {
+        color: #BEBEBE;
     }
     
 `;
@@ -90,19 +97,10 @@ const ResultLink = styled(StyledLink)`
 
 
 const DriverResults: React.FC = () => {
+    const [ hasNextPage, setHasNextPage ] = useState<boolean>(false);
     const search: SearchState = useSelector((state: RootState) => state.search);
     const dispatch = useDispatch();
 
-    const getPeriod = (statePeriod: TeamNameId | string): string => 
-        typeof statePeriod === "string" 
-            ? statePeriod === "All Time" ? "Career" : statePeriod 
-            : statePeriod.constructorId;
-
-    const splitStat = (stateStat: string): { stat: string; isPct: boolean; } => {
-        const split = stateStat.split("_");
-        if (split.length === 1 ) return { stat: stateStat, isPct: false};
-        else return { stat: split[0], isPct: true };
-    };
 
     const closeSearch = () => {
         dispatch( setSearch({}) );
@@ -125,8 +123,17 @@ const DriverResults: React.FC = () => {
         
   useEffect(() => {
       if ( data ) {
-          dispatch(setCurrResults(data.findDriverResults));
-
+          
+        if ( data.findDriverResults.length === 26 ) {
+            let spliced: Driver[] = [];
+            spliced = spliced.concat(data.findDriverResults);
+            spliced.splice(-1, 1);
+            dispatch(setCurrResults(spliced));
+            setHasNextPage(true);
+        } else {
+            dispatch(setCurrResults(data.findDriverResults));
+            setHasNextPage(false);
+        }
       }
   }, [data]);
 
@@ -153,13 +160,9 @@ const DriverResults: React.FC = () => {
                                     onClick={() => closeSearch()}>
                                     <OptionsButton 
                                         selected={true}
-                                        bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
-                                            ? "#e4eced" 
-                                            : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
-                                        color={getDriverStyle(driver.driverId).secondary}
-                                        border={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
-                                        ? "#e4eced" 
-                                        : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                        bg={resultItemStyle(driver.driverId, driver.givenName)}
+                                        color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
+                                        border={resultItemStyle(driver.driverId, driver.givenName)}
                                         >
                                             {driver.givenName} {driver.familyName}
                                     </OptionsButton>
@@ -188,13 +191,9 @@ const DriverResults: React.FC = () => {
                                                 onClick={() => closeSearch()}>
                                                 <OptionsButton 
                                                     selected={true}
-                                                    bg={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
-                                                    ? "#e4eced" 
-                                                    : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                                    bg={resultItemStyle(driver.driverId, driver.givenName)}
                                                     color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
-                                                    border={getDriverStyle(patchId(driver.driverId, driver.givenName)).team === "NA" 
-                                                    ? "#e4eced" 
-                                                    : getDriverStyle(patchId(driver.driverId, driver.givenName)).primary}
+                                                    border={resultItemStyle(driver.driverId, driver.givenName)}
                                                     >
                                                         {driver.givenName} {driver.familyName}
                                                 </OptionsButton>
@@ -216,7 +215,7 @@ const DriverResults: React.FC = () => {
             <CloseContainer>
                 {loading && search.prevResults.length !== 0 
                     ? <> <Spinner /> </> 
-                    : search.currResults.length === 25 
+                    : hasNextPage 
                         ?<OptionsButton
                             selected={false}
                             bg={"#FFF"}
