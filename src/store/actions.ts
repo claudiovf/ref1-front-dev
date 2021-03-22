@@ -1,7 +1,7 @@
-import { Driver } from '../types';
 import { Search, TeamNameId,
     SET_SEARCH, TOGGLE_OPEN, SET_TEAM_NAMES,
-    SetSearchAction, ToggleOpenAction, SetTeamNamesAction, SetCurrResults, SetPrevResults, SET_CURR_RESULTS, SET_PREV_RESULTS
+    SetSearchAction, ToggleOpenAction, SetTeamNamesAction, SetCurrResults, SetPrevResults, 
+    SET_CURR_RESULTS, SET_PREV_RESULTS, Results
 } from './searchTypes';
 
 export const setSearch = (newSearch: Search): SetSearchAction => {
@@ -24,14 +24,14 @@ export const setTeamNames = (nameList: TeamNameId[]): SetTeamNamesAction => {
     };
 };
 
-export const setCurrResults = (currList: Driver[]): SetCurrResults => {
+export const setCurrResults = (currList: Results[]): SetCurrResults => {
     return {
         type: SET_CURR_RESULTS,
         payload: currList
     };
 };
 
-export const setPrevResults = (prevList: Driver[]): SetPrevResults => {
+export const setPrevResults = (prevList: Results[]): SetPrevResults => {
     return {
         type: SET_PREV_RESULTS,
         payload: prevList

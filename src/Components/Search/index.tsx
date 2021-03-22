@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { Title } from '../LayoutComponents';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
-import { setSearch, toggleOpen, setTeamNames } from '../../store/actions';
+import { setSearch, toggleOpen, setTeamNames, setCurrResults, setPrevResults } from '../../store/actions';
 import FilterBy from './FilterBy';
 import SortBy from './SortBy';
 import ResutsFor from './ResultsFor';
@@ -12,6 +12,7 @@ import { useQuery } from '@apollo/client';
 import { GET_TEAM_NAMES } from '../../queries';
 import { Team } from '../../types';
 import DriverResults from './DriverResults';
+import TeamResults from './TeamResults';
 
 const overlayAnimation = keyframes`
     0% { opacity: 0;}
@@ -124,12 +125,13 @@ const SearchModal: React.FC = () => {
         setClosing(true);
         setTimeout(() => {
             dispatch( setSearch({}) );
+            dispatch( setCurrResults([]) );
+            dispatch( setPrevResults([]) );
             dispatch( toggleOpen() );
             setClosing(false);
         }, 600);
     };
 
-    
     if (search.isOpen) {
         return (
                 <Overlay overlayClosing={closing}>
@@ -145,10 +147,20 @@ const SearchModal: React.FC = () => {
                             <FilterBy />
                             {
                                 search.selections.resultsFor 
+                                && search.selections.resultsFor === "drivers"
                                 && search.selections.sortBy
                                 && search.selections.filterBy
                                 && search.selections.period
                                     ? <DriverResults />
+                                    : null
+                            }
+                            {
+                                search.selections.resultsFor 
+                                && search.selections.resultsFor === "teams"
+                                && search.selections.sortBy
+                                && search.selections.filterBy
+                                && search.selections.period
+                                    ? <TeamResults />
                                     : null
                             }
                         </ModalOverflow>

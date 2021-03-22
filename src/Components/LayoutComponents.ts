@@ -53,7 +53,7 @@ export const Title = styled.div`
     text-align: left;
     color: #2F2F2F;
     font-family: "Work Sans Bold";
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     padding: 1.25rem;
     padding-bottom: 0.25rem;
 `;

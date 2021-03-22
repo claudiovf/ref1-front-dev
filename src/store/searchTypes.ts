@@ -1,4 +1,4 @@
-import { Driver } from "../types";
+import { Driver, Team } from "../types";
 
 export interface TeamNameId {
     name: string;
@@ -12,13 +12,14 @@ export interface Search {
     period?: TeamNameId | string;
 }
 
+export type Results = Driver | Team;
 
 export interface SearchState {
     selections: Search;
     isOpen: boolean;
     teamNames: TeamNameId[];
-    currResults: Driver[];
-    prevResults: Driver[];
+    currResults: Results[];
+    prevResults: Results[];
 }
 
 export const SET_SEARCH = 'SET_SEARCH';
@@ -43,11 +44,11 @@ export interface SetTeamNamesAction {
 
 export interface SetCurrResults {
     type: typeof SET_CURR_RESULTS
-    payload: Driver[]
+    payload: Results[]
 }
 export interface SetPrevResults {
     type: typeof SET_PREV_RESULTS
-    payload: Driver[]
+    payload: Results[]
 }
 
 export type ActionTypes = SetSearchAction | ToggleOpenAction | SetTeamNamesAction | SetCurrResults | SetPrevResults;

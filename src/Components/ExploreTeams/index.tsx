@@ -8,7 +8,7 @@ import { Section, Title, Scroll, popOutAnimation } from '../LayoutComponents';
 
 const SearchCard = styled.div`
     font-family: "Work Sans Bold";
-    background-color: #262a4d;
+    background-color: #446df6;
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -34,7 +34,7 @@ const StatTitle = styled.div`
     color: #FFFFFF;
 `;
 
-const TeamWinners: React.FC = () => {
+const ExploreTeams: React.FC = () => {
 
     const stats = [
         'wins', 'podiums', 'pointsFinish', 'dnfs', 
@@ -46,15 +46,15 @@ const TeamWinners: React.FC = () => {
     return (
         <React.Fragment>
             <Section>  
-                <Title>Explore Drivers</Title>
+                <Title>Explore Teams</Title>
                 <Scroll>
                     {
                         stats.map(stat => 
                             <SearchCard 
-                                key={stat}
+                                key={stat + "1"}
                                 onClick={() => {
                                     dispatch( setSearch({
-                                        resultsFor: "drivers",
+                                        resultsFor: "teams",
                                         sortBy: stat,
                                         filterBy: "All Time",
                                         period: "All Time"
@@ -62,7 +62,7 @@ const TeamWinners: React.FC = () => {
                                     dispatch( toggleOpen() );
                                 }}
                                 >
-                                    <StatDescription>Career</StatDescription>
+                                    <StatDescription>All Time</StatDescription>
                                     <StatTitle>{formattedStat(stat)}</StatTitle>
                             </SearchCard>)
                     }
@@ -72,4 +72,4 @@ const TeamWinners: React.FC = () => {
     );
 };
 
-export default TeamWinners;
+export default ExploreTeams;

@@ -177,6 +177,27 @@ export const GET_DRIVER_RESULTS = gql`
         }
     }
 `;
+export const GET_TEAM_RESULTS = gql`
+    query getResults($period: String!, $stat: String!, $skip: Int!, $pct: Boolean!){
+        getTeamSearchResults(
+            period: $period
+            stat: $stat
+            skip: $skip
+            pct: $pct
+        ) {
+            constructorId
+            name
+            entries{
+                entries
+                stats {
+                    stat
+                    total
+                    pct
+                }
+            }
+        }
+    }
+`;
 
 // {
 //     givenName

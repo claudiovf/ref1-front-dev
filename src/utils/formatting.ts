@@ -23,7 +23,7 @@ export const splitStat = (stateStat: string): { stat: string; isPct: boolean; } 
     else return { stat: split[0], isPct: true };
 };
 
-export const resultItemStyle = (id: string, givenName: string): string => {
+export const resultItemStyle = (id: string, givenName: string | null): string => {
     return getDriverStyle(patchId(id, givenName)).team === "NA" 
     ? "#e4eced" 
     : getDriverStyle(patchId(id, givenName)).primary;

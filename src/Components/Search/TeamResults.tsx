@@ -3,11 +3,11 @@ import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { GET_DRIVER_RESULTS } from '../../queries';
+import { GET_TEAM_RESULTS } from '../../queries';
 import { RootState } from '../../store';
 import { setCurrResults, setPrevResults, setSearch, toggleOpen } from '../../store/actions';
 import { SearchState } from '../../store/searchTypes';
-import { Driver } from '../../types';
+import { Team } from '../../types';
 import { getDriverStyle, patchId } from '../../utils/currentInfo';
 import { getPeriod, resultItemStyle, splitStat } from '../../utils/formatting';
 import Spinner from '../Common/Spinner';
@@ -96,7 +96,7 @@ const ResultLink = styled(StyledLink)`
 
 
 
-const DriverResults: React.FC = () => {
+const TeamsResults: React.FC = () => {
     const [ hasNextPage, setHasNextPage ] = useState<boolean>(false);
     const search: SearchState = useSelector((state: RootState) => state.search);
     const dispatch = useDispatch();
@@ -113,7 +113,7 @@ const DriverResults: React.FC = () => {
     
     if (!search.selections.period || !search.selections.sortBy ) return null;
 
-    const { loading, data } = useQuery<{ findDriverResults: Driver[] }>(GET_DRIVER_RESULTS,
+    const { loading, data } = useQuery<{ getTeamSearchResults: Team[] }>(GET_TEAM_RESULTS,
         { variables: {
             "period": getPeriod(search.selections.period),
             "stat": splitStat(search.selections.sortBy).stat,
@@ -124,14 +124,14 @@ const DriverResults: React.FC = () => {
   useEffect(() => {
       if ( data ) {
           
-        if ( data.findDriverResults.length === 26 ) {
-            let spliced: Driver[] = [];
-            spliced = spliced.concat(data.findDriverResults);
+        if ( data.getTeamSearchResults.length === 26 ) {
+            let spliced: Team[] = [];
+            spliced = spliced.concat(data.getTeamSearchResults);
             spliced.splice(-1, 1);
             dispatch(setCurrResults(spliced));
             setHasNextPage(true);
         } else {
-            dispatch(setCurrResults(data.findDriverResults));
+            dispatch(setCurrResults(data.getTeamSearchResults));
             setHasNextPage(false);
         }
       }
@@ -151,20 +151,20 @@ const DriverResults: React.FC = () => {
                         <Th>{splitStat(search.selections.sortBy).isPct ? "%" : "Total" }</Th>
                         <Th>Entries</Th>
                     </Tr>
-                    {(search.prevResults as Array<Driver>).map(driver => <Tr key={driver.driverId}>
-                        <Td><Rank>{search.prevResults.indexOf(driver) + 1}</Rank></Td>
+                    {(search.prevResults as Array<Team>).map(team => <Tr key={team.constructorId}>
+                        <Td><Rank>{search.prevResults.indexOf(team) + 1}</Rank></Td>
                         <Td>
                             <TableCell>
                                 <ResultLink 
-                                    to={"/profile/driver/" + driver.driverId} 
+                                    to={"/profile/team/" + team.constructorId} 
                                     onClick={() => closeSearch()}>
                                     <OptionsButton 
                                         selected={true}
-                                        bg={resultItemStyle(driver.driverId, driver.givenName)}
-                                        color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
-                                        border={resultItemStyle(driver.driverId, driver.givenName)}
+                                        bg={resultItemStyle(team.constructorId, null)}
+                                        color={getDriverStyle(patchId(team.constructorId, null)).secondary}
+                                        border={resultItemStyle(team.constructorId, null)}
                                         >
-                                            {driver.givenName} {driver.familyName}
+                                            {team.name}
                                     </OptionsButton>
                                 </ResultLink>
                             </TableCell>
@@ -172,30 +172,30 @@ const DriverResults: React.FC = () => {
                         <Td>{
                             search.selections.sortBy 
                             ? splitStat(search.selections.sortBy).isPct 
-                                ? driver.entries[0].stats[0].pct.toFixed(2) 
-                                : driver.entries[0].stats[0].total
+                                ? team.entries[0].stats[0].pct.toFixed(2) 
+                                : team.entries[0].stats[0].total
                             : null
                         }</Td>
-                        <Td>{driver.entries[0].entries}</Td>
+                        <Td>{team.entries[0].entries}</Td>
                     </Tr>)}
                     
                     {loading && search.prevResults.length !== 0
                         ? null
-                        : (search.currResults as Array<Driver>).map(driver => 
-                            <Tr key={driver.driverId + `1`} >
-                                    <Td><Rank>{search.currResults.indexOf(driver) + search.prevResults.length + 1}</Rank></Td>
+                        : (search.currResults as Array<Team>).map(team => 
+                            <Tr key={team.constructorId + `1`} >
+                                    <Td><Rank>{search.currResults.indexOf(team) + search.prevResults.length + 1}</Rank></Td>
                                     <Td>
                                         <TableCell>
                                             <ResultLink 
-                                                to={"/profile/driver/" + driver.driverId}
+                                                to={"/profile/team/" + team.constructorId}
                                                 onClick={() => closeSearch()}>
                                                 <OptionsButton 
                                                     selected={true}
-                                                    bg={resultItemStyle(driver.driverId, driver.givenName)}
-                                                    color={getDriverStyle(patchId(driver.driverId, driver.givenName)).secondary}
-                                                    border={resultItemStyle(driver.driverId, driver.givenName)}
+                                                    bg={resultItemStyle(team.constructorId, null)}
+                                                    color={getDriverStyle(patchId(team.constructorId, null)).secondary}
+                                                    border={resultItemStyle(team.constructorId, null)}
                                                     >
-                                                        {driver.givenName} {driver.familyName}
+                                                        {team.name} 
                                                 </OptionsButton>
                                             </ResultLink>
                                         </TableCell>
@@ -203,11 +203,11 @@ const DriverResults: React.FC = () => {
                                     <Td>{
                                         search.selections.sortBy 
                                         ? splitStat(search.selections.sortBy).isPct 
-                                            ? driver.entries[0].stats[0].pct.toFixed(2) 
-                                            : driver.entries[0].stats[0].total
+                                            ? team.entries[0].stats[0].pct.toFixed(2) 
+                                            : team.entries[0].stats[0].total
                                         : null
                                     }</Td>
-                                    <Td>{driver.entries[0].entries}</Td>
+                                    <Td>{team.entries[0].entries}</Td>
                             </Tr>)}
                 </Tbody>
             </Table>
@@ -234,4 +234,4 @@ const DriverResults: React.FC = () => {
     
 };
 
-export default DriverResults;
+export default TeamsResults;

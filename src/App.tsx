@@ -10,7 +10,8 @@ import TeamProfile from './Components/TeamProfile';
 import LegendsPanel from './Components/LegendsPanel';
 import SkySportsPanel from './Components/SkySportsPanel';
 import SearchModal from './Components/Search';
-import TeamWinners from './Components/TeamWinners';
+import ExploreDrivers from './Components/ExploreDrivers';
+import ExploreTeams from './Components/ExploreTeams';
 
 
 
@@ -25,7 +26,8 @@ const App: React.FC = () => {
           <CurrentDriversPanel />
           <CurrentTeamsPanel />
           <LegendsPanel />
-          <TeamWinners />
+          <ExploreDrivers />
+          <ExploreTeams />
           <SkySportsPanel />
         </Route>
         <Route exact path="/profile/driver/:driverId">
