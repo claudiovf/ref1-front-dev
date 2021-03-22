@@ -16,7 +16,7 @@ const SortBy: React.FC = () => {
         "wins", "wins_pct", 
         "podiums",  "podiums_pct", 
         "pointsFinish", "pointsFinish_pct",
-        "dnfs", "dnfs_pct"
+        "dnfs"
     ];
 
     const filterStats = (statArr: string[]): string[] => {
