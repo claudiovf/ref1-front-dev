@@ -117,9 +117,14 @@ const SelectionButtonRight = styled(SelectionButton)`
     margin-bottom: 2rem;
     width: auto;
     max-width: 70vw;
+    min-height: 3rem;
     white-space: normal;
     animation-name: ${slideUpAnimation};
     animation-duration: 0.4s;
+`;
+
+const PeriodSpan = styled.span`
+    white-space: nowrap;
 `;
 
 interface Props {
@@ -185,7 +190,11 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                                 setOverlay(false);
                                 dispatch( toggleOpen() );
                             }}>
-                                {` ${formattedStat(s.stat)} by ${formattedPeriod(type)} - ${formattedPeriod(period)}`}
+                                {` ${formattedStat(s.stat)} 
+                                by ${formattedPeriod(type)} 
+                                - `}<PeriodSpan> 
+                                        {type === "teams" && formattedPeriod(period) === "Career" ? "All Time" : formattedPeriod(period)}
+                                    </PeriodSpan>
                         </SelectionButtonRight>
                         { s.stat !== "dnfs" && s.total !== 0
                             ? <SelectionButtonRight 
@@ -207,7 +216,9 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                                     ${formattedStat(s.stat).split(" ")[1]} 
                                     ${formattedStat(s.stat).split(" ")[2] ? formattedStat(s.stat).split(" ")[2]: ""} 
                                     by ${formattedPeriod(type)}
-                                    - ${formattedPeriod(period)}`}
+                                    - `}<PeriodSpan> 
+                                        {type === "teams" && formattedPeriod(period) === "Career" ? "All Time" : formattedPeriod(period)}
+                                    </PeriodSpan>
                         </SelectionButtonRight>
                         : null}
                     </NextSearchContainer>
@@ -296,7 +307,11 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                                 setOverlay(false);
                                 dispatch( toggleOpen() );
                             }}>
-                                {` ${formattedStat(s.stat)} by ${formattedPeriod(type)} - ${formattedPeriod(period)}`}
+                                {` ${formattedStat(s.stat)} 
+                                by ${formattedPeriod(type)} 
+                                - `}<PeriodSpan> 
+                                        {type === "teams" && formattedPeriod(period) === "Career" ? "All Time" : formattedPeriod(period)}
+                                    </PeriodSpan>
                         </SelectionButtonRight>
                         { s.stat !== "dnfs" 
                             ? <SelectionButtonRight 
@@ -318,7 +333,9 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                                     ${formattedStat(s.stat).split(" ")[1]} 
                                     ${formattedStat(s.stat).split(" ")[2] ? formattedStat(s.stat).split(" ")[2]: ""} 
                                     by ${formattedPeriod(type)}
-                                    - ${formattedPeriod(period)}`}
+                                    - `}<PeriodSpan> 
+                                        {type === "teams" && formattedPeriod(period) === "Career" ? "All Time" : formattedPeriod(period)}
+                                    </PeriodSpan>
                         </SelectionButtonRight>
                         : null}
                     </NextSearchContainer>

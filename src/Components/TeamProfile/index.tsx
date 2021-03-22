@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { Team } from '../../types';
-import { BackHome, Period, StyledLink, ProfileContainer, Spacer } from '../LayoutComponents';
+import { BackHome, StyledLink, ProfileContainer, Spacer } from '../LayoutComponents';
 import Spinner from '../Common/Spinner';
 
 import TeamStatSection from './StatSection/TeamStatSection';
@@ -45,7 +45,6 @@ const TeamProfile: React.FC = () => {
                 <StyledLink to="/">
                     <BackHome>
                         &larr;&nbsp;&nbsp;{team.name}
-                        <Period>/{period}</Period>
                     </BackHome>
                 </StyledLink>
                 <TeamInfo team={team} />
