@@ -85,8 +85,8 @@ const MagButton = styled(SelectionButton)`
     min-height: 3rem;
     min-width: 3rem;
     margin: 1rem;
-    padding: 0.5 rem 1rem;
-    font-size: 1rem;
+    padding: 0 1rem;
+    font-size: 0.75rem;
 `;
 
 const Mag = styled.div`
@@ -94,6 +94,8 @@ const Mag = styled.div`
   -moz-transform: rotate(45deg); 
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
+  height: auto;
+  font-size: 1.5rem;
 `;
 
 
@@ -114,7 +116,7 @@ const SelectionButtonRight = styled(SelectionButton)`
     text-align: right;
     margin-bottom: 2rem;
     width: auto;
-    max-width: 75vw;
+    max-width: 70vw;
     white-space: normal;
     animation-name: ${slideUpAnimation};
     animation-duration: 0.4s;
@@ -145,7 +147,75 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                     </InfoRow>
             
                 </InfoBox>
+                {!overlay
+                ?<MagButton 
+                    selected={true}
+                    bg={"#ff425c"}
+                    border={"#ff425c"}
+                    color={"#FFFFFF"}
+                    onClick={() => setOverlay(true)}>
+                        <Mag>&#9906;</Mag>
+                    </MagButton>
+                :null
+            }
+            {overlay
+                ? <CardOverlay rad={rad} darkOverlay={isDark(s.stat)}>
+                    <MagButton 
+                        selected={true}
+                        bg={"#ff425c"}
+                        border={"#ff425c"}
+                        color={"#FFFFFF"}
+                        onClick={() => setOverlay(false)}>
+                            Close &#x2715;
+                    </MagButton>
+                    <NextSearchContainer>
+                        <SelectionButtonRight 
+                            selected={true}
+                            bg={"#ff425c"}
+                            border={"#ff425c"}
+                            color={"#FFFFFF"}
+                            onClick={() => {
+                                
+                                dispatch( setSearch({
+                                    resultsFor: type,
+                                    sortBy: s.stat,
+                                    filterBy: period === "Career" ? "All Time" : isNaN(Number(period)) ? "Team" : "Season",
+                                    period: period === "Career" ? "All Time" : period
+                                }) );
+                                setOverlay(false);
+                                dispatch( toggleOpen() );
+                            }}>
+                                {` ${formattedStat(s.stat)} by ${formattedPeriod(type)} - ${formattedPeriod(period)}`}
+                        </SelectionButtonRight>
+                        { s.stat !== "dnfs" && s.total !== 0
+                            ? <SelectionButtonRight 
+                            selected={true}
+                            bg={"#ff425c"}
+                            border={"#ff425c"}
+                            color={"#FFFFFF"}
+                            onClick={() => {
+                                dispatch( setSearch({
+                                    resultsFor: type,
+                                    sortBy: `${s.stat}_pct`,
+                                    filterBy: period === "Career" ? "All Time" : isNaN(Number(period)) ? "Team" : "Season",
+                                    period: period === "Career" ? "All Time" : period
+                                }) );
+                                setOverlay(false);
+                                dispatch( toggleOpen() );
+                            }}>
+                                % {` 
+                                    ${formattedStat(s.stat).split(" ")[1]} 
+                                    ${formattedStat(s.stat).split(" ")[2] ? formattedStat(s.stat).split(" ")[2]: ""} 
+                                    by ${formattedPeriod(type)}
+                                    - ${formattedPeriod(period)}`}
+                        </SelectionButtonRight>
+                        : null}
+                    </NextSearchContainer>
+                </CardOverlay>
+                : null
+            }
             </StatCardStyle>
+            
         );
     }
     return (
@@ -207,7 +277,7 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                         border={"#ff425c"}
                         color={"#FFFFFF"}
                         onClick={() => setOverlay(false)}>
-                            &#x2715;
+                            Close &#x2715;
                     </MagButton>
                     <NextSearchContainer>
                         <SelectionButtonRight 
