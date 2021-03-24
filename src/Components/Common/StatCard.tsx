@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Stat } from '../../types';
 import { InfoRow, InfoBox, Icon } from '../LayoutComponents';
-import { formattedDate, formattedPeriod } from '../../utils/formatting';
+import { formattedDate, formattedPeriod, isDark } from '../../utils/formatting';
 import NextSearchOverlay from './NextSearchOverlay';
 
-
-const isDark = (stat: string): boolean => {
-    if ( stat === "wins" || stat === "pointsFinish") return false;
-    else return true;
-};
 
 const StatCardStyle = styled.div<{ dark: boolean, rad: string }>`
     background-color: ${props => props.dark ? '#2F2F2F' : '#FFFFFF'};
@@ -78,6 +73,7 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
 
     const handleOverlay = (bool: boolean) => setOverlay(bool);
 
+
     return (
         <StatCardStyle dark={isDark(s.stat)} rad={rad}>
             <InfoBox>
@@ -94,8 +90,6 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                         <StatLabel>{formattedPeriod(s.stat)}</StatLabel>
                     </InfoBox>
                 </InfoRow>
-            { s.total !== 0 
-            ? <>
                 <InfoRow>
                 <Icon>&#10066;</Icon>
                     <InfoBox>
@@ -103,6 +97,8 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                         <StatLabel>{`${formattedPeriod(s.stat)}/Entries`}</StatLabel>
                     </InfoBox>
                 </InfoRow>
+                { s.total !== 0 
+                ? <>
                 <InfoRow>
                     <Icon>&#10066;</Icon>
                     <InfoBox>
@@ -123,7 +119,7 @@ const StatCard: React.FC<Props> = ({s, rad, period, type}: Props) => {
                 : null }
             </InfoBox>
             <NextSearchOverlay 
-                    s={s}
+                    stats={[s.stat]}
                     rad={rad}
                     period={period}
                     type={type}
