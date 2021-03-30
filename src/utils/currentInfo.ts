@@ -50,8 +50,8 @@ export const getDriverStyle = (id: string): CurrTeamStyles => {
         case id === 'ocon' || id === 'alonso' || id === 'alpine':
             return {
                 team: 'Alpine F1 Team',
-                primary: '#2862d1',
-                secondary: '#ff0048'
+                primary: '#0090FF',
+                secondary: '#FFFFFF'
             };
         case id === 'raikkonen' || id === 'giovinazzi' || id === 'alfa':
             return {
