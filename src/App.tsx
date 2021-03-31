@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import './Fonts.css';
 import Header from './Components/Header';
 import CurrentDriversPanel from './Components/CurrentDriversPanel';
 import CurrentTeamsPanel from './Components/CurrentTeamsPanel';
