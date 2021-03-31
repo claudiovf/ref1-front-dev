@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import './Fonts.css';
 import Header from './Components/Header';
 import CurrentDriversPanel from './Components/CurrentDriversPanel';
 import CurrentTeamsPanel from './Components/CurrentTeamsPanel';
 import DriverProfile from './Components/DriverProfile';
 import { Switch, Route } from 'react-router-dom';
-import { Spacer, Fonts } from './Components/LayoutComponents';
+import { Spacer } from './Components/LayoutComponents';
 import TeamProfile from './Components/TeamProfile';
 import LegendsPanel from './Components/LegendsPanel';
 import SkySportsPanel from './Components/SkySportsPanel';
@@ -24,7 +25,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Fonts />
+
       <Header />
       <Switch>
         <Route exact path="/">
