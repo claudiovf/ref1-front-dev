@@ -15,12 +15,17 @@ import ExploreTeams from './Components/ExploreTeams';
 import Standings from './Components/Standings';
 import ReactGA from 'react-ga';
 import RouteTracker from './RouteTracker';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
+import { SearchState } from './store/searchTypes';
 
 
 const App: React.FC = () => {
+  const search: SearchState = useSelector((state: RootState) => state.search);
 
   const TRACKING_ID = "UA-192952368-1";
   ReactGA.initialize(TRACKING_ID);
+  
 
   return (
     <div className="App">
@@ -33,7 +38,7 @@ const App: React.FC = () => {
           <Standings />
           <ExploreDrivers />
           <LegendsPanel />
-          <ExploreTeams />
+          <ExploreTeams /> 
           <SkySportsPanel />
         </Route>
         <Route exact path="/profile/driver/:driverId">
@@ -46,7 +51,10 @@ const App: React.FC = () => {
         </Route>
       </Switch>
 
-      <SearchModal />
+      { search.isOpen 
+        ? <SearchModal />
+        : null
+      }
       <RouteTracker />
 
     </div>
