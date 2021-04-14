@@ -113,6 +113,7 @@ const Notif = styled.div`
     font-family: "Work Sans Semi Bold";
     color: #FFF;
     font-size: 0.5rem;
+    margin: 0.5rem 0;
 `;
 
 
@@ -142,7 +143,7 @@ const Weather: React.FC<Props> = ({nextRaceLoc, raceTime}: Props) => {
         }
     }, [raceWeather, nextRaceLoc]);
 
-    if (handleCountdown(raceTime).days > 7 ) return <Notif>*Weather forecast is displayed when race is within 7 days</Notif>;
+    if (handleCountdown(raceTime).days > 7 ) return <Notif>*Weather forecast is available during race week</Notif>;
 
 
     const lat = nextRaceLoc.lat;
