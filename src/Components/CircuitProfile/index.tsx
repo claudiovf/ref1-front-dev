@@ -4,16 +4,29 @@ import { useParams } from 'react-router-dom';
 import { CircuitType } from '../../types';
 import { BackHome, ProfileContainer, 
         Spacer, StyledLink, 
-        ProfileName, ProfileWrap, Label } from '../LayoutComponents';
+        ProfileName, ProfileWrap } from '../LayoutComponents';
 import Spinner from '../Common/Spinner';
 
 import { CIRCUIT_PROFILE } from '../../queries';
 import { getGP } from '../../utils/formatting';
 import styled from 'styled-components';
+import EventSchedule from './EventSchedule';
 
 const ProfileBody = styled(ProfileWrap)`
-    background-color: #00c49a;
+    background-color: #FFF;
     min-height: 100%;
+`;
+
+const RaceName = styled.div`
+    font-family: "Work Sans Semi Bold";
+    color: #828282;
+    font-size: 0.75rem;
+    margin: 0 1rem 1rem 1rem;
+    
+`;
+
+const ProfileGP = styled(ProfileName)`
+    padding: 2.5rem 0 0 0;
 `;
 
 const CircuitProfile: React.FC = () => {
@@ -34,7 +47,6 @@ const CircuitProfile: React.FC = () => {
     if ( loading ) return <> <Spacer /><Spinner /> </>;
 
     if ( !circuit ) return null;
-
     
     return (
         <React.Fragment>
@@ -46,9 +58,14 @@ const CircuitProfile: React.FC = () => {
                 </StyledLink>
                 <Spacer />
                 <ProfileBody>
-                    <Label>{circuit.raceName}</Label>
-                    <ProfileName color={"#FFF"} bg={"none"}>
-                        {getGP(circuit.circuitId).toUpperCase()} GP</ProfileName>
+                    <ProfileGP color={"#00c49a"} bg={"none"}>
+                        {getGP(circuit.circuitId).toUpperCase()} GP</ProfileGP>
+                    <RaceName>{circuit.raceName}</RaceName>
+                    
+                    <EventSchedule 
+                        scheduleTrack={circuit.scheduleTrack}
+                        scheduleUTC={circuit.scheduleUTC}    
+                    />
                 </ProfileBody>
             </ProfileContainer>
         </React.Fragment>
