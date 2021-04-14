@@ -108,7 +108,6 @@ export const ProfileContainer = styled.div`
     overflow:visible;
     @media (min-width: 768px) {
         background-color: #EdEDED;
-    
       }
 `;
 

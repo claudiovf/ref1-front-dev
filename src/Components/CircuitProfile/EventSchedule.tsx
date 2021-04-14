@@ -4,6 +4,14 @@ import { Schedule, DisplaySchedule } from '../../types';
 import { SectionTitle, Section, SelectionButton } from '../LayoutComponents';
 import { getLocalTimes, getTrackTimes } from '../../utils/formatting';
 
+const ScheduleSection = styled(Section)`
+    @media (min-width: 768px) {
+        width: 600px;
+        margin: 2rem 0 1rem 0;
+        justify-content: center;
+        align-items: center;
+    }
+`;
 const TitleRow = styled.div`
     padding: 0.75rem 1.25rem;
     display: flex;
@@ -13,6 +21,9 @@ const TitleRow = styled.div`
 const ScheduleTitle = styled(SectionTitle)`
     padding: 0.25rem 0;
     vertical-align: bottom;
+    @media (min-width: 768px) {
+        text-align: center;
+    }
 `;
 
 const TimeSelection = styled.div`
@@ -30,6 +41,11 @@ const ScheduleTable = styled.table`
     margin:  0 1.25rem;
     padding: 0.5rem 0.5rem 0.5rem 1.5rem;
     border-radius: 0.5rem;
+    @media (min-width: 768px) {
+        max-width: 600px;
+        min-width: 600px;
+        margin: 0;
+    }
 `;
 
 const Td = styled.td`
@@ -73,7 +89,7 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
 
 
     return (
-        <Section>
+        <ScheduleSection>
             <TitleRow>
                 <ScheduleTitle color={"#2f2f2f"}>Weekend Schedule</ScheduleTitle>
                 <TimeSelection>
@@ -128,7 +144,7 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
                     </Tr>
                 </tbody>
             </ScheduleTable>
-        </Section>
+        </ScheduleSection>
     );
 };
 

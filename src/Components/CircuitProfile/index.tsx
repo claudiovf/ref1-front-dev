@@ -15,6 +15,10 @@ import EventSchedule from './EventSchedule';
 const ProfileBody = styled(ProfileWrap)`
     background-color: #FFF;
     min-height: 100%;
+    @media (min-width: 768px) {
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const RaceName = styled.div`
@@ -27,6 +31,7 @@ const RaceName = styled.div`
 
 const ProfileGP = styled(ProfileName)`
     padding: 2.5rem 0 0 0;
+
 `;
 
 const CircuitProfile: React.FC = () => {
