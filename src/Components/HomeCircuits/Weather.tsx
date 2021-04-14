@@ -137,7 +137,7 @@ const Weather: React.FC<Props> = ({nextRaceLoc}: Props) => {
     const long = nextRaceLoc.long;
     
     const nextRaceDate = "2021-04-18";
-    const nextRaceTime= "2021-04-18 15:00";
+    const nextRaceTime= "2021-04-18 14:00";
 
 
 
@@ -161,7 +161,6 @@ const Weather: React.FC<Props> = ({nextRaceLoc}: Props) => {
                     };
     
                     setRaceWeather(raceForecast);
-                    console.log(raceForecast);
                     
                 }
             }

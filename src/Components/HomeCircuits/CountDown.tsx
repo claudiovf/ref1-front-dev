@@ -38,13 +38,14 @@ const CountDown: React.FC<Props> = ({nextRaceDate}: Props) => {
     const [secs, setSecs ] = useState<number>(0);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             const countDown = handleCountdown(nextRaceDate);
             setDays(countDown.days);
             setHours(countDown.hours);
             setMins(countDown.mins);
             setSecs(countDown.secs);
         });
+        return () => clearInterval(interval);
     }, [nextRaceDate]);
     
     
