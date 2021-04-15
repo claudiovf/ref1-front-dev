@@ -17,7 +17,7 @@ const TitleRow = styled.div`
 `;
 
 const ScheduleTitle = styled(SectionTitle)`
-    padding: 0.25rem 0 0.5rem 0;
+    padding: 0.25rem 0 0.75rem 0;
     vertical-align: bottom;
     text-align: center;
     font-size: 1.25rem;
