@@ -32,7 +32,7 @@ const Overlay = styled.div`
 `;
 
 const ModalContainer = styled.div<{ teams: boolean }>`
-    height: ${props => props.teams ? "82%" : "62vh"};
+    height: ${props => props.teams ? "78%" : "62vh"};
     padding-top: ${props => props.teams ? "0" : "5rem"};
     display: flex;
     flex-direction: column;
