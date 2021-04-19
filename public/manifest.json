@@ -2,7 +2,12 @@
     "short_name": "Ref1 App Dev",
     "name": "Ref1 App Dev",
     "icons": [
-   
+      {
+        "src": "/images/icon-192.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "any maskable"
+      },
       {
         "src": "/images/icon-512.png",
         "type": "image/png",
