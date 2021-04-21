@@ -12,13 +12,17 @@ import { getGP } from '../../utils/formatting';
 import styled from 'styled-components';
 import EventSchedule from './EventSchedule';
 import RaceInfo from './RaceInfo';
+import PreviousResults from './PreviousResults/PreviousResults';
 
 const ProfileBody = styled(ProfileWrap)`
     background-color: #FFF;
-    @media (min-width: 768px) {
-        justify-content: center;
-        align-items: center;
-    }
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
 `;
 
 const RaceName = styled.div`
@@ -66,7 +70,7 @@ const CircuitProfile: React.FC = () => {
     
     if ( loading ) return <> <Spacer /><Spinner /> </>;
 
-    if ( !circuit || !circuit.location ) return null;
+    if ( !circuit) return null;
     
     return (
         <React.Fragment>
@@ -82,7 +86,7 @@ const CircuitProfile: React.FC = () => {
                         {getGP(circuit.circuitId).toUpperCase()} GP</ProfileGP>
                     <RaceName>{circuit.raceName}</RaceName>
                     <CircuitName>{circuit.circuitName}</CircuitName>
-                    <Local>{circuit.location?.locality}, {circuit.location.country}</Local>
+                    <Local>{circuit.location?.locality}, {circuit.location?.country}</Local>
                     
                     <EventSchedule 
                         scheduleTrack={circuit.scheduleTrack}
@@ -91,6 +95,7 @@ const CircuitProfile: React.FC = () => {
                     <RaceInfo 
                         circuit={circuit}
                     />
+                    <PreviousResults />
                 </ProfileBody>
             </ProfileContainer>
         </React.Fragment>

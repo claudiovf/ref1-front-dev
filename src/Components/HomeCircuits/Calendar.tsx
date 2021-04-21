@@ -103,7 +103,9 @@ interface Props {
 
 const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
 
-    const { loading, data } = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_RACES);
+    const { loading, data } = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_RACES, {
+        fetchPolicy: "cache-and-network"
+    });
 
     
     const nextRef = useRef<HTMLDivElement | null>(null);
@@ -143,6 +145,7 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
     ];
 
     return (
+        <React.Fragment>
             <CalendarSection>  
                 <Scroll>
                     { data
@@ -155,38 +158,41 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
 
                         
                         return (
-                            <StyledLink to={"/profile/circuit/" + race.circuitId} key={race.circuitId}>
-                                <RaceCard 
-                                    ref ={race.circuitId === nextCircuit ? nextRef : null}
-                                >
-                                    <RaceName>
-                                        {getGP(race.circuitId)} GP
-                                    </RaceName>
-                                    <CircuitName>
-                                        {race.circuitName}
-                                    </CircuitName>
-                                    <RaceLocation>
-                                        {race.location?.locality}, {race.location?.country}
-                                    </RaceLocation>
-                                    <RaceDate>
-                                        { start.toDateString().substring(4, 10)}, { start.toLocaleTimeString().substring(0, 5)}
-                                    </RaceDate>
-                                    <SelectionButton 
-                                        color={"#FFF"} 
-                                        bg={"#00c49a"} 
-                                        border={"#00c49a"} 
-                                        selected={true}
+                            <React.Fragment key={race.circuitId}>
+                                <StyledLink to={"/profile/circuit/" + race.circuitId}>
+                                    <RaceCard 
+                                        ref ={race.circuitId === nextCircuit ? nextRef : null}
                                     >
-                                        View Event Info
-                                    </SelectionButton>
-                                </RaceCard> 
-                            </StyledLink>
+                                        <RaceName>
+                                            {getGP(race.circuitId)} GP
+                                        </RaceName>
+                                        <CircuitName>
+                                            {race.circuitName}
+                                        </CircuitName>
+                                        <RaceLocation>
+                                            {race.location?.locality}, {race.location?.country}
+                                        </RaceLocation>
+                                        <RaceDate>
+                                            { start.toDateString().substring(4, 10)}, { start.toLocaleTimeString().substring(0, 5)}
+                                        </RaceDate>
+                                        <SelectionButton 
+                                            color={"#FFF"} 
+                                            bg={"#00c49a"} 
+                                            border={"#00c49a"} 
+                                            selected={true}
+                                        >
+                                            View Event Info
+                                        </SelectionButton>
+                                    </RaceCard> 
+                                </StyledLink>
+                            </React.Fragment>
                         );
                     })
                          : null 
                     }
                 </Scroll>
             </CalendarSection> 
+        </React.Fragment>
     );
 };
 

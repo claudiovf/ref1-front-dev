@@ -219,13 +219,23 @@ export const GET_TEAM_RESULTS_MONGO = gql`
     }
 `;
 
+export const GET_PREVIOUS_EVENTS = gql`
+    query findCircuitEvents($circuitId: String!){
+        getPreviousEvents (
+            circuitId: $circuitId
+        ) {
+            round
+            season
+            date
+            raceName
+        }
+    }
+`;
+
 export const GET_NEXT_RACES = gql`
     query findingCircuit {
         findAllCircuits {
             circuitId
-            scheduleUTC {
-                race
-            }
             location {
                 country
                 locality

@@ -185,28 +185,30 @@ const Weather: React.FC<Props> = ({nextRaceLoc, raceTime}: Props) => {
     
 
     return (
-        <WeatherContainer>
-            <IconTextWrap>
-                <img src={process.env.PUBLIC_URL + `/${raceWeather.icon}`} />
-            </IconTextWrap>
-            <MeasureBox>
-            <WeatherTitle>RACE FORECAST</WeatherTitle>
-                <MeasuresWrap>
-                    <MeasureRow>
-                        <Value>{raceWeather.temp}&#176;</Value>
-                        <Description>Celcius</Description>
-                    </MeasureRow>
-                    <MeasureRow>
-                        <Value>{raceWeather.chance_of_rain}<Unit>%</Unit></Value> 
-                        <Description>Chance of rain</Description>
-                    </MeasureRow>
-                    <MeasureRow>
-                        <Value>{raceWeather.wind}<Unit>kph</Unit></Value>
-                        <Description>Wind speed</Description>
-                    </MeasureRow>
-                </MeasuresWrap>
-            </MeasureBox>
-        </WeatherContainer>
+        <React.Fragment>
+            <WeatherContainer>
+                <IconTextWrap>
+                    <img src={process.env.PUBLIC_URL + `/${raceWeather.icon}`} />
+                </IconTextWrap>
+                <MeasureBox>
+                <WeatherTitle>RACE FORECAST</WeatherTitle>
+                    <MeasuresWrap>
+                        <MeasureRow>
+                            <Value>{raceWeather.temp}&#176;</Value>
+                            <Description>Celcius</Description>
+                        </MeasureRow>
+                        <MeasureRow>
+                            <Value>{raceWeather.chance_of_rain}<Unit>%</Unit></Value> 
+                            <Description>Chance of rain</Description>
+                        </MeasureRow>
+                        <MeasureRow>
+                            <Value>{raceWeather.wind}<Unit>kph</Unit></Value>
+                            <Description>Wind speed</Description>
+                        </MeasureRow>
+                    </MeasuresWrap>
+                </MeasureBox>
+            </WeatherContainer>
+        </React.Fragment>
     );
 };
 

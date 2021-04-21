@@ -105,6 +105,7 @@ export const ProfileContainer = styled.div`
     animation-name: ${popOutAnimation};
     animation-duration: 1s;
     width: auto;
+    overscroll-behavior-y: contain;
     overflow:visible;
     @media (min-width: 768px) {
         background-color: #EdEDED;

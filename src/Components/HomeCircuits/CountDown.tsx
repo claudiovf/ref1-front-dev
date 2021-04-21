@@ -61,22 +61,24 @@ const CountDown: React.FC<Props> = ({nextRaceDate, handleTimeUp}: Props) => {
     
 
     return (
-        <Table>
-            <tbody>
-                <tr>
-                    <Th>{days.toString().padStart(2, "0")}</Th>
-                    <Th>{hours.toString().padStart(2, "0")}</Th>
-                    <Th>{mins.toString().padStart(2, "0")}</Th>
-                    <Th>{secs.toString().padStart(2, "0")}</Th>
-                </tr>
-                <tr>
-                    <Td>Days</Td>
-                    <Td>hours</Td>
-                    <Td>Mins</Td>
-                    <Td>Secs</Td>
-                </tr>
-            </tbody>
-        </Table>
+        <React.Fragment>
+            <Table>
+                <tbody>
+                    <tr>
+                        <Th>{days.toString().padStart(2, "0")}</Th>
+                        <Th>{hours.toString().padStart(2, "0")}</Th>
+                        <Th>{mins.toString().padStart(2, "0")}</Th>
+                        <Th>{secs.toString().padStart(2, "0")}</Th>
+                    </tr>
+                    <tr>
+                        <Td>Days</Td>
+                        <Td>hours</Td>
+                        <Td>Mins</Td>
+                        <Td>Secs</Td>
+                    </tr>
+                </tbody>
+            </Table>
+        </React.Fragment>
     );
 };
 
