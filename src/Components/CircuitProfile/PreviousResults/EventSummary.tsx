@@ -18,7 +18,10 @@ const SummaryWrap = styled.div`
     width: auto;
     height: auto;
     max-width: 100vw;
-    margin: 0.5rem 0.5rem 1.5rem 0.5rem;
+    margin: 0.5rem 0.5rem 2rem 0.5rem;
+    @media (min-width: 960px) {
+        margin: 0.5rem 0.5rem 2rem 0.5rem;
+      }
 `;
 const EventName = styled(SectionTitle)`
     padding: 0.25rem 0 0.25rem 0;

@@ -17,12 +17,16 @@ import PreviousResults from './PreviousResults/PreviousResults';
 const ProfileBody = styled(ProfileWrap)`
     background-color: #FFF;
     display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: auto;
-      overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    @media (min-width: 960px) {
+        width: 80%;
+        margin: 0 10% 0 10%;
+      }
 `;
 
 const RaceName = styled.div`

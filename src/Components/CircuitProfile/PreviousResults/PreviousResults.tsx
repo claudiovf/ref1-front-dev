@@ -25,8 +25,16 @@ const ResultsWrap = styled.div`
     margin: 1.25rem 0;
 `;
 
+const SectionCircuit = styled(Section)`
+    @media (min-width: 768px) {
+        margin:0;
+        max-width: 80%;
+    }
+`;
+
+
 const Title = styled(SectionTitle)`
-    padding: 0.25rem 0 0.25rem 0;
+    padding: 0.25rem 0 1rem 0;
     vertical-align: bottom;
     text-align: left;
     font-size: 1.25rem;
@@ -91,7 +99,7 @@ const PreviousResults: React.FC<Props> = ({circuitId}: Props) => {
             <Container>
                 <ResultsWrap>
                     <Title color={"#2f2f2f"}>Previous Results</Title>
-                    <Section>
+                    <SectionCircuit>
                         <Scroll>
                             {
                                 allEvents.map(race => 
@@ -118,7 +126,7 @@ const PreviousResults: React.FC<Props> = ({circuitId}: Props) => {
                                 )
                             }
                         </Scroll>
-                    </Section>
+                    </SectionCircuit>
                     {
                         displayEvent
                         ? <>

@@ -32,6 +32,12 @@ const Table = styled.table`
     text-align: left;
     font-size: 1rem;
     width: 100%;
+
+    @media (min-width: 768px) {
+        max-width: 600px;
+        min-width: 600px;
+        padding: 0;
+    }
 `;
 
 const TdName = styled.td`
@@ -40,7 +46,7 @@ const TdName = styled.td`
 const TdTeam = styled.td`
     font-size: 0.75rem;
     color: #828282;
-    padding-bottom: 0.75rem;
+    padding-bottom: 1.25rem;
 `;
 
 const Tr = styled.tr`
