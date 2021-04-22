@@ -47,19 +47,22 @@ const TdName = styled.td`
 const TdTeam = styled.td`
     font-size: 0.75rem;
     color: #00c49a;
-    padding: 0.5rem 0 1.5rem 0;
+    padding: 0.25rem 0 1.5rem 0;
 `;
 const StyledLinkDriver = styled(StyledLink)`
     color: #2f2f2f;
+    font-family: "Work Sans Bold";
 `;
 const StyledLinkTeam = styled(StyledLink)`
     color: #00c49a;
+    font-family: "Work Sans Bold";
 `;
 
 const Tr = styled.tr`
     td:first-child {
         width: 2rem;
         color: #2f2f2f;
+        font-family: "Work Sans Bold";
     }
     td:nth-child(3) {
         text-align: right;
