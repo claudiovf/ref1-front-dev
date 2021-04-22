@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { GET_EVENT_RESULTS } from '../../../queries';
 import { CircuitEvent, CircuitPos } from '../../../types';
 import Spinner from '../../Common/Spinner';
+import { StyledLink } from '../../LayoutComponents';
 
 const Container = styled.div`
     width: 100%;
@@ -45,8 +46,14 @@ const TdName = styled.td`
 `;
 const TdTeam = styled.td`
     font-size: 0.75rem;
-    color: #828282;
-    padding-bottom: 1.25rem;
+    color: #00c49a;
+    padding: 0.5rem 0 1.5rem 0;
+`;
+const StyledLinkDriver = styled(StyledLink)`
+    color: #2f2f2f;
+`;
+const StyledLinkTeam = styled(StyledLink)`
+    color: #00c49a;
 `;
 
 const Tr = styled.tr`
@@ -88,22 +95,28 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
             <Container>
                 <SummaryWrap>
                     <Table>
-                        <tbody>
                             {result?.map(pos =>
-                                <>
-                                    <Tr key={pos.position}>
+                                <tbody key={pos.position}>
+                                    <Tr>
                                         <td>{pos.position}</td>
-                                        <TdName>{pos.Driver.givenName} {pos.Driver.familyName}</TdName>
+                                        <TdName>
+                                            <StyledLinkDriver to={"/profile/driver/" + pos.Driver.driverId}>
+                                                {pos.Driver.givenName} {pos.Driver.familyName}
+                                            </StyledLinkDriver>    
+                                        </TdName>
                                         <td>{pos.Time ? pos.Time.time : pos.status}</td>
                                     </Tr>
                                     <Tr>
                                         <td></td>
-                                        <TdTeam>{pos.Constructor.name.toUpperCase()}</TdTeam>
+                                        <TdTeam>
+                                            <StyledLinkTeam to={"/profile/team/" + pos.Constructor.constructorId}>
+                                                {pos.Constructor.name.toUpperCase()}
+                                            </StyledLinkTeam>
+                                        </TdTeam>
                                         <td></td>
                                     </Tr>
-                                </>
+                                </tbody>
                             )}
-                        </tbody>
                     </Table>
  
                 </SummaryWrap>
