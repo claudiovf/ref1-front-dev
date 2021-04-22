@@ -232,6 +232,38 @@ export const GET_PREVIOUS_EVENTS = gql`
     }
 `;
 
+export const GET_EVENT_RESULTS = gql`
+    query findCircuitResult($season: String!, $round: String!){
+        getCircuitResults (
+            season: $season
+            round: $round
+        ) {
+            round
+            season
+            date
+            raceName
+            results {
+                grid
+                position
+                positionText
+                status
+                Time {
+                    time
+                }
+                Driver {
+                    givenName
+                    familyName
+                    driverId
+                }
+                Constructor {
+                    name
+                    constructorId
+                }
+            }
+        }
+    } 
+`;
+
 export const GET_NEXT_RACES = gql`
     query findingCircuit {
         findAllCircuits {

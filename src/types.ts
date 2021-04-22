@@ -271,6 +271,7 @@ export interface CircuitPos{
     position        : string;
     positionText    : string;
     status          : string;
+    Time            : { millis: string; time: string; }
     Driver          : DriverCircuit;
     Constructor     : TeamCircuit;
 }

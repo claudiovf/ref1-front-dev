@@ -95,7 +95,7 @@ const CircuitProfile: React.FC = () => {
                     <RaceInfo 
                         circuit={circuit}
                     />
-                    <PreviousResults />
+                    <PreviousResults circuitId={circuit.circuitId}/>
                 </ProfileBody>
             </ProfileContainer>
         </React.Fragment>
