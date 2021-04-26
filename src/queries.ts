@@ -276,6 +276,9 @@ export const GET_NEXT_RACES = gql`
             raceName  
             scheduleUTC {
                 practice_1
+                practice_2
+                practice_3
+                qualifying
                 race
             }     
         }
@@ -291,6 +294,10 @@ export const GET_NEXT_RACE = gql`
             raceName
 
             scheduleUTC {
+                practice_1
+                practice_2
+                practice_3
+                qualifying
                 race
             }
             location {

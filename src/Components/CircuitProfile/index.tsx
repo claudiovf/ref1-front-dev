@@ -42,12 +42,14 @@ const CircuitName = styled.div`
     color: #2f2f2f;
     font-size: 1rem;
     margin: 1rem 1rem 0 1rem;
+    white-space: nowrap;
 `;
 
 const Local = styled.div`
     font-family: "Work Sans Bold";
     font-size: 1rem;
     color: #00c49a;
+    white-space: nowrap;
 `;
 
 const ProfileGP = styled(ProfileName)`

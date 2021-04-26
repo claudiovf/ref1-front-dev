@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { GET_NEXT_RACES } from '../../queries';
 import { CircuitType } from '../../types';
-import { getGP } from '../../utils/formatting';
+import { getGP, getLocalTimes } from '../../utils/formatting';
 import Spinner from '../Common/Spinner';
 import { Section, Scroll, SelectionButton, StyledLink } from '../LayoutComponents';
 
@@ -89,10 +89,14 @@ const RaceDate = styled.div`
 
 
 const CalendarSection = styled(Section)`
-width: 100vw;
+    width: 100vw;
     @media (min-width: 768px) {
         width: auto;
         margin: 3rem 10% 3rem 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 `;
 
@@ -103,9 +107,7 @@ interface Props {
 
 const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
 
-    const { loading, data } = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_RACES, {
-        fetchPolicy: "cache-and-network"
-    });
+    const { loading, data } = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_RACES);
 
     
     const nextRef = useRef<HTMLDivElement | null>(null);
@@ -144,6 +146,8 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
         'yas_marina' 
     ];
 
+
+
     return (
         <React.Fragment>
             <CalendarSection>  
@@ -154,7 +158,7 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
                         
                         if (!race) return null;
 
-                        const start = new Date(Date.parse(race.scheduleUTC.race) - 3600000);
+                        const start = getLocalTimes(race.scheduleUTC);
 
                         
                         return (
@@ -173,7 +177,7 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
                                             {race.location?.locality}, {race.location?.country}
                                         </RaceLocation>
                                         <RaceDate>
-                                            { start.toDateString().substring(4, 10)}, { start.toLocaleTimeString().substring(0, 5)}
+                                            { start.race.date}, {start.race.time}
                                         </RaceDate>
                                         <SelectionButton 
                                             color={"#FFF"} 
