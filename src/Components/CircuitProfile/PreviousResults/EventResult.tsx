@@ -117,8 +117,8 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                         <TdName>
                                             <StyledLinkDriver to={"/profile/driver/" + pos.Driver.driverId}>
                                                 <ResultButton
-                                                    color={"#fff"}
-                                                    bg={"#2f2f2f"}
+                                                    color={"#2f2f2f"}
+                                                    bg={"rgb(47, 47, 47,0.05)"}
                                                     border={"rgb(0,0,0,0)"}
                                                     selected={true}
                                                 >
@@ -136,7 +136,7 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                                     color={"#00c49a"}
                                                     bg={"rgb(0, 196, 154, 0.15)"}
                                                     border={"rgb(0,0,0,0)"}
-                                                    selected={false}
+                                                    selected={true}
                                                 >
                                                     {pos.Constructor.name.toUpperCase()}
                                                 </ResultButtonTeam>
