@@ -81,7 +81,7 @@ const ResultButton = styled(SelectionButton)`
 const ResultButtonTeam = styled(SelectionButton)`
     margin: 0;
     padding: 0.25rem 1rem;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
 `;
 
 interface Props {
