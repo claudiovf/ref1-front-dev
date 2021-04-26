@@ -134,11 +134,11 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                             <StyledLinkTeam to={"/profile/team/" + pos.Constructor.constructorId}>
                                                 <ResultButtonTeam
                                                     color={"#00c49a"}
-                                                    bg={"rgb(0, 196, 154, 0.15)"}
+                                                    bg={"rgb(0, 196, 154, 0.2)"}
                                                     border={"rgb(0,0,0,0)"}
                                                     selected={true}
                                                 >
-                                                    {pos.Constructor.name.toUpperCase()}
+                                                    {pos.Constructor.name}
                                                 </ResultButtonTeam>
                                             </StyledLinkTeam>
                                         </TdTeam>
