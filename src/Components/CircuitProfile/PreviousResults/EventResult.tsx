@@ -76,12 +76,12 @@ const Tr = styled.tr`
 const ResultButton = styled(SelectionButton)`
     margin: 0;
     padding: 0.25rem 1rem;
-    font-size: 1rem;
+    font-size: 0.75rem;
 `;
 const ResultButtonTeam = styled(SelectionButton)`
     margin: 0;
     padding: 0.25rem 1rem;
-    font-size: 0.75rem;
+    font-size: 0.5rem;
 `;
 
 interface Props {
@@ -117,8 +117,8 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                         <TdName>
                                             <StyledLinkDriver to={"/profile/driver/" + pos.Driver.driverId}>
                                                 <ResultButton
-                                                    color={"#2f2f2f"}
-                                                    bg={"rgb(47, 47, 47,0.05)"}
+                                                    color={"#fff"}
+                                                    bg={"#2f2f2f"}
                                                     border={"rgb(0,0,0,0)"}
                                                     selected={true}
                                                 >
@@ -134,7 +134,7 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                             <StyledLinkTeam to={"/profile/team/" + pos.Constructor.constructorId}>
                                                 <ResultButtonTeam
                                                     color={"#00c49a"}
-                                                    bg={"rgb(0, 196, 154, 0.1)"}
+                                                    bg={"rgb(0, 196, 154, 0.15)"}
                                                     border={"rgb(0,0,0,0)"}
                                                     selected={false}
                                                 >
