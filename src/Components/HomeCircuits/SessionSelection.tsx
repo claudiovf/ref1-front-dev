@@ -22,7 +22,7 @@ const Wrap = styled.div`
 `;
 
 const SelButton = styled(SelectionButton)`
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 0.75rem;
     margin: 0rem;
 `;
 const Scratched = styled.div`
