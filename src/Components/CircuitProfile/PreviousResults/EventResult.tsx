@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { GET_EVENT_RESULTS } from '../../../queries';
 import { CircuitEvent, CircuitPos } from '../../../types';
 import Spinner from '../../Common/Spinner';
-import { StyledLink } from '../../LayoutComponents';
+import { StyledLink, SelectionButton } from '../../LayoutComponents';
 
 const Container = styled.div`
     width: 100%;
@@ -47,7 +47,7 @@ const TdName = styled.td`
 const TdTeam = styled.td`
     font-size: 0.75rem;
     color: #00c49a;
-    padding: 0.25rem 0 1.5rem 0;
+    padding: 0rem 0 1.5rem 0;
 `;
 const StyledLinkDriver = styled(StyledLink)`
     color: #2f2f2f;
@@ -55,7 +55,7 @@ const StyledLinkDriver = styled(StyledLink)`
 `;
 const StyledLinkTeam = styled(StyledLink)`
     color: #00c49a;
-    font-family: "Work Sans Bold";
+    font-family: "Work Sans Reg";
 `;
 
 const Tr = styled.tr`
@@ -63,6 +63,7 @@ const Tr = styled.tr`
         width: 2rem;
         color: #2f2f2f;
         font-family: "Work Sans Bold";
+        font-size: 1rem;
     }
     td:nth-child(3) {
         text-align: right;
@@ -70,6 +71,17 @@ const Tr = styled.tr`
         font-size: 0.75rem;
         color: #2f2f2f;
     }
+`;
+
+const ResultButton = styled(SelectionButton)`
+    margin: 0;
+    padding: 0.25rem 0.75rem;
+    font-size: 1rem;
+`;
+const ResultButtonTeam = styled(SelectionButton)`
+    margin: 0;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
 `;
 
 interface Props {
@@ -104,7 +116,14 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                         <td>{pos.position}</td>
                                         <TdName>
                                             <StyledLinkDriver to={"/profile/driver/" + pos.Driver.driverId}>
-                                                {pos.Driver.givenName} {pos.Driver.familyName}
+                                                <ResultButton
+                                                    color={"#2f2f2f"}
+                                                    bg={"rgb(0,0,0,0)"}
+                                                    border={"#f2f2f2"}
+                                                    selected={true}
+                                                >
+                                                    {pos.Driver.givenName} {pos.Driver.familyName}
+                                                </ResultButton>
                                             </StyledLinkDriver>    
                                         </TdName>
                                         <td>{pos.Time ? pos.Time.time : pos.status}</td>
@@ -113,7 +132,14 @@ const EventResult: React.FC<Props> = ({displayEvent}: Props) => {
                                         <td></td>
                                         <TdTeam>
                                             <StyledLinkTeam to={"/profile/team/" + pos.Constructor.constructorId}>
-                                                {pos.Constructor.name.toUpperCase()}
+                                                <ResultButtonTeam
+                                                    color={"#00c49a"}
+                                                    bg={"rgb(0,0,0,0)"}
+                                                    border={"#f2f2f2"}
+                                                    selected={false}
+                                                >
+                                                    {pos.Constructor.name.toUpperCase()}
+                                                </ResultButtonTeam>
                                             </StyledLinkTeam>
                                         </TdTeam>
                                         <td></td>
