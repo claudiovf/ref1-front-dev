@@ -76,7 +76,7 @@ const Tr = styled.tr`
 const ResultButton = styled(SelectionButton)`
     margin: 0;
     padding: 0.25rem 1rem;
-    font-size: 0.75rem;
+    font-size: 1rem;
 `;
 const ResultButtonTeam = styled(SelectionButton)`
     margin: 0;
