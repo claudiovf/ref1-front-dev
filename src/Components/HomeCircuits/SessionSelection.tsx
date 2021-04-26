@@ -51,9 +51,9 @@ const SessionSelection: React.FC<Props> = ({handleSessionSelection, sessionSelec
                     {sessions.map(session => session === sessionSelected
                         ? <SelButton
                             key={session}
-                            bg={"#FFF"}
-                            border={"#FFF"}
-                            color={"#00c49a"}
+                            bg={"rgb(255, 255, 255, 0.1)"}
+                            border={"rgb(0,0,0,0)"}
+                            color={"#fff"}
                             selected={true}
                         >
                             {formattedPeriod(session)}
