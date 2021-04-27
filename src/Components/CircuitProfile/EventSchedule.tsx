@@ -88,7 +88,7 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
     }, [timeSelected]);
 
 
-
+    
 
     return (
         <React.Fragment>
