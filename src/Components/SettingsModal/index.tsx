@@ -122,7 +122,7 @@ const SettingsModal: React.FC = () => {
         setTimeout(() => {
             dispatch( toggleSettingsOpen() );
             setClosing(false);
-        }, 600);
+        }, 500);
     };
 
     if (settings.isOpen) {
