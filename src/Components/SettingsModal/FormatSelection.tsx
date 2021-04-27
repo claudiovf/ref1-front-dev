@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setDistance } from '../../store/SettingsStore/actions';
+import { setDistance, setTimeFormat } from '../../store/SettingsStore/actions';
 import { SelectionButton, Title } from '../LayoutComponents';
 
 const OptionContainer = styled.div`
@@ -42,15 +42,21 @@ const FormatSelection: React.FC<Props> = ({altFormat, title, defaultFormat, stor
 
         if (selected === defaultFormat) {
             localStorage.removeItem(storageKey);
-            
+
             if (storageKey === 'distUnit') {
                 dispatch (setDistance('k'));
+            }
+            if (storageKey === 'timeFormat') {
+                dispatch (setTimeFormat('24hour'));
             }
         } else if (selected === altFormat) {
             localStorage.setItem(storageKey, selected);
 
             if (storageKey === 'distUnit') {
                 dispatch (setDistance('m'));
+            }
+            if (storageKey === 'timeFormat') {
+                dispatch (setTimeFormat('ampm'));
             }
         }
 

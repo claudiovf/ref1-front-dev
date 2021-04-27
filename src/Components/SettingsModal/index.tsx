@@ -148,8 +148,8 @@ const SettingsModal: React.FC = () => {
                             />
                             <FormatSelection 
                                 title={"Hour Format"}
-                                defaultFormat={"24-Hour"}
-                                altFormat={"am/pm"}
+                                defaultFormat={"24hour"}
+                                altFormat={"ampm"}
                                 storageKey={'timeFormat'}
                             />
                         </SelectionContainer>

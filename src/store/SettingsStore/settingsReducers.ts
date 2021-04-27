@@ -6,7 +6,7 @@ import {
 const initialState: SettingsState = {
     temp: 'c',
     distance: localStorage.getItem('distUnit') ? 'm' : 'k',
-    timeFormat: '24hour',
+    timeFormat: localStorage.getItem('timeFormat') ? 'ampm' : '24hour',
     isOpen: false
 };
 
