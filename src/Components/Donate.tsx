@@ -6,9 +6,8 @@ const DonateContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: 1rem 0;
+    margin: 0 0 0.5rem 0;
     width:100%;
-    padding-bottom: 0.25rem;
 `;
 const DonateTitle = styled.div`
     font-family: "Work Sans Bold";
@@ -17,8 +16,11 @@ const DonateTitle = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem 0 0.25rem 0;
+    margin: 0rem 0 0.25rem 0;
     width:100%;
+`;
+const HiringTitle = styled(DonateTitle)`
+    margin: 1rem 0 0.25rem 0;
 `;
 const DonateText = styled.div`
     font-family: "Work Sans Reg";
@@ -42,7 +44,6 @@ const Donate: React.FC = () => {
                 <DonateText>
                     Ref1 App is free to use. 
                     Help us maintain and improve the app by contributing to the running costs.
-                    Web Development jobs are also accepted at contact.ref1app@gmail.com :)
                 </DonateText>
                 <form action="https://www.paypal.com/donate" method="post" target="_blank">
                     <input type="hidden" name="business" value="contact.ref1app@gmail.com" />
@@ -50,6 +51,13 @@ const Donate: React.FC = () => {
                     <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
                     <img alt="" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" />
                 </form>
+                <HiringTitle>
+                    Are you hiring?
+                </HiringTitle>
+                <DonateText>
+                    We would love to hear from you about web development opportunities.  
+                    Get in touch at contact.ref1app@gmail.com :)
+                </DonateText>
             </DonateContainer>
         </React.Fragment>
     );
