@@ -12,6 +12,10 @@ const OptionContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 0.5rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: 1rem;
+    }
 `;
 const OptionsWrap = styled.div`
     width: auto;
@@ -25,6 +29,10 @@ const OptionsWrap = styled.div`
 const OptionTitle = styled(Title)`
     font-size: 1rem;
     margin-bottom: 0.25rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: -0.5rem;
+    }
 `;
 
 interface Props {
