@@ -75,10 +75,15 @@ const HomeCircuits: React.FC = () => {
         fetchPolicy: "cache-and-network", 
         variables: { circuitId: !timeUp ? nextCircuit : circuitAfter} 
     });
+
     
     useEffect(() => {
         if (data) {
-            setNextRace(data.findCircuit);
+            if (Date.parse(data.findCircuit.scheduleUTC.race) > Date.parse(new Date().toUTCString())) {
+                setNextRace(data.findCircuit);
+            } else {
+                setTimeUp(true);
+            }
         }
     }, [data, timeUp]);
     
@@ -96,8 +101,7 @@ const HomeCircuits: React.FC = () => {
     };
 
 
-    if ( loading || !data ) return null;
-    if (!nextRace || !nextRace.location) return null;
+    if ( loading || !data || !nextRace || !nextRace.location) return null;
     
 
     return (
