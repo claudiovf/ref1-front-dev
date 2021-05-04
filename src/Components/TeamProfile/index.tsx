@@ -12,12 +12,16 @@ import TeamInfo from './TeamInfo';
 import { TEAM_PROFILE } from '../../queries';
 import TeamAchievements from './TeamAchievements';
 import { getDriverStyle } from '../../utils/currentInfo';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 
 
 
 const TeamProfile: React.FC = () => {
     const [ team, setTeam ] = useState<Team | null>(null);
     
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
 
     const { constructorId } = useParams<{ constructorId: string }>();
     const { loading, data } = useQuery<{ findTeam: Team }>(TEAM_PROFILE, { 
@@ -41,7 +45,7 @@ const TeamProfile: React.FC = () => {
         <React.Fragment>
             <ProfileContainer>
                 <StyledLink to="/">
-                    <BackHome>
+                    <BackHome darkMode={settings.isDarkMode}>
                         &larr;&nbsp;&nbsp;{team.name}
                     </BackHome>
                 </StyledLink>
@@ -49,10 +53,10 @@ const TeamProfile: React.FC = () => {
                 <ProfileWrap>
                     <ProfileName 
                         color={getDriverStyle(team.constructorId).secondary}
-                        bg={getDriverStyle(team.constructorId).primary}>
+                        >
                         {getDriverStyle(team.constructorId).team === "NA" 
                         ? team.name.toUpperCase() : getDriverStyle(team.constructorId).team.toUpperCase()}</ProfileName>
-                    <GenAchContainer contBg={getDriverStyle(team.constructorId).primary}>
+                    <GenAchContainer>
                         <TeamInfo team={team} />
                         <TeamAchievements team={team} />
                     </GenAchContainer>

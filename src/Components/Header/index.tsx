@@ -1,14 +1,16 @@
 import React from 'react';
 import {  StyledLink } from '../LayoutComponents';
 import styled from "styled-components";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleOpen } from '../../store/actions';
 import { eventGa } from '../../RouteTracker';
 import { Settings } from '@styled-icons/fluentui-system-regular/Settings';
 import { toggleSettingsOpen } from '../../store/SettingsStore/actions';
 import { Search } from '@styled-icons/fluentui-system-filled';
+import { RootState } from '../../store';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 
-export const HeaderStyled = styled.div`
+export const HeaderStyled = styled.div<{darkMode: boolean}>`
 
     display: flex;
     flex-direction: row;
@@ -19,26 +21,30 @@ export const HeaderStyled = styled.div`
     width: 100%;
     position: fixed;
     box-shadow: 0px 0.5px 2px #D1DADC;
-    background-color: #FFFFFF;
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF" };
     overflow: hidden;
     z-index: 1000;
 `;
 
 
-export const LogoStyled = styled.div`
-    background-color: #2F2F2F;
-    color: #FFFFFF;
+export const LogoStyled = styled.div<{darkMode: boolean}>`
+    background-color: ${props => props.darkMode ? "#00c49a" : "#2f2f2f" };
+    color: ${props => props.darkMode ? "#2f2f2f" : "#fff" };;
     font-family: "Work Sans Bold";
     font-size: 1rem;
     padding: 0.5rem 1rem;
     margin: 0.5rem;
     margin-left: 1.25rem;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     cursor: pointer;
 `;
 
-export const MagBox = styled.div`
-    background-color: #2F2F2F;
+const One = styled.span<{darkMode: boolean}>`
+    color: ${props => props.darkMode ? "#fff" : "#00c49a" };
+`;
+
+export const MagBox = styled.div<{darkMode: boolean}>`
+    background-color: ${props => props.darkMode ? "#00c49a" : "#2f2f2f" };
     color: #FFFFFF;
     // border: 1px solid #FF8700;
     font-family: "Work Sans Bold";
@@ -75,8 +81,8 @@ const RightItems = styled.div`
   align-items: center;
 `;
 
-const SettingsIcon = styled(Settings)`
-  color: #2f2f2f;
+const SettingsIcon = styled(Settings)<{ darkMode: boolean}>`
+  color: ${props => props.darkMode ? "rgb(255,255,255,0.9)" : "#2f2f2f" };
   cursor: pointer;
   @media (min-width: 768px) {
       &:hover {
@@ -93,17 +99,21 @@ const SearchIcon = styled(Search)`
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
+  const settings: SettingsState = useSelector((state: RootState) => state.settings);
 
   return (
       <React.Fragment>
-        <HeaderStyled> 
+        <HeaderStyled darkMode={settings.isDarkMode}> 
           <StyledLink to={"/"}>
-            <LogoStyled>REF1</LogoStyled> 
+            <LogoStyled darkMode={settings.isDarkMode}>
+              REF<One darkMode={settings.isDarkMode}>1</One>
+            </LogoStyled> 
           </StyledLink>
 
           <RightItems>
             <SettingsContainer>
               <SettingsIcon 
+                darkMode={settings.isDarkMode}
                 size={28} 
                 onClick={ () => {
                   dispatch( toggleSettingsOpen() );
@@ -111,9 +121,11 @@ const Header: React.FC = () => {
                 }}
               />
             </SettingsContainer>
-            <MagBox onClick={ () => {
-              dispatch( toggleOpen() );
-              eventGa("HeaderSearch", 'default', 'default');
+            <MagBox 
+              darkMode={settings.isDarkMode}
+              onClick={ () => {
+                dispatch( toggleOpen() );
+                eventGa("HeaderSearch", 'default', 'default');
             }} ><Mag><SearchIcon size={20} /></Mag></MagBox> 
           </RightItems>
 

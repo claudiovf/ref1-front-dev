@@ -16,12 +16,12 @@ const expanding = keyframes`
     100% { opacity: 1}
 `;
 
-const RaceCard = styled.div`
+const RaceCard = styled.div<{ darkMode: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: #fefefe;
+    background-color: ${props => props.darkMode ? "rgb(255, 255, 255, 0.15)" : "#fefefe"}; 
     color: black;
     border-radius: 0.5rem;
     height: auto;
@@ -65,21 +65,21 @@ const RaceLocation = styled.div`
     align-items: center;
     font-family: "Work Sans Semi Bold";
     font-size: 0.75rem;
-    color: gray;
+    color: #b2b2b2;
 `;
-const CircuitName = styled.div`
+const CircuitName = styled.div<{ darkMode: boolean}>`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: "Work Sans Semi Bold";
     font-size: 0.75rem;
-    color: #2f2f2f;
+    color: ${props => props.darkMode ? "rgb(255,255,255, 0.9)" : "#2f2f2f"};
     @media (min-width: 768px) {
         min-width: 14rem;
       }
 `;
-const RaceDate = styled.div`
+const RaceDate = styled.div<{ darkMode: boolean}>`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,7 +87,7 @@ const RaceDate = styled.div`
     font-family: "Work Sans Semi Bold";
     font-size: 1rem;
     margin: 1rem;
-    color: #2f2f2f;
+    color: ${props => props.darkMode ? "rgb(255,255,255, 0.9)" : "#2f2f2f"};
 `;
 
 
@@ -167,18 +167,19 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
                             <React.Fragment key={race.circuitId}>
                                 <StyledLink to={"/profile/circuit/" + race.circuitId}>
                                     <RaceCard 
+                                        darkMode={settings.isDarkMode}
                                         ref ={race.circuitId === nextCircuit ? nextRef : null}
                                     >
                                         <RaceName>
                                             {getGP(race.circuitId)} GP
                                         </RaceName>
-                                        <CircuitName>
+                                        <CircuitName darkMode={settings.isDarkMode}>
                                             {race.circuitName}
                                         </CircuitName>
                                         <RaceLocation>
                                             {race.location?.locality}, {race.location?.country}
                                         </RaceLocation>
-                                        <RaceDate>
+                                        <RaceDate darkMode={settings.isDarkMode}>
                                             { start.race.date}, {settings.timeFormat === '24hour' ? start.race.time : convertToAmPm(start.race.time)}
                                         </RaceDate>
                                         <SelectionButton 

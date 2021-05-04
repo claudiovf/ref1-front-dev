@@ -8,6 +8,7 @@ export const patchId = (id: string, firstName: string | null): string => {
     else return id;
 };
  
+
 export const getDriverStyle = (id: string): CurrTeamStyles => {
     switch(true) {
         case id === 'hamilton' || id === 'bottas' || id === 'mercedes':
@@ -79,6 +80,22 @@ export const getDriverStyle = (id: string): CurrTeamStyles => {
                 secondary: '#2D2D2D'
             };
     }
+};
+
+export const invertStyle = (darkMode: boolean, style: CurrTeamStyles): CurrTeamStyles => {
+    if (darkMode) {
+        if (style.primary === '#02CCB6') return { ...style, primary: style.secondary, secondary: style.primary}; //mercedes
+        if (style.primary === '#0000AE') return { ...style, primary: '#001E3C'}; //redbull
+        if (style.primary === "#C00000") return {...style, primary: '#a10000'}; //ferrari
+        if (style.primary === '#FF8700') return { ...style, primary: style.secondary, secondary: style.primary}; //mclaren
+        if (style.secondary === '#e60b0b') return { ...style, primary: '#3f3f3f'}; //haas
+        if (style.primary === "#0090FF") return {...style, primary: '#0b6eba'}; //alpine
+        if (style.primary === '#0082FA') return { ...style, primary: style.secondary, secondary: style.primary}; //williams
+
+        // aston, alphatauri, alfa returns
+    }
+    
+    return style;
 };
 
 export const driversList = [

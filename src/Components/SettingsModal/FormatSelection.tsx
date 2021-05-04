@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setDistance, setTimeFormat } from '../../store/SettingsStore/actions';
+import { RootState } from '../../store';
+import { setDistance, setTimeFormat, setDarkMode } from '../../store/SettingsStore/actions';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { SelectionButton, Title } from '../LayoutComponents';
 
 const OptionContainer = styled.div`
@@ -45,6 +47,7 @@ interface Props {
 const FormatSelection: React.FC<Props> = ({altFormat, title, defaultFormat, storageKey}: Props) => {
     const [selected, setSelected] = useState<string>(localStorage.getItem(storageKey) || defaultFormat);
     const dispatch = useDispatch();
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
 
     useEffect(() => {
 
@@ -73,6 +76,10 @@ const FormatSelection: React.FC<Props> = ({altFormat, title, defaultFormat, stor
     const handleSelection = (format: string) => {
         if(format !== selected) {
             setSelected(format);
+            
+            if (storageKey === 'darkMode') {
+                dispatch (setDarkMode());
+            }
         }
     };
  
@@ -80,13 +87,13 @@ const FormatSelection: React.FC<Props> = ({altFormat, title, defaultFormat, stor
     return (
         <React.Fragment>
             <OptionContainer>
-                <OptionTitle>{title}</OptionTitle>
+                <OptionTitle darkMode={settings.isDarkMode}>{title}</OptionTitle>
                 <OptionsWrap>
                     {
                         [defaultFormat, altFormat].map(format => 
                             <SelectionButton
                                 key={format}
-                                color={format === selected ? "#FFF" : "#828282"}
+                                color={format === selected ? "#FFF" : "#a2a2a2"}
                                 bg={format === selected ? "#00c49a" : "rgb(0,0,0,0)"}
                                 border={"rgb(0,0,0,0)"}
                                 selected={format === selected ? true : false}

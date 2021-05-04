@@ -6,6 +6,7 @@ import { GET_TEAM_NAMES } from '../../queries';
 import { RootState } from '../../store';
 import { setSearch, setTeamNames } from '../../store/actions';
 import { SearchState } from '../../store/searchTypes';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { Team } from '../../types';
 import { getDriverStyle } from '../../utils/currentInfo';
 import { formattedPeriod } from '../../utils/formatting';
@@ -95,6 +96,7 @@ const OptionsButton = styled(SelectionButton)`
 const FilterModal: React.FC = () => {
 
     const search: SearchState = useSelector((state: RootState) => state.search);
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
     const dispatch = useDispatch();
 
     const teamNames = useQuery<{ findManyTeams: Team[] }>(GET_TEAM_NAMES);
@@ -126,7 +128,7 @@ const FilterModal: React.FC = () => {
         return (
                 <Overlay>
                     <ModalContainer teams={ search.selections.filterBy !== "Season" }>
-                        <FilterTitle>Select a {formattedPeriod(search.selections.filterBy)}</FilterTitle>
+                        <FilterTitle darkMode={settings.isDarkMode}>Select a {formattedPeriod(search.selections.filterBy)}</FilterTitle>
                         {
                             search.selections.filterBy === "Season"
                             ? <OptionsContainer>
@@ -146,7 +148,7 @@ const FilterModal: React.FC = () => {
                                 ? <Spinner /> 
                                 : <>
                                 <OptionsContainer>
-                                <TeamTitle>Current Teams</TeamTitle>
+                                <TeamTitle darkMode={settings.isDarkMode}>Current Teams</TeamTitle>
                                 { 
                                     search.teamNames.length === 0
                                         ? null
@@ -166,7 +168,7 @@ const FilterModal: React.FC = () => {
                                             );
                                         })
                                 }
-                                <TeamTitle>All Teams</TeamTitle>
+                                <TeamTitle darkMode={settings.isDarkMode}>All Teams</TeamTitle>
                                 { 
                                     search.teamNames.length === 0
                                         ? null

@@ -5,6 +5,7 @@ import { formattedPeriod, formattedStat } from '../../utils/formatting';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { SearchState } from '../../store/searchTypes';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 
 
 
@@ -72,13 +73,14 @@ interface Props {
 
 const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handleSelection }: Props) => {
     const search: SearchState = useSelector((state: RootState) => state.search);
-    
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
+
     if (!selected) {
         return(
             <React.Fragment>
                 <ScrollCover>
                     <SectionSearch>
-                        <FilterTitle>{title}</FilterTitle>
+                        <FilterTitle darkMode={settings.isDarkMode}>{title}</FilterTitle>
                         <SearchScrollNotSelected>
                             {
                                 optionsArr.map(item => 
@@ -103,7 +105,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
     return (
         <React.Fragment>
                 <SectionSearch>
-                    <FilterTitle>{title}</FilterTitle>
+                    <FilterTitle darkMode={settings.isDarkMode}>{title}</FilterTitle>
                     <SearchScroll>
                         <SelectionButton 
                             selected={true}

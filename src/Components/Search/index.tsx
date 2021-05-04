@@ -10,6 +10,7 @@ import SortBy from './SortBy';
 import ResutsFor from './ResultsFor';
 import TeamResults from './TeamResults';
 import DriverResults from './DriverResults';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 
 const overlayAnimation = keyframes`
     0% { opacity: 0;}
@@ -131,6 +132,7 @@ const SearchModal: React.FC = () => {
     const [closing, setClosing] = useState<boolean>(false);
 
     const search: SearchState = useSelector((state: RootState) => state.search);
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
     const dispatch = useDispatch();
 
 
@@ -151,7 +153,7 @@ const SearchModal: React.FC = () => {
                     <ModalContainer closing={closing}>
                         <ModalOverflow>
                             <SearchHeader>
-                                <SearchTitle>Search</SearchTitle>
+                                <SearchTitle darkMode={settings.isDarkMode}>Search</SearchTitle>
                                 <CloseX onClick={() => handleSearchClose()}>&#x2715;</CloseX>
                             </SearchHeader>
 

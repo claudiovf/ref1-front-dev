@@ -5,7 +5,7 @@ import { eventGa } from '../../RouteTracker';
 import { RootState } from '../../store';
 import { toggleSettingsOpen } from '../../store/SettingsStore/actions';
 import { SettingsState } from '../../store/SettingsStore/settingsTypes';
-import Donate from '../Donate';
+import Donate from './Donate';
 import { Title } from '../LayoutComponents';
 import FormatSelection from './FormatSelection';
 
@@ -43,8 +43,8 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
     z-index: 2000;
 `;
 
-const ModalContainer = styled.div<{ closing: boolean }>`
-    background-color: white;
+const ModalContainer = styled.div<{ closing: boolean; darkMode: boolean; }>`
+    background-color: ${props => props.darkMode ? "#3f3f3f" : "#FFF"};
     width: 80%;
     max-width: 20rem;
     height: auto;
@@ -133,12 +133,18 @@ const SettingsModal: React.FC = () => {
     if (settings.isOpen) {
         return (
                 <Overlay overlayClosing={closing}>
-                    <ModalContainer closing={closing}>
+                    <ModalContainer closing={closing} darkMode={settings.isDarkMode}>
                         <Header>
-                            <SearchTitle> Settings </SearchTitle>
+                            <SearchTitle darkMode={settings.isDarkMode}> Settings </SearchTitle>
                             <CloseX onClick={() => handleSettingsClose()}> &#x2715; </CloseX>
                         </Header>
                         <SelectionContainer>
+                            <FormatSelection 
+                                title={"Dark Mode"}
+                                defaultFormat={"Off"}
+                                altFormat={"On"}
+                                storageKey={'darkMode'}
+                            />
                             <FormatSelection 
                                 title={"Temperature"}
                                 defaultFormat={"Celsius"}
