@@ -11,12 +11,15 @@ import TeamInfo from './TeamInfo';
 
 import { TEAM_PROFILE } from '../../queries';
 import TeamAchievements from './TeamAchievements';
-import { getDriverStyle } from '../../utils/currentInfo';
+import { getDriverStyle, invertStyle } from '../../utils/currentInfo';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { SettingsState } from '../../store/SettingsStore/settingsTypes';
+import styled from 'styled-components';
 
-
+const TeamProfileWrap = styled(ProfileWrap)<{bg: string}>`
+    background-color: ${props => props.bg}
+`;
 
 const TeamProfile: React.FC = () => {
     const [ team, setTeam ] = useState<Team | null>(null);
@@ -50,9 +53,9 @@ const TeamProfile: React.FC = () => {
                     </BackHome>
                 </StyledLink>
                 <Spacer />
-                <ProfileWrap>
+                <TeamProfileWrap bg={invertStyle(settings.isDarkMode, getDriverStyle(team.constructorId)).primary }>
                     <ProfileName 
-                        color={getDriverStyle(team.constructorId).secondary}
+                        color={invertStyle(settings.isDarkMode, getDriverStyle(team.constructorId)).secondary}
                         >
                         {getDriverStyle(team.constructorId).team === "NA" 
                         ? team.name.toUpperCase() : getDriverStyle(team.constructorId).team.toUpperCase()}</ProfileName>
@@ -62,7 +65,7 @@ const TeamProfile: React.FC = () => {
                     </GenAchContainer>
                     <TeamStatSection 
                         team={team} />
-                </ProfileWrap>
+                </TeamProfileWrap>
             </ProfileContainer>
         </React.Fragment>
     );

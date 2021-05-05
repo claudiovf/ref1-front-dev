@@ -49,10 +49,10 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
 `;
 
 const ModalContainer = styled.div<{ closing: boolean }>`
-    min-width: 100vw;
-    height: 100vh;
+    min-width: 100%;
+    height: 100%;
     position:absolute;                        
-    top: 56%;                        
+    top: 52%;                        
     left: 50%;                        
     transform:translate(-50%,-50%);  
     border-radius:1rem 1rem 0 0;
@@ -67,14 +67,14 @@ const ModalContainer = styled.div<{ closing: boolean }>`
     }
 `;
 
-const ModalOverflow = styled.div`
-    width: 100vw;
+const ModalOverflow = styled.div<{ darkMode: boolean }>`
+    width: 100%;
     height: 100%;
     position:absolute;             
-    top: 50%;                        
+    top: 52%;                        
     left: 50%;                        
     transform:translate(-50%,-50%);  
-    background-color: white;          
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF"};          
     border-radius:1rem 1rem 0 0;
     overflow-y:  auto;
 
@@ -151,7 +151,7 @@ const SearchModal: React.FC = () => {
         return (
                 <Overlay overlayClosing={closing}>
                     <ModalContainer closing={closing}>
-                        <ModalOverflow>
+                        <ModalOverflow darkMode={settings.isDarkMode}>
                             <SearchHeader>
                                 <SearchTitle darkMode={settings.isDarkMode}>Search</SearchTitle>
                                 <CloseX onClick={() => handleSearchClose()}>&#x2715;</CloseX>

@@ -38,7 +38,7 @@ const TimeSelection = styled.div`
 `;
 
 const ScheduleTable = styled.table<{ darkMode: boolean }>`
-    background-color: ${props => props.darkMode ? "#3f3f3f" : "rgb(11, 49, 66, 0.04)" };
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "rgb(11, 49, 66, 0.04)" };
     color: ${props => props.darkMode ? "rgb(255,255,255,0.8)" : "#2f2f2f;" };
     width: 90vw;
     padding: 0.5rem 0.5rem 0.5rem 1.5rem;

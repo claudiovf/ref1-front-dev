@@ -23,8 +23,6 @@ const DriverProfileWrap = styled(ProfileWrap)<{bg: string}>`
 `;
 
 
-
-
 const DriverProfile: React.FC = () => {
     const [ driver, setDriver ] = useState<Driver | null>(null);
     

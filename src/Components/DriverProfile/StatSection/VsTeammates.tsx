@@ -51,7 +51,7 @@ const IconTeammate = styled(Icon)`
 `;
 
 const TopStats = styled.div<{darkMode: boolean}>`
-    background-color: ${props => props.darkMode ? "rgb(255,255,255,0.15)" : "#FFF"};
+    background-color: ${props => props.darkMode ? "rgb(255,255,255,0.1)" : "#FFF"};
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

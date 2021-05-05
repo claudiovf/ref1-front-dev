@@ -24,9 +24,9 @@ const Unselect = styled.span`
     margin-left: 0.5rem;
 `;
 
-const ScrollCover = styled.div`
+const ScrollCover = styled.div<{ darkMode: boolean}>`
     min-width: 100%;
-    background-color: #FFFFFF;
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFFFFF" };
     overflow: hidden;
     animation-name: ${slideUpAnimation};
     animation-duration: 0.3s;
@@ -78,7 +78,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
     if (!selected) {
         return(
             <React.Fragment>
-                <ScrollCover>
+                <ScrollCover darkMode={settings.isDarkMode}>
                     <SectionSearch>
                         <FilterTitle darkMode={settings.isDarkMode}>{title}</FilterTitle>
                         <SearchScrollNotSelected>
@@ -86,9 +86,9 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                                 optionsArr.map(item => 
                                     <SelectionButton 
                                         selected={false}
-                                        bg={"#e4eced"}
-                                        color={"#2F2F2F"}
-                                        border={"#e4eced"}
+                                        bg={settings.isDarkMode ? "#4f4f4f" : "#e4eced"}
+                                        color={settings.isDarkMode ? "rgb(255,255,255,0.9)" : "#2F2F2F"}
+                                        border={"rgb(0,0,0,0)"}
                                         key={item}
                                         onClick={() => handleSelection(item)}
                                         >
@@ -109,9 +109,9 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                     <SearchScroll>
                         <SelectionButton 
                             selected={true}
-                            bg={"#2F2F2F"}
-                            color={"#FFFFFF"}
-                            border={"#2F2F2F"}
+                            bg={settings.isDarkMode ? "rgb(255,255,255,0.9)" : "#2F2F2F"}
+                            color={settings.isDarkMode ? "#2f2f2f" : "#FFFFFF"}
+                            border={"rgb(0,0,0,0)"}
                             >
                                 {formattedPeriod(formattedStat(selected))} 
                                 {search.selections.period && ( selected === "Season" || selected === "Team" )

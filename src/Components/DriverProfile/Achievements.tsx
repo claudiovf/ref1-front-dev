@@ -23,7 +23,7 @@ const Title = styled.div`
 `;
 
 const AchieveCard = styled.div`
-    background-color: rgb(255,255,255,0.15);
+    background-color: rgb(255,255,255,0.1);
     display: flex;
     flex-direction: column;
     justify-content: left;

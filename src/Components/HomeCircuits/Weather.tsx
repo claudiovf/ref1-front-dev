@@ -41,7 +41,7 @@ const IconTextWrap = styled.div<{ darkMode: boolean }>`
     align-items: center;
     width: 6rem;
     min-height: 100%;
-    background-color: ${props => props.darkMode ? "#3f3f3f" : "#0b3142" };
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "#0b3142" };
     margin: 2px;
     border-radius: 0.5rem;
 

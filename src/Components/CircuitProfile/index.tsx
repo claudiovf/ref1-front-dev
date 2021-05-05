@@ -20,7 +20,7 @@ import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 
 
 const ProfileBody = styled(ProfileWrap)<{ darkMode: boolean }>`
-    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF" };
+    background-color: ${props => props.darkMode ? "#1f1f1f" : "#FFF" };
     display: flex;
     flex-direction: column;
     justify-content: center;

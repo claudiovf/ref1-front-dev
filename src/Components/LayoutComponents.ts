@@ -6,7 +6,7 @@ export const AppStyled = styled.div<{darkMode: boolean}>`
     text-align: center;
     margin: 0;
     overflow: visible;
-    background-color: ${props => props.darkMode ? "#2f2f2f" : "none"};
+    background-color: ${props => props.darkMode ? "#1f1f1f" : "none"};
     min-height: 100vh;
     @media (min-width: 768px) {
         display: flex;
@@ -210,7 +210,7 @@ export const BackHome = styled.div<{ darkMode: boolean}>`
     align-items: center;
     width: 100%;
     color: ${props => props.darkMode ? "rgb(255,255,255, 0.9)" : "#2E2E2E" }; 
-    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFFFFF" };
+    background-color: ${props => props.darkMode ? "#1f1f1f" : "#FFFFFF" };
     font-size: 1rem;
     padding: 1rem 1rem;
     box-shadow: 0px 1px 1px ${props => props.darkMode ? "#3f3f3f" : "#EEE" };

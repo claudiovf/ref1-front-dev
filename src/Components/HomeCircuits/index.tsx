@@ -22,7 +22,7 @@ const CircuitsContainer = styled.div<{ exp: boolean; darkMode: boolean;}>`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: ${props => props.darkMode ? "#3f3f3f" : "#0b3142" };
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "#0b3142" };
     scroll-margin-top: 3rem;
     width: auto;
     min-height: auto;

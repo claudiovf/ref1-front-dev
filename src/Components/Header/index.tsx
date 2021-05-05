@@ -21,7 +21,7 @@ export const HeaderStyled = styled.div<{darkMode: boolean}>`
     width: 100%;
     position: fixed;
     box-shadow: 0px 0.5px 2px #D1DADC;
-    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF" };
+    background-color: ${props => props.darkMode ? "#1f1f1f" : "#FFF" };
     overflow: hidden;
     z-index: 1000;
 `;
