@@ -48,6 +48,17 @@ const Overlay = styled.div<{ overlayClosing: boolean }>`
     z-index: 2000;
 `;
 
+const CloseOverlay = styled.div<{ overlayClosing: boolean }>`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    animation-name: ${props => props.overlayClosing ? overlayClosingAnimation: overlayAnimation};
+    animation-duration: 0.6s;
+`;
+
 const ModalContainer = styled.div<{ closing: boolean }>`
     min-width: 100%;
     height: 100%;
@@ -58,6 +69,7 @@ const ModalContainer = styled.div<{ closing: boolean }>`
     border-radius:1rem 1rem 0 0;
     animation-name: ${props => props.closing ? slideDownAnimation : slideUpAnimation};
     animation-duration: 0.5s;
+    z-index: 3000;
     @media (min-width: 768px) {
         max-width: 40rem;
         min-width: 40rem;
@@ -77,6 +89,7 @@ const ModalOverflow = styled.div<{ darkMode: boolean }>`
     background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF"};          
     border-radius:1rem 1rem 0 0;
     overflow-y:  auto;
+    z-index: 3000;
 
     @media (min-width: 768px) {
         width: 40rem;
@@ -137,6 +150,7 @@ const SearchModal: React.FC = () => {
 
 
     const handleSearchClose = () => {
+        if (closing) return null;
         setClosing(true);
         setTimeout(() => {
             dispatch( setSearch({}) );
@@ -150,6 +164,7 @@ const SearchModal: React.FC = () => {
     if (search.isOpen) {
         return (
                 <Overlay overlayClosing={closing}>
+                    <CloseOverlay overlayClosing={closing} onClick={() => handleSearchClose()}></CloseOverlay>
                     <ModalContainer closing={closing}>
                         <ModalOverflow darkMode={settings.isDarkMode}>
                             <SearchHeader>

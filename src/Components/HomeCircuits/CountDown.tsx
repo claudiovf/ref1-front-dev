@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RootState } from '../../store';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { Schedule, Location } from '../../types';
-import { handleCountdown, getSessionInfo } from '../../utils/formatting';
+import { handleCountdown, getSessionInfo, getLocalDateWith, convertToAmPm } from '../../utils/formatting';
 import SessionSelection from './SessionSelection';
 import Weather from './Weather';
 
@@ -29,6 +32,14 @@ const Td = styled.td`
     padding: 0 0.75rem;
 `;
 
+const StartDisplay = styled.div`
+      width: 100%;
+      font-family: "Work Sans Bold";
+      font-size: 0.75rem;
+      padding: 0.25rem 0;
+      color: rgb(255,255,255, 0.7);
+`;
+
 
 interface Props {
     nextRaceDates: Schedule;
@@ -39,13 +50,15 @@ interface Props {
 const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: Props) => {
     const [sessionSelected, setSessionSelected] = useState<string>(localStorage.getItem('countdownSession') || "race");
     const [sessionsOver, setSessionsOver] = useState<string[]>([]);
+    const [start, setStart] = useState<string>(getSessionInfo(nextRaceDates, sessionSelected));
 
     const [days, setDays ] = useState<number>(0);
     const [hours, setHours ] = useState<number>(0);
     const [mins, setMins ] = useState<number>(0);
     const [secs, setSecs ] = useState<number>(0);
 
-
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
+    
 //    const test = {
 //        practice_1: "2021-05-03T05:03:00.000Z",
 //        practice_2: "2021-05-03T05:03:30.000Z",
@@ -106,6 +119,8 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
 
     const handleSessionSelection = (session: string) => {
         setSessionSelected(session);
+        setStart(getSessionInfo(nextRaceDates, session));
+
         if (localStorage.getItem('countdownSession') ) {
             localStorage.removeItem('countdownSession');
         }
@@ -119,6 +134,10 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
                 sessionSelected={sessionSelected}
                 sessionsOver={sessionsOver}
             />
+            <StartDisplay>
+                {getLocalDateWith(start).date}, 
+                &nbsp;{settings.timeFormat === '24hour' ? getLocalDateWith(start).time : convertToAmPm(getLocalDateWith(start).time)}
+            </StartDisplay>
             <Table>
                 <tbody>
                     <tr>

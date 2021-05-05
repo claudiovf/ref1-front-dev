@@ -17,13 +17,13 @@ import { SelectionButton, Title } from '../LayoutComponents';
 
 
 
-const Overlay = styled.div`
+const Overlay = styled.div<{ darkMode: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #FFF;
+    background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF"};
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -126,7 +126,7 @@ const FilterModal: React.FC = () => {
     const sortedTeams = search.teamNames.slice().sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1 );
 
         return (
-                <Overlay>
+                <Overlay darkMode={settings.isDarkMode}>
                     <ModalContainer teams={ search.selections.filterBy !== "Season" }>
                         <FilterTitle darkMode={settings.isDarkMode}>Select a {formattedPeriod(search.selections.filterBy)}</FilterTitle>
                         {
@@ -135,8 +135,8 @@ const FilterModal: React.FC = () => {
                                 {options.reverse().map(option => <OptionsButton 
                                     key={option}
                                     selected={false}
-                                    bg={"#e4eced"}
-                                    color={"#2F2F2F"}
+                                    bg={settings.isDarkMode ? "#4f4f4f" : "#e4eced"}
+                                    color={settings.isDarkMode ? "rgb(255,255,255,0.9)" : "#2F2F2F"}
                                     border={"rgb(0,0,0,0)"}
                                     onClick={() => dispatch(setSearch({...search.selections, period: option}))}
                                     >
@@ -176,8 +176,8 @@ const FilterModal: React.FC = () => {
                                             <OptionsButton 
                                                 key={option.constructorId}
                                                 selected={false}
-                                                bg={"#e4eced"}
-                                                color={"#2F2F2F"}
+                                                bg={settings.isDarkMode ? "#4f4f4f" : "#e4eced"}
+                                                color={settings.isDarkMode ? "rgb(255,255,255,0.9)" : "#2F2F2F"}
                                                 border={"rgb(0,0,0,0)"}
                                                 onClick={() => dispatch(setSearch({...search.selections, period: option}))}
                                                 >
@@ -193,7 +193,7 @@ const FilterModal: React.FC = () => {
                         <OptionsButton
                             selected={false}
                             bg={"rgb(0,0,0,0)"}
-                            color={"#2F2F2F"}
+                            color={settings.isDarkMode ? "rgb(255,255,255,0.9)" : "#2F2F2F"}
                             border={"rgb(0,0,0,0)"}
                             onClick={() => handleClose()}                       
                         >

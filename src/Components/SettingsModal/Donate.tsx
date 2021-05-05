@@ -58,13 +58,19 @@ const Donate: React.FC = () => {
                     <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
                     <img alt="" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" />
                 </form>
-                <HiringTitle darkMode={settings.isDarkMode}>
-                    Are you hiring?
-                </HiringTitle>
-                <DonateText darkMode={settings.isDarkMode}>
-                    We would love to hear from you about web development opportunities.  
-                    Get in touch at contact.ref1app@gmail.com :)
-                </DonateText>
+                {
+                    window.innerHeight > 568
+                    ? <>
+                        <HiringTitle darkMode={settings.isDarkMode}>
+                            Are you hiring?
+                        </HiringTitle>
+                        <DonateText darkMode={settings.isDarkMode}>
+                            We would love to hear from you about development opportunities.  
+                            Get in touch at contact.ref1app@gmail.com :)
+                        </DonateText>
+                    </>
+                    : null
+                }
             </DonateContainer>
         </React.Fragment>
     );

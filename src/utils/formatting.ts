@@ -183,6 +183,7 @@ export const getGP = (circuitId: string): string => {
     }
 };
 
+
 export const getSessionInfo = (schedule: Schedule, sessionSel: string): string => {
     switch(true) {
         case sessionSel === "FP1":
@@ -246,18 +247,19 @@ export const convertToAmPm = (time: string): string | number => {
     else return `${(hour24 - 12).toString().padStart(2,'0')}:${mins}pm`;
 };
 
-export const getLocalTimes = (eventSchedule: Schedule): DisplaySchedule => {
-    const getLocalDateWith = (dateStr: string) => {
+export const getLocalDateWith = (dateStr: string): {date: string; time: string} => {
 
-        /// includes daylight saving UK. ends in october
-        const date = new Date(((Date.parse(dateStr)  / 1000) - 3600) * 1000);
-        const time = new Date(((Date.parse(dateStr)  / 1000) - 3600) * 1000);
-        
-        return {
-            date: `${getMonthStr(date.getMonth())} ${date.getDate().toString().padStart(2,'0')}`,
-            time: `${time.getHours().toString().padStart(2,'0')}:${time.getMinutes().toString().padStart(2,'0')}`
-        };
+    /// includes daylight saving UK. ends in october
+    const date = new Date(((Date.parse(dateStr)  / 1000) - 3600) * 1000);
+    const time = new Date(((Date.parse(dateStr)  / 1000) - 3600) * 1000);
+    
+    return {
+        date: `${getMonthStr(date.getMonth())} ${date.getDate().toString().padStart(2,'0')}`,
+        time: `${time.getHours().toString().padStart(2,'0')}:${time.getMinutes().toString().padStart(2,'0')}`
     };
+};
+
+export const getLocalTimes = (eventSchedule: Schedule): DisplaySchedule => {
 
     //removes an hour for london day light saving. ends in october
     return {

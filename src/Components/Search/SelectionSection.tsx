@@ -109,8 +109,8 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                     <SearchScroll>
                         <SelectionButton 
                             selected={true}
-                            bg={settings.isDarkMode ? "rgb(255,255,255,0.9)" : "#2F2F2F"}
-                            color={settings.isDarkMode ? "#2f2f2f" : "#FFFFFF"}
+                            bg={settings.isDarkMode ? "#00c49a" : "#2F2F2F"}
+                            color={settings.isDarkMode ? "#fff" : "#fff"}
                             border={"rgb(0,0,0,0)"}
                             >
                                 {formattedPeriod(formattedStat(selected))} 
