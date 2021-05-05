@@ -80,7 +80,7 @@ export const getSecondSort = (splitStat: SplitStat): string | null => {
 
 export const resultItemStyle = (id: string, givenName: string | null): string => {
     return getDriverStyle(patchId(id, givenName)).team === "NA" 
-    ? "#e4eced" 
+    ? "rgb(235,235,235, 0.9)" 
     : getDriverStyle(patchId(id, givenName)).primary;
 }; 
 

@@ -109,7 +109,7 @@ const SelectionSection: React.FC<Props> = ({ selected, optionsArr, title, handle
                     <SearchScroll>
                         <SelectionButton 
                             selected={true}
-                            bg={settings.isDarkMode ? "#00c49a" : "#2F2F2F"}
+                            bg={settings.isDarkMode ? "rgb(255,255,255, 0.5)" : "#2F2F2F"}
                             color={settings.isDarkMode ? "#fff" : "#fff"}
                             border={"rgb(0,0,0,0)"}
                             >

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleOpen } from '../../store/actions';
 import { eventGa } from '../../RouteTracker';
-import { Settings } from '@styled-icons/fluentui-system-regular/Settings';
+import { Settings } from '@styled-icons/fluentui-system-filled';
 import { toggleSettingsOpen } from '../../store/SettingsStore/actions';
 import { Search } from '@styled-icons/fluentui-system-filled';
 import { RootState } from '../../store';
@@ -17,10 +17,11 @@ export const HeaderStyled = styled.div<{darkMode: boolean}>`
     justify-content: space-between;
     align-items: center;
     min-height: 3rem;
+    max-height: 3rem;
     max-width: 100vw;
     width: 100%;
     position: fixed;
-    box-shadow: 0px 0.5px 2px #D1DADC;
+    box-shadow: ${props => props.darkMode ? "0px 0.5px 1px #3f3f3f" : "0px 0.5px 1px #D1DADC" };
     background-color: ${props => props.darkMode ? "#1f1f1f" : "#FFF" };
     overflow: hidden;
     z-index: 1000;
@@ -28,31 +29,20 @@ export const HeaderStyled = styled.div<{darkMode: boolean}>`
 
 
 export const LogoStyled = styled.div<{darkMode: boolean}>`
-    background-color: ${props => props.darkMode ? "#00c49a" : "#2f2f2f" };
-    color: ${props => props.darkMode ? "#2f2f2f" : "#fff" };;
+    color: ${props => props.darkMode ? "#fff" : "#2f2f2f" };
     font-family: "Work Sans Bold";
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
-    margin-left: 1.25rem;
-    border-radius: 0.25rem;
+    font-size: 1.25rem;
     cursor: pointer;
 `;
 
 const One = styled.span<{darkMode: boolean}>`
-    color: ${props => props.darkMode ? "#fff" : "#00c49a" };
+    color: ${props => props.darkMode ? "#00c49a" : "#00c49a" };
+    font-family: "Work Sans Extra Bold";
 `;
 
 export const MagBox = styled.div<{darkMode: boolean}>`
-    background-color: ${props => props.darkMode ? "#00c49a" : "#2f2f2f" };
-    color: #FFFFFF;
-    // border: 1px solid #FF8700;
-    font-family: "Work Sans Bold";
-    font-size: 1.5rem;
-    padding: 0 1.5rem;
-    margin: 0.5rem;
+    color: ${props => props.darkMode ? "rgb(255,255,255,0.9)" : "#2f2f2f" };
     margin-right: 1.25rem;
-    border-radius: 2rem;
     cursor: pointer;
     @media (min-width: 768px) {
       &:hover {
@@ -72,14 +62,10 @@ const SettingsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 1.25rem;
 `;
 
-const RightItems = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-`;
+
 
 const SettingsIcon = styled(Settings)<{ darkMode: boolean}>`
   color: ${props => props.darkMode ? "rgb(255,255,255,0.9)" : "#2f2f2f" };
@@ -104,30 +90,30 @@ const Header: React.FC = () => {
   return (
       <React.Fragment>
         <HeaderStyled darkMode={settings.isDarkMode}> 
-          <StyledLink to={"/"}>
-            <LogoStyled darkMode={settings.isDarkMode}>
-              REF<One darkMode={settings.isDarkMode}>1</One>
-            </LogoStyled> 
-          </StyledLink>
 
-          <RightItems>
             <SettingsContainer>
               <SettingsIcon 
                 darkMode={settings.isDarkMode}
-                size={28} 
+                size={24} 
                 onClick={ () => {
                   dispatch( toggleSettingsOpen() );
     
                 }}
               />
             </SettingsContainer>
+
+            <StyledLink to={"/"}>
+              <LogoStyled darkMode={settings.isDarkMode}>
+                REF<One darkMode={settings.isDarkMode}>1</One>
+              </LogoStyled> 
+            </StyledLink>
+
             <MagBox 
               darkMode={settings.isDarkMode}
               onClick={ () => {
                 dispatch( toggleOpen() );
                 eventGa("HeaderSearch", 'default', 'default');
-            }} ><Mag><SearchIcon size={20} /></Mag></MagBox> 
-          </RightItems>
+            }} ><Mag><SearchIcon size={24} /></Mag></MagBox> 
 
         </HeaderStyled>
       </React.Fragment>

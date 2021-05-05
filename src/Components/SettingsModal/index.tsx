@@ -90,7 +90,7 @@ const SearchTitle = styled(Title)`
 `;
 
 const CloseX = styled.div`
-    background-color: #e4eced;
+    background-color: rgb(218, 226, 227, 0.5);
     display: flex;
     flex-direction: column;
     justify-contents: center;
@@ -139,7 +139,7 @@ const SettingsModal: React.FC = () => {
 
     const handleSettingsClose = () => {
         if (closing) return null;
-        
+
         setClosing(true);
         setTimeout(() => {
             dispatch( toggleSettingsOpen() );

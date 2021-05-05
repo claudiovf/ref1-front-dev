@@ -18,19 +18,19 @@ const overlayAnimation = keyframes`
 `;
 const overlayClosingAnimation = keyframes`
     0% { opacity: 1;}
-    50% { opacity: 1}
+    60% { opacity: 1}
     100% { opacity: 0}
 `;
 
 const slideUpAnimation = keyframes`
-    0% { opacity: 0;}
+    0% { opacity: 0; top: 90%;}
     50% { opacity: 0; top: 90%; }
     100% { opacity: 1}
 `;
 
 const slideDownAnimation = keyframes`
     0% { opacity: 1;}
-    50% { opacity: 1; top: 56%;  }
+    50% { opacity: 1; }
     100% { opacity: 0; top: 100%;  }
 `;
 
@@ -68,7 +68,7 @@ const ModalContainer = styled.div<{ closing: boolean }>`
     transform:translate(-50%,-50%);  
     border-radius:1rem 1rem 0 0;
     animation-name: ${props => props.closing ? slideDownAnimation : slideUpAnimation};
-    animation-duration: 0.5s;
+    animation-duration: 0.6s;
     z-index: 3000;
     @media (min-width: 768px) {
         max-width: 40rem;
@@ -120,7 +120,7 @@ const SearchTitle = styled(Title)`
 `;
 
 const CloseX = styled.div`
-    background-color: #e4eced;
+    background-color: rgb(218, 226, 227, 0.5);
     display: flex;
     flex-direction: column;
     justify-contents: center;
@@ -158,7 +158,7 @@ const SearchModal: React.FC = () => {
             dispatch( setPrevResults([]) );
             dispatch( toggleOpen() );
             setClosing(false);
-        }, 600);
+        }, 590);
     };
 
     if (search.isOpen) {
