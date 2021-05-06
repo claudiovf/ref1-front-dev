@@ -8,7 +8,7 @@ import { BackHome, ProfileContainer,
 import Spinner from '../Common/Spinner';
 
 import { CIRCUIT_PROFILE } from '../../queries';
-import { getGP } from '../../utils/formatting';
+import { getCountryCode, getGP } from '../../utils/formatting';
 import styled from 'styled-components';
 import EventSchedule from './EventSchedule';
 import RaceInfo from './RaceInfo';
@@ -59,6 +59,10 @@ const Local = styled.div`
     font-size: 1rem;
     color: #00c49a;
     white-space: nowrap;
+    margin: 0.25rem
+`;
+const Flag = styled.div`
+    margin: 0.25rem
 `;
 
 const ProfileGP = styled(ProfileName)`
@@ -76,6 +80,7 @@ const CircuitProfile: React.FC = () => {
         fetchPolicy: "cache-and-network", 
         variables: { circuitId } 
     });
+
     
     useEffect(() => {
         if ( data ) {
@@ -87,6 +92,7 @@ const CircuitProfile: React.FC = () => {
     if ( loading ) return <> <Spacer /><Spinner /> </>;
 
     if ( !circuit) return null;
+
     
     return (
         <React.Fragment>
@@ -103,7 +109,10 @@ const CircuitProfile: React.FC = () => {
                     <RaceName>{circuit.raceName}</RaceName>
                     <CircuitName darkMode={settings.isDarkMode}> {circuit.circuitName} </CircuitName>
                     <Local>{circuit.location?.locality}, {circuit.location?.country}</Local>
-                    
+                    <Flag>
+                        <img src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${getCountryCode(circuit.circuitId)}.svg`} 
+                        alt={`${getGP(circuit.circuitId)} flag`} width={"28"} height={"24"} />
+                    </Flag>
                     <EventSchedule 
                         scheduleTrack={circuit.scheduleTrack}
                         scheduleUTC={circuit.scheduleUTC}    

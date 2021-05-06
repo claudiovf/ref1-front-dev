@@ -29,12 +29,28 @@ const OptionsWrap = styled.div`
 `;
 
 const OptionTitle = styled(Title)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     font-size: 1rem;
     margin-bottom: 0.25rem;
 
     @media (min-width: 768px) {
         margin-bottom: -0.5rem;
     }
+`;
+
+const NewNotif = styled.span`
+  background-color: #ff425c;
+  font-family: "Work Sans Semi Bold";
+  color: #FFF;
+  font-size: 10px;
+  padding: 0.15rem;
+  border-radius: 5px;
+  margin: -1rem -2rem 0 0;
+  z-index: 2000;
 `;
 
 interface Props {
@@ -87,7 +103,9 @@ const FormatSelection: React.FC<Props> = ({altFormat, title, defaultFormat, stor
     return (
         <React.Fragment>
             <OptionContainer>
-                <OptionTitle darkMode={settings.isDarkMode}>{title}</OptionTitle>
+                <OptionTitle darkMode={settings.isDarkMode}>
+                    {title}{storageKey === 'darkMode' ? <NewNotif>NEW</NewNotif> : null}
+                </OptionTitle>
                 <OptionsWrap>
                     {
                         [defaultFormat, altFormat].map(format => 

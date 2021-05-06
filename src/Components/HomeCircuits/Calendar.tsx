@@ -6,7 +6,7 @@ import { GET_NEXT_RACES } from '../../queries';
 import { RootState } from '../../store';
 import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { CircuitType } from '../../types';
-import { getGP, getLocalTimes, convertToAmPm } from '../../utils/formatting';
+import { getGP, getLocalTimes, convertToAmPm, getCountryCode } from '../../utils/formatting';
 import Spinner from '../Common/Spinner';
 import { Section, Scroll, SelectionButton, StyledLink } from '../LayoutComponents';
 
@@ -21,7 +21,7 @@ const RaceCard = styled.div<{ darkMode: boolean }>`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: ${props => props.darkMode ? "rgb(255, 255, 255, 0.15)" : "#fefefe"}; 
+    background-color: ${props => props.darkMode ? "rgb(255, 255, 255, 0.15)" : "rgb(255,255,255, 0.95)"}; 
     color: black;
     border-radius: 0.5rem;
     height: auto;
@@ -66,6 +66,7 @@ const RaceLocation = styled.div`
     font-family: "Work Sans Semi Bold";
     font-size: 0.75rem;
     color: #b2b2b2;
+    margin: 0.25rem 0;
 `;
 const CircuitName = styled.div<{ darkMode: boolean}>`
     display: flex;
@@ -103,6 +104,9 @@ const CalendarSection = styled(Section)`
     }
 `;
 
+const Flag = styled.div`
+`;
+
 
 interface Props {
     nextCircuit: string;
@@ -119,7 +123,7 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
             nextRef.current.scrollIntoView({ behavior: "smooth", inline: "center", block: "end" });
         }
         
-    }, [nextRef]);
+    }, [nextRef, nextCircuit]);
 
 
     if ( loading ) return <Spinner />;
@@ -179,6 +183,10 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
                                         <RaceLocation>
                                             {race.location?.locality}, {race.location?.country}
                                         </RaceLocation>
+                                        <Flag>
+                                            <img src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${getCountryCode(id)}.svg`} 
+                                            alt={`${getGP(id)} flag`} width={"28"} height={"24"} />
+                                        </Flag>
                                         <RaceDate darkMode={settings.isDarkMode}>
                                             { start.race.date}, {settings.timeFormat === '24hour' ? start.race.time : convertToAmPm(start.race.time)}
                                         </RaceDate>

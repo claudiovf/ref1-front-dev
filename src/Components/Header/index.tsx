@@ -65,6 +65,17 @@ const SettingsContainer = styled.div`
   margin-left: 1.25rem;
 `;
 
+const NewNotif = styled.span`
+  background-color: #ff425c;
+  font-family: "Work Sans Semi Bold";
+  font-size: 10px;
+  color: #FFF;
+  padding: 0.15rem;
+  border-radius: 5px;
+  margin: 0 -2rem -0.75rem 0;
+  z-index: 2000;
+`;
+
 
 
 const SettingsIcon = styled(Settings)<{ darkMode: boolean}>`
@@ -92,12 +103,12 @@ const Header: React.FC = () => {
         <HeaderStyled darkMode={settings.isDarkMode}> 
 
             <SettingsContainer>
+              <NewNotif>NEW</NewNotif>
               <SettingsIcon 
                 darkMode={settings.isDarkMode}
                 size={24} 
                 onClick={ () => {
                   dispatch( toggleSettingsOpen() );
-    
                 }}
               />
             </SettingsContainer>

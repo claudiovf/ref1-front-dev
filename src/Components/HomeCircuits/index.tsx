@@ -134,7 +134,7 @@ const HomeCircuits: React.FC = () => {
                 
                 {
                     expanded
-                    ? <Calendar nextCircuit={nextCircuit} />
+                    ? <Calendar nextCircuit={!timeUp ? nextCircuit : circuitAfter} />
                     : null
                 }
                 

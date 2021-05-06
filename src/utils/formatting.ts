@@ -183,6 +183,58 @@ export const getGP = (circuitId: string): string => {
     }
 };
 
+export const getCountryCode = (circuitId: string): string => {
+    switch(true) {
+        case circuitId === 'bahrain':
+            return 'BH';
+        case circuitId === 'imola':
+            return 'IT';
+        case circuitId === 'portimao':
+            return 'PT';
+        case circuitId === 'catalunya':
+            return 'ES';
+        case circuitId === 'monaco':
+            return 'MC';
+        case circuitId === 'BAK':
+            return 'AZ';
+        case circuitId === 'villeneuve':
+            return 'CA';
+        case circuitId === 'ricard':
+            return 'FR';
+        case circuitId === 'red_bull_ring':
+            return 'AT';
+        case circuitId === 'silverstone':
+            return 'GB';
+        case circuitId === 'hungaroring':
+            return 'HU';
+        case circuitId === 'spa':
+            return 'BE';
+        case circuitId === 'zandvoort':
+            return 'NL';
+        case circuitId === 'monza':
+            return 'IT';
+        case circuitId === 'sochi':
+            return 'RU';
+        case circuitId === 'marina_bay':
+            return 'SG';
+        case circuitId === 'suzuka':
+            return 'JP';
+        case circuitId === 'americas':
+            return 'US';
+        case circuitId === 'rodriguez':
+            return 'MX';
+        case circuitId === 'interlagos':
+            return 'BR';
+        case circuitId === 'albert_park':
+            return 'AU';
+        case circuitId === 'jeddah':
+            return 'SA';
+        case circuitId === 'yas_marina':
+            return 'AE';
+        default:
+            return "";
+    }
+};
 
 export const getSessionInfo = (schedule: Schedule, sessionSel: string): string => {
     switch(true) {

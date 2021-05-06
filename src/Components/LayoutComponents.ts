@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 
 export const AppStyled = styled.div<{darkMode: boolean}>`
+    -webkit-tap-highlight-color: transparent;
     text-align: center;
     margin: 0;
     overflow: visible;

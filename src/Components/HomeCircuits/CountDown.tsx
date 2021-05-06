@@ -37,7 +37,7 @@ const StartDisplay = styled.div`
       font-family: "Work Sans Bold";
       font-size: 0.75rem;
       padding: 0.25rem 0;
-      color: rgb(255,255,255, 0.7);
+      color: rgb(255,255,255, 0.8);
 `;
 
 
@@ -59,13 +59,6 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
 
     const settings: SettingsState = useSelector((state: RootState) => state.settings);
     
-//    const test = {
-//        practice_1: "2021-05-03T05:03:00.000Z",
-//        practice_2: "2021-05-03T05:03:30.000Z",
-//        practice_3: "2021-05-03T05:04:00.000Z",
-//        qualifying: "2021-05-03T05:04:30.000Z",
-//        race: "2021-05-03T05:05:00.000Z",
-//    };
 
     useEffect(() => {
         const zeroedSessions: string[] = [];
@@ -99,6 +92,7 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
 
                             if(session === sessionSelected) {
                                 setSessionSelected("race");
+                                setStart(getSessionInfo(nextRaceDates, "race"));
                             }
                         }
                     }
