@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {  StyledLink } from '../LayoutComponents';
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
@@ -95,20 +95,27 @@ const SearchIcon = styled(Search)`
 
 
 const Header: React.FC = () => {
+  const [notifSeen, setNotifSeen] = useState<boolean>(localStorage.getItem('notif') === 'viewed');
+
   const dispatch = useDispatch();
   const settings: SettingsState = useSelector((state: RootState) => state.settings);
+
 
   return (
       <React.Fragment>
         <HeaderStyled darkMode={settings.isDarkMode}> 
 
             <SettingsContainer>
-              <NewNotif>NEW</NewNotif>
+              {
+                notifSeen ? null : <NewNotif>NEW</NewNotif>
+              }
               <SettingsIcon 
                 darkMode={settings.isDarkMode}
                 size={24} 
                 onClick={ () => {
                   dispatch( toggleSettingsOpen() );
+                  setNotifSeen(true);
+                  localStorage.setItem('notif', 'viewed');
                 }}
               />
             </SettingsContainer>
