@@ -114,10 +114,7 @@ interface Props {
 
 const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
 
-    const { loading, data } = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_RACES,
-        { 
-            fetchPolicy: "cache-and-network"
-        });
+    const { loading, data } = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_RACES);
     const settings: SettingsState = useSelector((state: RootState) => state.settings);
     
     const nextRef = useRef<HTMLDivElement | null>(null);
