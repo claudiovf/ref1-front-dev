@@ -149,7 +149,10 @@ const Header: React.FC = () => {
               <TwitterIcon 
                   darkMode={settings.isDarkMode}
                   size={24} 
-                  onClick={() => window.open("https://twitter.com/AppRef1")}/>
+                  onClick={() => {
+                    window.open("https://twitter.com/AppRef1", '_blank')?.focus();
+                    eventGa("Twitter", 'Twitter', 'default');
+                  }}/>
                   
               <MagBox 
                 darkMode={settings.isDarkMode}
