@@ -36,6 +36,11 @@ export const LogoStyled = styled.div<{darkMode: boolean}>`
     cursor: pointer;
 `;
 
+const H1 = styled.h1`
+  font-size: 1.25rem;
+  margin: 0;
+`;
+
 const One = styled.span<{darkMode: boolean}>`
     color: ${props => props.darkMode ? "#00c49a" : "#00c49a" };
     font-family: "Work Sans Extra Bold";
@@ -113,6 +118,8 @@ const SearchIcon = styled(Search)`
 `;
 
 
+
+
 const Header: React.FC = () => {
   const [notifSeen, setNotifSeen] = useState<boolean>(localStorage.getItem('notif') === 'viewed');
 
@@ -141,7 +148,7 @@ const Header: React.FC = () => {
 
             <StyledLink to={"/"}>
               <LogoStyled darkMode={settings.isDarkMode}>
-                REF<One darkMode={settings.isDarkMode}>1</One>
+                <H1>REF<One darkMode={settings.isDarkMode}>1</One></H1>
               </LogoStyled> 
             </StyledLink>
 

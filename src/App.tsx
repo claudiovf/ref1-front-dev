@@ -7,7 +7,7 @@ const TeamProfile = lazy(() => import('./Components/TeamProfile'));
 const CircuitProfile = lazy(() => import('./Components/CircuitProfile'));
 import SearchModal from './Components/Search';
 import { Switch, Route } from 'react-router-dom';
-import { Spacer, AppStyled } from './Components/LayoutComponents';
+import { Spacer, AppStyled, H1 } from './Components/LayoutComponents';
 import LegendsPanel from './Components/LegendsPanel';
 import SkySportsPanel from './Components/SkySportsPanel';
 import ExploreDrivers from './Components/ExploreDrivers';
@@ -64,7 +64,7 @@ const App: React.FC = () => {
     <AppStyled darkMode={settings.isDarkMode}>
 
       <Header />
-      <Spacer />
+      <Spacer><H1>Ref1 App - F1 Calendar 2021 | Countdown | Standings | Results | Drivers &amp; Team Stats</H1></Spacer>
       <Switch>
         <Suspense fallback={<> <Spacer /><Spinner /> </>}>
           <Route exact path="/">
