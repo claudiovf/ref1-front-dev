@@ -86,8 +86,8 @@ export const Scroll = styled.div`
 `;
 
 export const CardsSlide = keyframes`
-    0% { opacity: 0; transform: translateX(2rem)}
-    50% { opacity: 0; transform: translateX(2rem)}
+    0% { opacity: 0;}
+    50% { opacity: 0; transform: scale(0.9, 0.9)}
     100% { opacity: 1}
 `;
 export const popOutAnimation = keyframes`
