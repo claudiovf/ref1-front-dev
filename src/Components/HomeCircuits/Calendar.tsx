@@ -93,7 +93,7 @@ const RaceDate = styled.div<{ darkMode: boolean}>`
 
 
 const CalendarSection = styled(Section)`
-    width: 100vw;
+    min-width: 100vw;
     @media (min-width: 768px) {
         width: auto;
         margin: 3rem 10% 3rem 10%;
@@ -128,7 +128,7 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
     }, [data, nextRef, nextCircuit]);
 
 
-    if ( loading ) return <Spinner />;
+    if ( loading ) return <CalendarSection><Spinner /></CalendarSection>;
 
     const calendarList = [
         'bahrain',
