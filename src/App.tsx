@@ -21,7 +21,6 @@ import DesktopSwitch from './Components/DesktopSwitch';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { SettingsState } from './store/SettingsStore/settingsTypes';
-import Spinner from './Components/Common/Spinner';
 import { SearchState } from './store/searchTypes';
 
 
@@ -68,7 +67,7 @@ const App: React.FC = () => {
       <Header />
       <Spacer />
       <Switch>
-        <Suspense fallback={<> <Spacer /><Spinner /> </>}>
+        <Suspense fallback={<></>}>
           <Route exact path="/">
             {isMobile
               ? <>

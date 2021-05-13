@@ -86,7 +86,8 @@ export const Scroll = styled.div`
 `;
 
 export const CardsSlide = keyframes`
-    0% { opacity: 0; transform: translateX(5rem)}
+    0% { opacity: 0; transform: translateX(2rem)}
+    50% { opacity: 0; transform: translateX(2rem)}
     100% { opacity: 1}
 `;
 export const popOutAnimation = keyframes`
@@ -250,7 +251,8 @@ export const InfoBox = styled.div`
 `;
 
 export const Label = styled.div`
-    font-family: "Work Sans Semi Bold";
+    font-family: "Arial";
+    font-weight: 600;
     color: rgb(255,255,255,0.75);
     font-size: 0.75rem;
 `;
