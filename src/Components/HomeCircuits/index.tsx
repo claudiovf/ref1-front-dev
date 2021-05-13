@@ -12,8 +12,8 @@ const Calendar = lazy(() => import('./Calendar'));
 import CountDown from './CountDown';
 
 const slowAppearAnimation = keyframes`
-    0% { opacity: 0 ;}
-    20% { opacity: 0; transform: scale(0.8, 0.8)}
+    0% { opacity: 0; transform: scale(0.8, 0.8) ;}
+    20% { opacity: 0;}
     100% { opacity: 1;}
 `;
 
@@ -109,7 +109,6 @@ const HomeCircuits: React.FC = () => {
     };
 
 
-    
 
     return (
         <React.Fragment>

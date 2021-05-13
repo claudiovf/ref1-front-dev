@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { SettingsState } from './store/SettingsStore/settingsTypes';
 import { SearchState } from './store/searchTypes';
+import { Helmet } from 'react-helmet';
 
 
 const App: React.FC = () => {
@@ -63,6 +64,13 @@ const App: React.FC = () => {
 
   return (
     <AppStyled darkMode={settings.isDarkMode}>
+      <Helmet>
+          <title>Ref1 App - F1 Calendar 2021 | Countdown | Standings | Results | Drivers & Team Stats</title>
+          <meta
+              name={"description"}
+              content={"Formula 1 Calendar 2021 | Countdown + Weather Forecast | Standings | Results | Drivers & Team Stats."}
+          />
+      </Helmet>
 
       <Header />
       <Spacer />
