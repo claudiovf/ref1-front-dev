@@ -12,8 +12,8 @@ const Calendar = lazy(() => import('./Calendar'));
 import CountDown from './CountDown';
 
 const slowAppearAnimation = keyframes`
-    0% { opacity: 0; transform: scale(0.8, 0.8) ;}
-    20% { opacity: 0;}
+    0% { opacity: 0 ;}
+    20% { opacity: 0; transform: scale(0.8, 0.8)}
     100% { opacity: 1;}
 `;
 
@@ -26,11 +26,12 @@ const CircuitsContainer = styled.div<{ exp: boolean; darkMode: boolean;}>`
     background-color: ${props => props.darkMode ? "#2f2f2f" : "#0b3142" };
     scroll-margin-top: 4.25rem;
     width: auto;
-    min-height: auto;
+    min-height: 18rem;
     margin: ${ props => props.exp ? "0" : "1.25rem"};
     padding: ${ props => props.exp ? "0.75rem 0" : "0.5rem 0"};
     border-radius: ${ props => props.exp ? "0" : "0.5rem"};
     margin-bottom: 0;
+    transform-origin: top;
     transition: all 0.5s ease-in-out;
     animation-name: ${slowAppearAnimation};
     animation-duration: 0.5s;
@@ -108,42 +109,47 @@ const HomeCircuits: React.FC = () => {
     };
 
 
-    if ( loading || !data || !nextRace || !nextRace.location) return null;
     
 
     return (
         <React.Fragment>
             <CircuitsContainer exp={expanded} darkMode={settings.isDarkMode} ref={topRef}>
-                <NextTitle>Up Next: 
-                    <StyledLink to={"/profile/circuit/" + nextRace.circuitId}>
-                        <SelectionButton 
-                            selected={true}
-                            bg={"#00c49a"}
-                            color={"#FFF"}
-                            border={"rgb(255,255,255, 0)"}
-                            >
-                                {getGP(nextRace.circuitId)} GP
-                        </SelectionButton> 
-                    </StyledLink>
-                </NextTitle>
-                
-                <CountDown 
-                    nextRaceDates={nextRace.scheduleUTC} 
-                    handleTimeUp={handleTimeUp}
-                    nextRaceLoc={nextRace.location} 
-                />
-                
-                <Suspense fallback={<></>}>
-                    {
-                        expanded
-                        ? <Calendar nextCircuit={!timeUp ? nextCircuit : circuitAfter} />
-                        : null
-                    }
-                </Suspense>
-                
-                <ExpandButton onClick={() => handleExpand(expanded)}>
-                    { !expanded ? "2021 Calendar" : "Collapse"}
-                </ExpandButton>
+                {
+                    loading || !data || !nextRace || !nextRace.location
+                    ? <></>
+                    :<>
+                        <NextTitle>Up Next: 
+                            <StyledLink to={"/profile/circuit/" + nextRace.circuitId}>
+                                <SelectionButton 
+                                    selected={true}
+                                    bg={"#00c49a"}
+                                    color={"#FFF"}
+                                    border={"rgb(255,255,255, 0)"}
+                                    >
+                                        {getGP(nextRace.circuitId)} GP
+                                </SelectionButton> 
+                            </StyledLink>
+                        </NextTitle>
+                        
+                        <CountDown 
+                            nextRaceDates={nextRace.scheduleUTC} 
+                            handleTimeUp={handleTimeUp}
+                            nextRaceLoc={nextRace.location} 
+                        />
+                        
+                        <Suspense fallback={<></>}>
+                            {
+                                expanded
+                                ? <Calendar nextCircuit={!timeUp ? nextCircuit : circuitAfter} />
+                                : null
+                            }
+                        </Suspense>
+                        
+                        <ExpandButton onClick={() => handleExpand(expanded)}>
+                            { !expanded ? "2021 Calendar" : "Collapse"}
+                        </ExpandButton>
+                    </>
+                }
             </CircuitsContainer>
             
         </React.Fragment>
