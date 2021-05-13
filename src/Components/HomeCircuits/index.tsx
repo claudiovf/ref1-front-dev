@@ -1,5 +1,5 @@
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useQuery } from '@apollo/client';
-import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { GET_NEXT_RACE } from '../../queries';
@@ -8,14 +8,15 @@ import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { CircuitType } from '../../types';
 import { getGP } from '../../utils/formatting';
 import { SelectionButton, StyledButton, StyledLink } from '../LayoutComponents';
-import Calendar from './Calendar';
+const Calendar = lazy(() => import('./Calendar'));
 import CountDown from './CountDown';
 
 const slowAppearAnimation = keyframes`
-    0% { opacity: 0;}
+    0% { opacity: 0; transform: scale(0.8, 0.8) ;}
     20% { opacity: 0;}
     100% { opacity: 1;}
 `;
+
 
 const CircuitsContainer = styled.div<{ exp: boolean; darkMode: boolean;}>`
     display: flex;
@@ -132,11 +133,13 @@ const HomeCircuits: React.FC = () => {
                     nextRaceLoc={nextRace.location} 
                 />
                 
-                {
-                    expanded
-                    ? <Calendar nextCircuit={!timeUp ? nextCircuit : circuitAfter} />
-                    : null
-                }
+                <Suspense fallback={<></>}>
+                    {
+                        expanded
+                        ? <Calendar nextCircuit={!timeUp ? nextCircuit : circuitAfter} />
+                        : null
+                    }
+                </Suspense>
                 
                 <ExpandButton onClick={() => handleExpand(expanded)}>
                     { !expanded ? "2021 Calendar" : "Collapse"}

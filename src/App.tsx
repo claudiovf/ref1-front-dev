@@ -5,7 +5,8 @@ import CurrentTeamsPanel from './Components/CurrentTeamsPanel';
 const DriverProfile = lazy(() => import('./Components/DriverProfile'));
 const TeamProfile = lazy(() => import('./Components/TeamProfile'));
 const CircuitProfile = lazy(() => import('./Components/CircuitProfile'));
-import SearchModal from './Components/Search';
+const SearchModal = lazy(() => import('./Components/Search'));
+const SettingsModal = lazy(() => import('./Components/SettingsModal'));
 import { Switch, Route } from 'react-router-dom';
 import { Spacer, AppStyled } from './Components/LayoutComponents';
 import LegendsPanel from './Components/LegendsPanel';
@@ -16,7 +17,6 @@ import Standings from './Components/Standings';
 import ReactGA from 'react-ga';
 import RouteTracker from './RouteTracker';
 import HomeCircuits from './Components/HomeCircuits';
-import SettingsModal from './Components/SettingsModal';
 import DesktopSwitch from './Components/DesktopSwitch';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
@@ -97,17 +97,18 @@ const App: React.FC = () => {
           <Route exact path="/profile/circuit/:circuitId">
             <CircuitProfile />
           </Route>
-
-          {
-            isSearch 
-            ? <SearchModal />
-            : null
-          }
-          {
-            isSettings 
-            ? <SettingsModal />
-            : null
-          }
+            <Suspense fallback={<></>}>
+            {
+              isSearch 
+              ? <SearchModal />
+              : null
+            }
+            {
+              isSettings 
+              ? <SettingsModal />
+              : null
+            }
+            </Suspense>
         </Suspense>
       </Switch>
 

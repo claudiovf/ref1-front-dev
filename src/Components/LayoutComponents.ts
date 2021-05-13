@@ -86,8 +86,7 @@ export const Scroll = styled.div`
 `;
 
 export const CardsSlide = keyframes`
-    0% { opacity: 0;}
-    65% { opacity: 0; transform: translateX(5rem)}
+    0% { opacity: 0; transform: translateX(5rem)}
     100% { opacity: 1}
 `;
 export const popOutAnimation = keyframes`
@@ -115,7 +114,7 @@ export const Cards = styled.div<{ bg: string}>`
     border-radius: 0.5rem;
     will-change: transform;
     animation-name: ${CardsSlide};
-    animation-duration: 1s;
+    animation-duration: 0.7s;
     cursor: pointer;
 
     @media (min-width: 768px) {
