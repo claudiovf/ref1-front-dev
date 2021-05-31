@@ -23,22 +23,17 @@ const overlayClosingAnimation = keyframes`
 `;
 
 const slideUpAnimation = keyframes`
-    0% { opacity: 0; top: 90%;}
-    50% { opacity: 0; top: 90%; }
-    100% { opacity: 1}
+    0% {transform: translate(-50%, 100%)}
 `;
 
 const slideDownAnimation = keyframes`
-    0% { opacity: 1;}
-    50% { opacity: 1; }
-    100% { opacity: 0; top: 100%;  }
+    100% { transform: translate(-50%, 100%)  }
 `;
 
 
 
 const Overlay = styled.div<{ overlayClosing: boolean }>`
     position: fixed;
-
     top: 0;
     left: 0;
     width: 100%;
@@ -61,16 +56,18 @@ const CloseOverlay = styled.div<{ overlayClosing: boolean }>`
 `;
 
 const ModalContainer = styled.div<{ closing: boolean; darkMode: boolean }>`
-    min-width: 100%;
+    min-width: 100vw;
+    max-width: 100vw;
     height: 100%;
     position:absolute;                        
     top: 52%;                        
-    left: 50%;                        
+    left: 50%;     
     transform:translate(-50%,-50%);  
     background-color: ${props => props.darkMode ? "#2f2f2f" : "#FFF"}; 
     border-radius:1rem 1rem 0 0;
     animation-name: ${props => props.closing ? slideDownAnimation : slideUpAnimation};
     animation-duration: 0.6s;
+    transform-origin: bottom left;
     z-index: 3000;
     @media (min-width: 768px) {
         max-width: 40rem;

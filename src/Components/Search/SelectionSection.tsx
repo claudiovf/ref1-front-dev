@@ -26,6 +26,7 @@ const Unselect = styled.span`
 
 const ScrollCover = styled.div`
     min-width: 100%;
+    max-width: 100%;
     
     overflow: hidden;
     animation-name: ${slideUpAnimation};

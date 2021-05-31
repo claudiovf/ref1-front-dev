@@ -97,7 +97,7 @@ const CircuitProfile: React.FC = () => {
     
     return (
         <React.Fragment>
-            <ProfileContainer>
+            <ProfileContainer darkMode={settings.isDarkMode}>
                 <Helmet>
                     <title>{getGP(circuit.circuitId)} Grand Prix | Ref1 App</title>
                     <meta
