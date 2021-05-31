@@ -38,7 +38,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts, tsx}'",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "build-and-deploy": "npm run build && s3cmd sync build/* s3://bezos && echo '🚀  Deployed!'"
   },
   "eslintConfig": {
     "extends": [
