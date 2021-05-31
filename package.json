@@ -39,7 +39,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts, tsx}'",
     "postinstall": "npm run build",
-    "deployS3": "npm run build && s3cmd sync build/* s3://ref1-dev-s3 && echo '🚀  Deployed!' && rm -rf build"
+    "deployAll": "git push heroku main && echo '🚀  Deployed to Heroku!' && npm run build && s3cmd sync build/* s3://ref1-dev-s3 && echo '🚀  Deployed to S3!' && rm -rf build"
   },
   "eslintConfig": {
     "extends": [
