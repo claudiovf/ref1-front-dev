@@ -39,7 +39,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts, tsx}'",
     "postinstall": "npm run build",
-    "build-and-deploy": "npm run build && s3cmd sync build/* s3://bezos && echo '🚀  Deployed!'"
+    "deployS3": "npm run build && s3cmd sync build/* s3://ref1-dev-s3 && echo '🚀  Deployed!' && rm -rf build"
   },
   "eslintConfig": {
     "extends": [

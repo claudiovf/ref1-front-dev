@@ -21,15 +21,11 @@ const overlayClosingAnimation = keyframes`
 `;
 
 const slideUpAnimation = keyframes`
-    0% { opacity: 0;}
-    50% { opacity: 0; top: 90%; }
-    100% { opacity: 1}
+    0% { transform: translate(-50%, 100%)  }  
 `;
 
 const slideDownAnimation = keyframes`
-    0% { opacity: 1;}
-    50% { opacity: 1; }
-    100% { opacity: 0; top: 100%;  }
+    100% { transform: translate(-50%, 100%)  }
 `;
 
 const Overlay = styled.div<{ overlayClosing: boolean }>`
