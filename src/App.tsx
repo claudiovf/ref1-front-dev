@@ -35,24 +35,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     //trigger for lazy modals
-    if(search.isOpen) {
-      setIsSearch(true);
-    } else {
-      setIsSearch(false);
-    }
-    if(settings.isOpen) {
-      setIsSettings(true);
-    } else {
-      setIsSettings(false);
-    }
+    setIsSearch(search.isOpen);
+    setIsSettings(settings.isOpen);
 
     //window size listener for home view switch
     const handleResize = () => {
-      if(window.innerWidth < 768) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
+      setIsMobile(window.innerWidth < 768);
     };
 
     window.addEventListener("resize", handleResize);
@@ -61,7 +49,7 @@ const App: React.FC = () => {
   
 
   //google analytics
-  const TRACKING_ID = "UA-192952368-1TEST";
+  const TRACKING_ID = "UA-192952368-1";
   ReactGA.initialize(TRACKING_ID);
   
 
