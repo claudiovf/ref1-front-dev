@@ -7,6 +7,9 @@ import { Section, SelectionButton } from '../LayoutComponents';
 const Container = styled(Section)`
     margin: 0.75rem 0 0.25rem 0;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     @media (min-width: 768px) {
         max-width: 30rem;
       }
@@ -18,8 +21,8 @@ const Wrap = styled.div`
     align-items: center;
     font-family: "Work Sans Reg";
     font-size: 0.75rem;
-    margin: 0.25rem 0.75rem;
-
+    margin: 0.25rem 0rem;
+      width: 96%;
 `;
 
 const SelButton = styled(SelectionButton)<{scratched: boolean}>`
@@ -36,17 +39,16 @@ interface Props {
     handleSessionSelection: (session: string) => void;
     sessionSelected: string;
     sessionsOver: string[];
+    sessions: string[];
 }
 
-const SessionSelection: React.FC<Props> = ({handleSessionSelection, sessionSelected, sessionsOver}: Props) => {
-
-    const sessions = ["FP1", "FP2", "FP3", "qualifying", "race"];
-
+const SessionSelection: React.FC<Props> = ({handleSessionSelection, sessionSelected, sessionsOver, sessions}: Props) => {
 
     return (
         <React.Fragment>
             <Container>
                 <Wrap>
+
                     {sessions.map(session => session === sessionSelected
                         ? <SelButton
                             key={session}

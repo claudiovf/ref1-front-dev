@@ -59,7 +59,8 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
     const [secs, setSecs ] = useState<number>(0);
 
     const settings: SettingsState = useSelector((state: RootState) => state.settings);
-    
+    const sessions = ["FP1", "FP2", "FP3", "qualifying", "race"];
+    const sprintSessions = ["FP1", "qualifying", "FP2", "sprint", "race"];
 
     useEffect(() => {
         const zeroedSessions: string[] = [];
@@ -67,7 +68,7 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
         const interval = setInterval(() => {
             
             
-            ["FP1", "FP2", "FP3", "qualifying", "race"].map(session => {
+            sessions.map(session => {
                 //const sessionCountdown = handleCountdown(getSessionInfo(nextRaceDates.practice_1 === "2021-05-20T10:30:00.000Z" ? nextRaceDates : test, session));
                 const sessionCountdown = handleCountdown(getSessionInfo(nextRaceDates, session));
                 if(session === sessionSelected) {
@@ -124,12 +125,17 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
         localStorage.setItem('countdownSession', session);
     };
 
+    //console.log(nextRaceLoc);
+
+
+
     return (
         <React.Fragment>
             <SessionSelection 
                 handleSessionSelection={handleSessionSelection}
                 sessionSelected={sessionSelected}
                 sessionsOver={sessionsOver}
+                sessions={ nextRaceLoc.locality === "Silverstone" ? sprintSessions : sessions}
             />
             <StartDisplay>
                 {getLocalDateWith(start).date}, 
