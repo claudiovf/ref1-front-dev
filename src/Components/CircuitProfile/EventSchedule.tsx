@@ -93,9 +93,6 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
         }
     }, [timeSelected]);
 
-
-
-
     return (
         <React.Fragment>
             <ScheduleSection>
@@ -136,21 +133,21 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
                                     : convertToAmPm(displaySchedule.practice_1.time)}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Practice 2</Td>
+                            <Td>{displaySchedule.practice_1.date === "Jul 16" ? "Qualifying" : "Practice 2"}</Td>
                             <Td>{displaySchedule.practice_2.date}</Td>
                             <Td>{settings.timeFormat === '24hour' 
                                     ? displaySchedule.practice_2.time 
                                     : convertToAmPm(displaySchedule.practice_2.time)}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Practice 3</Td>
+                            <Td>{displaySchedule.practice_1.date === "Jul 16" ? "Practice 2" : "Practice 3"}</Td>
                             <Td>{displaySchedule.practice_3.date}</Td>
                             <Td>{settings.timeFormat === '24hour' 
                                     ? displaySchedule.practice_3.time 
                                     : convertToAmPm(displaySchedule.practice_3.time)}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Qualifying</Td>
+                            <Td>{displaySchedule.practice_1.date === "Jul 16" ? "Sprint" : "Qualifying"}</Td>
                             <Td>{displaySchedule.qualifying.date}</Td>
                             <Td>{settings.timeFormat === '24hour' 
                                     ? displaySchedule.qualifying.time 
