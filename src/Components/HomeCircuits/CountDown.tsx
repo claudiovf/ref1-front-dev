@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-//import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-//import { RootState } from '../../store';
-//import { SettingsState } from '../../store/SettingsStore/settingsTypes';
+import { RootState } from '../../store';
+import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { Schedule, Location } from '../../types';
-import { handleCountdown, getSessionInfo } from '../../utils/formatting';
+import { handleCountdown, getSessionInfo, convertToAmPm, getLocalDateWith } from '../../utils/formatting';
 import SessionSelection from './SessionSelection';
 import Weather from './Weather';
 
@@ -33,13 +33,13 @@ const Td = styled.td`
     padding: 0 0.75rem;
 `;
 
-// const StartDisplay = styled.div`
-//       width: 100%;
-//       font-family: "Work Sans Bold";
-//       font-size: 0.75rem;
-//       padding: 0.25rem 0;
-//       color: rgb(255,255,255, 0.8);
-// `;
+const StartDisplay = styled.div`
+      width: 100%;
+      font-family: "Work Sans Bold";
+      font-size: 0.75rem;
+      padding: 0.25rem 0;
+      color: rgb(255,255,255, 0.8);
+`;
 
 
 interface Props {
@@ -51,13 +51,15 @@ interface Props {
 const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: Props) => {
     const [sessionSelected, setSessionSelected] = useState<string>(localStorage.getItem('countdownSession') || "race");
     const [sessionsOver, setSessionsOver] = useState<string[]>([]);
-    // const [start, setStart] = useState<string>(getSessionInfo(nextRaceDates, sessionSelected));
+    const [start, setStart] = useState<string>(getSessionInfo(nextRaceDates, sessionSelected));
 
     const [days, setDays ] = useState<number>(0);
     const [hours, setHours ] = useState<number>(0);
     const [mins, setMins ] = useState<number>(0);
     const [secs, setSecs ] = useState<number>(0);
 
+
+    const settings: SettingsState = useSelector((state: RootState) => state.settings);
     // const settings: SettingsState = useSelector((state: RootState) => state.settings);
     let sessions = ["FP1", "FP2", "FP3", "qualifying", "race"];
     const sprintSessions = ["FP1", "qualifying", "FP2", "sprint", "race"];
@@ -105,7 +107,7 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
 
                             if(session === sessionSelected) {
                                 setSessionSelected("race");
-                                // setStart(getSessionInfo(nextRaceDates, "race"));
+                                setStart(getSessionInfo(nextRaceDates, "race"));
                             }
                         }
                     }
@@ -128,7 +130,7 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
 
             setSessionSelected(session);
 
-        //setStart(getSessionInfo(nextRaceDates, session));
+        setStart(getSessionInfo(nextRaceDates, session));
 
         if (localStorage.getItem('countdownSession') ) {
             localStorage.removeItem('countdownSession');
@@ -148,10 +150,10 @@ const CountDown: React.FC<Props> = ({nextRaceDates, handleTimeUp, nextRaceLoc}: 
                 sessionsOver={sessionsOver}
                 sessions={ nextRaceLoc.locality === "Silverstone" ? sprintSessions : sessions}
             />
-            {/* <StartDisplay>
+            <StartDisplay>
                 {getLocalDateWith(start).date}, 
                 &nbsp;{settings.timeFormat === '24hour' ? getLocalDateWith(start).time : convertToAmPm(getLocalDateWith(start).time)}
-            </StartDisplay> */}
+            </StartDisplay>
             <Table>
                 <tbody>
                     <tr>
