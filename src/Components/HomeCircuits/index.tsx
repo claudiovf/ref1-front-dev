@@ -77,8 +77,8 @@ const HomeCircuits: React.FC = () => {
     const topRef = useRef<HTMLDivElement | null>(null);
 
     //next race and race after to be display when countdown time is up. to be automated
-    const nextCircuit = "zandvoort";
-    const circuitAfter = "monza";
+    const nextCircuit = "sochi";
+    const circuitAfter = "istanbul";
     
     const { loading, data } = useQuery<{ findCircuit: CircuitType }>(GET_NEXT_RACE, { 
         fetchPolicy: "cache-and-network", 

@@ -146,12 +146,10 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
         'zandvoort',
         'monza',
         'sochi',
-        'marina_bay',
-        'suzuka',
+        'istanbul',
         'americas',
         'rodriguez',
         'interlagos',
-        'albert_park',
         'jeddah',
         'yas_marina' 
     ];
