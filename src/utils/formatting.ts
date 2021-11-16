@@ -152,6 +152,7 @@ export type CircuitIds  =
     | 'rodriguez'
     | 'interlagos'
     | 'albert_park'
+    | 'losail'
     | 'jeddah'
     | 'yas_marina';
 
@@ -206,6 +207,8 @@ export const getGP = (circuitId: CircuitIds): CountryInfo => {
             return { gpName: 'Brazilian', flagCode: 'BR' };
         case 'albert_park':
             return { gpName: 'Australian', flagCode: 'AU' };
+        case 'losail':
+            return { gpName: 'Qatar', flagCode: 'QA' };
         case 'jeddah':
             return { gpName: 'Saudi Arabian', flagCode: 'SA' };
         case 'yas_marina':
