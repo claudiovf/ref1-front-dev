@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
-import { GET_NEXT_RACE } from '../../queries';
+import { GET_NEXT_EVENTS, GET_NEXT_RACE } from '../../queries';
 import { RootState } from '../../store';
 import { SettingsState } from '../../store/SettingsStore/settingsTypes';
 import { CircuitType } from '../../types';
@@ -71,18 +71,21 @@ const HomeCircuits: React.FC = () => {
     const [nextRace, setNextRace] = useState<CircuitType | null>(null);
     const [expanded, setExpanded ] = useState<boolean>(false);
     const [timeUp, setTimeUp ] = useState<boolean>(false);
+    const [upcomingEvents, setUpcomingEvents] = useState<{next: string; after: string} | null>(null);
+
+    const nextEvents = useQuery<{ findAllCircuits: CircuitType[] }>(GET_NEXT_EVENTS,
+        { 
+            fetchPolicy: "cache-and-network"
+        }
+    );
 
     const settings: SettingsState = useSelector((state: RootState) => state.settings);
     
     const topRef = useRef<HTMLDivElement | null>(null);
-
-    //next race and race after to be display when countdown time is up. to be automated
-    const nextCircuit = "losail";
-    const circuitAfter = "jeddah";
     
     const { loading, data } = useQuery<{ findCircuit: CircuitType }>(GET_NEXT_RACE, { 
         fetchPolicy: "cache-and-network", 
-        variables: { circuitId: !timeUp ? nextCircuit : circuitAfter} 
+        variables: { circuitId: !timeUp ? upcomingEvents?.next : upcomingEvents?.after} 
     });
 
     
@@ -94,8 +97,25 @@ const HomeCircuits: React.FC = () => {
                 setTimeUp(true);
             }
         }
-    }, [data, timeUp]);
-    
+        if (nextEvents.data) {
+            const now: number = Date.parse(new Date().toJSON());
+
+            const sortedEvents = nextEvents.data.findAllCircuits
+                .map(r => {
+                    return { circuitId: r.circuitId, race: r.scheduleUTC.race, countdown: Date.parse(r.scheduleUTC.race) - now};
+                })
+                .sort((a, b) => a.countdown - b.countdown);
+
+            const nextIds: string[] = [];
+            sortedEvents.map((r, i) => {
+                if (!nextIds.length && r.countdown > 0) {
+                    nextIds.push(r.circuitId);
+                    nextIds.push(sortedEvents[i + 1].circuitId);
+                }
+            });
+            setUpcomingEvents({next: nextIds[0], after: nextIds[1]});
+        }
+    }, [data, timeUp, nextEvents]);
 
 
     const handleTimeUp = (bool: boolean) => {
@@ -139,8 +159,8 @@ const HomeCircuits: React.FC = () => {
                         
                         <Suspense fallback={<></>}>
                             {
-                                expanded
-                                ? <Calendar nextCircuit={!timeUp ? nextCircuit : circuitAfter} />
+                                expanded && upcomingEvents
+                                ? <Calendar nextCircuit={!timeUp ? upcomingEvents?.next : upcomingEvents?.after} />
                                 : null
                             }
                         </Suspense>

@@ -132,27 +132,27 @@ const Calendar: React.FC<Props> = ({nextCircuit}: Props) => {
 
     const calendarList = [
         'bahrain',
+        'jeddah',
+        'albert_park',
         'imola',
-        'portimao',
+        'miami',
         'catalunya',
         'monaco',
         'BAK',
-        'ricard',
-        'red_bull_ring1',
-        'red_bull_ring2',
+        'villeneuve',
         'silverstone',
+        'red_bull_ring',
+        'ricard',
         'hungaroring',
         'spa',
         'zandvoort',
         'monza',
-        'sochi',
-        'istanbul',
+        'marina_bay',
+        'suzuka',
         'americas',
         'rodriguez',
         'interlagos',
-        'losail',
-        'jeddah',
-        'yas_marina' 
+        'yas_marina',
     ];
 
 

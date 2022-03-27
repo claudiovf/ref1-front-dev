@@ -136,10 +136,10 @@ export type CircuitIds  =
     | 'catalunya'
     | 'monaco'
     | 'BAK'
+    | 'villeneuve'
     | 'istanbul'
     | 'ricard'
-    | 'red_bull_ring1'
-    | 'red_bull_ring2'
+    | 'red_bull_ring'
     | 'silverstone'
     | 'hungaroring'
     | 'spa'
@@ -149,6 +149,7 @@ export type CircuitIds  =
     | 'marina_bay'
     | 'suzuka'
     | 'americas'
+    | 'miami'
     | 'rodriguez'
     | 'interlagos'
     | 'albert_park'
@@ -175,14 +176,14 @@ export const getGP = (circuitId: CircuitIds): CountryInfo => {
             return { gpName: 'Monaco', flagCode: 'MC' };
         case 'BAK':
             return { gpName: 'Azerbaijan', flagCode: 'AZ' };
+        case 'villeneuve':
+            return { gpName: 'Canadian', flagCode: 'CA' };
         case 'istanbul':
             return { gpName: 'Turkish', flagCode: 'TR' };
         case 'ricard':
             return { gpName: 'French', flagCode: 'FR' };
-        case 'red_bull_ring1':
+        case 'red_bull_ring':
             return { gpName: 'Styrian', flagCode: 'AT' };
-        case 'red_bull_ring2':
-            return { gpName: 'Austrian', flagCode: 'AT' };
         case 'silverstone':
             return { gpName: 'British', flagCode: 'GB' };
         case 'hungaroring':
@@ -201,6 +202,8 @@ export const getGP = (circuitId: CircuitIds): CountryInfo => {
             return { gpName: 'Japanese', flagCode: 'JP' };
         case 'americas':
             return { gpName: 'United States', flagCode: 'US' };
+        case 'miami':
+            return { gpName: 'Miami', flagCode: 'US' };
         case 'rodriguez':
             return { gpName: 'Mexican', flagCode: 'MX' };
         case 'interlagos':
@@ -227,7 +230,8 @@ export const getSessionInfo = (schedule: Schedule, sessionSel: string): string =
         case "FP2":
             return schedule.practice_2;
         case "FP3":
-            return schedule.practice_3;
+        case "sprint":
+            return schedule.practice_3 || schedule.sprint || "";
         case "qualifying":
             return schedule.qualifying;
         default:
@@ -301,7 +305,8 @@ export const getLocalTimes = (eventSchedule: Schedule): DisplaySchedule => {
     return {
         practice_1: getLocalDateWith(eventSchedule.practice_1),
         practice_2: getLocalDateWith(eventSchedule.practice_2),
-        practice_3: getLocalDateWith(eventSchedule.practice_3),
+        practice_3: eventSchedule.practice_3 ? getLocalDateWith(eventSchedule.practice_3) : undefined,
+        sprint: eventSchedule.sprint ? getLocalDateWith(eventSchedule.sprint) : undefined,
         qualifying: getLocalDateWith(eventSchedule.qualifying),
         race: getLocalDateWith(eventSchedule.race),
     };
@@ -323,7 +328,8 @@ export const getTrackTimes = (trackSchedule: Schedule): DisplaySchedule => {
     return {
         practice_1: getDateWith(trackSchedule.practice_1),
         practice_2: getDateWith(trackSchedule.practice_2),
-        practice_3: getDateWith(trackSchedule.practice_3),
+        practice_3: trackSchedule.practice_3 ? getDateWith(trackSchedule.practice_3) : undefined,
+        sprint: trackSchedule.sprint ? getDateWith(trackSchedule.sprint) : undefined,
         qualifying: getDateWith(trackSchedule.qualifying),
         race: getDateWith(trackSchedule.race),
     };

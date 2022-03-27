@@ -216,7 +216,8 @@ export interface LapRecord {
 export interface Schedule {
     practice_1: string;
     practice_2: string;
-    practice_3: string;
+    practice_3?: string;
+    sprint?: string;
     qualifying: string;
     race: string;
 }
@@ -245,7 +246,8 @@ export interface DisplayDate {
 export interface DisplaySchedule {
     practice_1: DisplayDate;
     practice_2: DisplayDate;
-    practice_3: DisplayDate;
+    practice_3?: DisplayDate;
+    sprint?: DisplayDate;
     qualifying: DisplayDate;
     race: DisplayDate;
 }

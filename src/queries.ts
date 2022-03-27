@@ -264,6 +264,16 @@ export const GET_EVENT_RESULTS = gql`
     } 
 `;
 
+export const GET_NEXT_EVENTS = gql`
+    query findingCircuit {
+        findAllCircuits {
+            circuitId
+            scheduleUTC {
+                race
+            }     
+        }
+    }
+`;
 export const GET_NEXT_RACES = gql`
     query findingCircuit {
         findAllCircuits {
@@ -278,6 +288,7 @@ export const GET_NEXT_RACES = gql`
                 practice_1
                 practice_2
                 practice_3
+                sprint
                 qualifying
                 race
             }     
@@ -297,6 +308,7 @@ export const GET_NEXT_RACE = gql`
                 practice_1
                 practice_2
                 practice_3
+                sprint
                 qualifying
                 race
             }
@@ -323,14 +335,16 @@ export const CIRCUIT_PROFILE = gql`
             scheduleTrack {
                 practice_1  
                 practice_2  
-                practice_3  
+                practice_3
+                sprint  
                 qualifying  
                 race        
             }   
             scheduleUTC  {
                 practice_1  
                 practice_2  
-                practice_3  
+                practice_3
+                sprint  
                 qualifying  
                 race   
             }    

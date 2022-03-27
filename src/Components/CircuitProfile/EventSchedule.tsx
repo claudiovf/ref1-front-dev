@@ -93,6 +93,17 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
         }
     }, [timeSelected]);
 
+    const weekendSessions = displaySchedule.sprint
+        ? ["practice_1", "qualifying", "practice_2", "sprint", "race"]
+        : ["practice_1", "practice_2", "practice_3", "qualifying","race"];
+
+    console.log({displaySchedule, weekendSessions});
+    const toProperCase = (session: string) => {
+        const nameParts = session.split("_");
+        const uppedName = nameParts[0][0].toUpperCase() + nameParts[0].slice(1);
+        return nameParts[1] ? `${uppedName} ${nameParts[1]}` : uppedName;
+    };
+
     return (
         <React.Fragment>
             <ScheduleSection>
@@ -125,14 +136,16 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
                 </TitleRow>
                 <ScheduleTable darkMode={settings.isDarkMode}>
                     <tbody>
-                        <Tr>
-                            <Td>Practice 1</Td>
-                            <Td>{displaySchedule.practice_1.date}</Td>
-                            <Td>{settings.timeFormat === '24hour' 
-                                    ? displaySchedule.practice_1.time 
-                                    : convertToAmPm(displaySchedule.practice_1.time)}</Td>
-                        </Tr>
-                        <Tr>
+                        {weekendSessions.map((session: string) => (
+                            <Tr key={session}>
+                                <Td>{toProperCase(session)}</Td>
+                                <Td>{ displaySchedule[session as keyof DisplaySchedule]?.date }</Td>
+                                <Td>{settings.timeFormat === '24hour' 
+                                        ? displaySchedule[session as keyof DisplaySchedule]?.time 
+                                        : convertToAmPm(displaySchedule[session as keyof DisplaySchedule]?.time || "")}</Td>
+                            </Tr>
+                        ))}
+                        {/* <Tr>
                             <Td>{displaySchedule.practice_1.date === "Jul 16" ? "Qualifying" : "Practice 2"}</Td>
                             <Td>{displaySchedule.practice_2.date}</Td>
                             <Td>{settings.timeFormat === '24hour' 
@@ -159,7 +172,7 @@ const EventSchedule: React.FC<Props> = ({ scheduleTrack, scheduleUTC}: Props) =>
                             <Td>{settings.timeFormat === '24hour' 
                                     ? displaySchedule.race.time 
                                     : convertToAmPm(displaySchedule.race.time)}</Td>
-                        </Tr>
+                        </Tr> */}
                     </tbody>
                 </ScheduleTable>
             </ScheduleSection>
